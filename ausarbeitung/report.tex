@@ -55,16 +55,15 @@ Die Prüfung der Anpassung übernehmen sogenannte Anpassungsgüte-Tests. Diese T
 Da diese Tests in der Regel alle vorhandenen empirischen Daten zur Berechnung der Anpassungsgüte verwenden, sind diese mitunter ziemlich aufwendig und zeitintensiv. Um die Berechnung der Anpassungsgüte-Tests zu beschleunigen und den um den Prozess zu automatisieren, existieren diverse numerische Bibliotheken für verschiedene Programmiersprachen.\\
 Diese Bibliotheken beinhalten eine Vielzahl von Algorithmen, zur Bewältigung mathematischer Probleme. Sie werden genutzt für die Berechnung von Integralen, der Lösung von Differentialgleichungen oder der Berechnung der Anpassungsgüte eines statistischen Modells.\\
 Numerische Bibliotheken ersparen dem Programmierer somit das Schreiben eines eigenen Algorithmus' für mathematische Probleme. Jedoch muss beachtet werden, dass diese Algorithmen, aufgrund der Fähigkeit von Computern Zahlen nur endlich darstellen zu können, bei Eingaben einen Fehler aufweisen können, welcher nicht immer unerheblich ist.\\
-Exemplarisch sollen in diesem Seminar zwei Anpassungsgüte-Test, namentlich der $\chi^2$-Test und der Kolmogorow-Smirnow-Test, mitsamt ihren Implementierungen in numerischen Bibliotheken erklärt werden.
-\\1\\
-2\\
-3\\
-4\\
-5\\
-6\\
-7
+Exemplarisch sollen zwei Anpassungsgüte-Tests, namentlich der $\chi^2$-Test und der Kolmogorow-Smirnow-Test, zur Demonstration genutzt werden.
+Beide Test überprüfen, ob ein statistisches Merkmal $X$, dessen Wahrscheinlichkeitsverteilung in der Grundgesamtheit unbekannt ist, einer Verteilung $F_0$ folgen. Dies bezeichnet man auch als Nullhypothese.
+Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer numerischen Bibliothek erklären.
 
-%%%--------------------------------------
+%%%---Problembeschreibung---%%%
+\newpage
+\section{Problembeschreibung}
+
+%%%-----Notes-----%%%
 \newpage
 \section{Einführung}
 kurze Einführung in das Thema Statistik allgemein, Betonung der Wichtigkeit von Statistik
@@ -72,7 +71,7 @@ kurze Einführung in das Thema Statistik allgemein, Betonung der Wichtigkeit von
 -> Numerische Bibliotheken machen das Leben schöner
 exemplarische Darstellung von $\chi^2$-Test und Kolmogorow-Smirnow-Test (KS-Test)
 
-\section{Problembescheibung}
+\section{Problembeschreibung}
 Seminar soll sich mit Einarbeitung in die o.g. Algorithmen befassen
 Dabei soll dargelegt werden, wie die Routinen zu den Algorithmen aufgerufen werden können
 Die Eigenschaften der zugrundeliegenden Algorithmen sollen \emph{anhand von Beispielen demonstriert werden}
@@ -116,9 +115,17 @@ signifikante Unterschiede erkennen und herausarbeiten, im Zweifel vertiefte Lite
 
 \subsection{Finalisierungsphase (1 Woche)}
 Verfassen von Fazit, Ausblick, ...
-Abschließende Arbeiten am Dokument
-
-\nocite{}
+Abschlie%
+%@book{hellbr\"uck2009angewandte,
+%  title={Angewandte Statistik mit R: Eine Einf{\"u}hrung f{\"u}r {\"O}konomen und Sozialwissenschaftler},
+%  author={Hellbr{\"u}ck, R.},
+%  isbn={9783834918574},
+%  url={http://books.google.de/books?id=DjEvfQR9UC8C},
+%  year={2009},
+%  publisher={Gabler, Betriebswirt.-Vlg}
+%}ßende Arbeiten am Dokument
+\newpage
+\nocite{*}
 \bibliographystyle{plain}
 \bibliography{report}
 

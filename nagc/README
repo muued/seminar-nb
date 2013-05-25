@@ -1,0 +1,7 @@
+module load LIBRARIES
+module load nag/c_mark23
+
+make
+
+./g08cgce < g08cgce.d | diff g08cgce.r -
+./g08cbce < g08cbce.d | diff g08cbce.r -

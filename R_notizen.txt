@@ -1,0 +1,26 @@
+sink("output.txt")
+source("commands.R")
+
+// c(...) construct vector
+x <- c(1,2,3,4,5)
+
+
+
+
+readLines("/root/seminarnb_r/g08cbce.d") -> x
+as.double(unlist(strsplit(x[2], ' '))) -> y
+hist(y, breaks=6, plot=FALSE)$counts -> c
+
+
+
+Chi-Square-Test:
+readLines("/root/seminarnb_r/g08cgce.d") -> g
+unlist(strsplit(g, ' ')) -> d
+as.double(d[1]) -> n
+as.double(d[2]) -> nclass
+d[3]=="Nag_Uniform"
+as.double(d[4]) -> a
+as.double(d[5]) -> b
+runif(100, a, b) -> r
+hist(r, breaks=nclass, plot=FALSE)$counts -> c
+chisq.test(c)

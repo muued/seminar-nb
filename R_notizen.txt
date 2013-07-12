@@ -18,9 +18,12 @@ readLines("/root/seminarnb_r/g08cgce.d") -> g
 unlist(strsplit(g, ' ')) -> d
 as.double(d[1]) -> n
 as.double(d[2]) -> nclass
-d[3]=="Nag_Uniform"
-as.double(d[4]) -> a
-as.double(d[5]) -> b
-runif(n, a, b) -> r
+as.double(d[4]) -> p0
+as.double(d[5]) -> p1
+if (d[3]=="Nag_Uniform") { runif(n, p0, p1) -> r }
+if (d[3]=="Nag_Normal") { rnorm(n, p0, p1) -> r }
+if (d[3]=="Nag_Exponential") { rexp(n, p0) -> r }
+if (d[3]=="Nag_Gamma") { rgamma(n, p0, p1) -> r }
+if (d[3]=="Nag_ChiSquare") { rchisq(n, p0) -> r }
 hist(r, breaks=nclass, plot=FALSE)$counts -> c
 chisq.test(c)

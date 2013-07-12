@@ -21,6 +21,6 @@ as.double(d[2]) -> nclass
 d[3]=="Nag_Uniform"
 as.double(d[4]) -> a
 as.double(d[5]) -> b
-runif(100, a, b) -> r
+runif(n, a, b) -> r
 hist(r, breaks=nclass, plot=FALSE)$counts -> c
 chisq.test(c)

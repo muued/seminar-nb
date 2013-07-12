@@ -6,7 +6,7 @@
 \usepackage{lmodern}
 
 \usepackage{amsmath}
-\usepackage[german]{babel}
+\usepackage[english]{babel}
 \usepackage{amssymb}
 \usepackage{amsxtra}
 \usepackage{epsfig,psfrag}
@@ -14,10 +14,11 @@
 \usepackage{url}
 
 \usepackage{epstopdf}
-\newcommand{\refchapter}[1]{Kapitel~\ref{#1}}
-\newcommand{\refsec}[1]{Sektion~\ref{#1}}
-\newcommand{\refeqn}[1]{Gleichung~(\ref{#1})}
-\newcommand{\reffig}[1]{Abbildung~\ref{#1}}
+
+\newcommand{\refchapter}[1]{Chapter~\ref{#1}}
+\newcommand{\refsec}[1]{Section~\ref{#1}}
+\newcommand{\refeqn}[1]{Equation~(\ref{#1})}
+\newcommand{\reffig}[1]{Figure~\ref{#1}}
 
 \title{
 {\bf \scriptsize RHEINISCH-WESTF\"ALISCHE TECHNISCHE HOCHSCHULE AACHEN \\
@@ -25,12 +26,13 @@ LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
 \vspace{.5cm} \\
 \epsfig{file=figures/STCE_Logo_WWW.eps,width=.7\textwidth}
 \vspace{1cm} \\
-{\bf \Large Numerische Bibliotheken} \\
-{\bf \large Statistik} \\
-{\large Arbeitsplan zur Seminararbeit} 
+{\bf \Large Numerical Libraries} \\
+{\bf \large Statistics} \\
+{\large The $\chi^2$ and Kolmogorov-Smirnov tests in the NAG C Library}
 }
 
 \author{Christian Janßen (302530) \\ Fabian Ohler (280424) }
+\date{July 15, 2013}
 
 \begin{document}
 
@@ -41,10 +43,10 @@ LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
 \begin{titlepage}
 \clearpage
 \maketitle
-
 \thispagestyle{empty}
-
 \end{titlepage}
+
+\tableofcontents
 
 \pagestyle{headings}
 \newpage
@@ -109,7 +111,7 @@ Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer nume
 	Punktschätzer:
 	Konfidenzintervalle (benötigt für Signifikanztests): $\alpha$ als Wahrscheinlichkeit, dass man falsch liegt
 
-\subsection{Hypothese}
+\subsection{Hypothesis}
 	definition \\
 	has to be falsifiable, can not be proven, ...\\
 

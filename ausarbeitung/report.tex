@@ -48,6 +48,8 @@ LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
 
 \pagestyle{headings}
 \newpage
+
+
 %%%----Einführung----%%%
 \section{Einführung}
 Die Statistik als Teilgebiet der Mathematik beschreibt das Sammeln, Auswerten und Beurteilen von Informationen und Daten.
@@ -62,6 +64,77 @@ Numerische Bibliotheken ersparen dem Programmierer somit das Schreiben eines eig
 Exemplarisch sollen zwei Anpassungsgüte-Tests, namentlich der $\chi^2$-Test und der Kolmogorow-Smirnow-Test, zur Demonstration genutzt werden.
 Beide Test überprüfen, ob ein statistisches Merkmal $X$, dessen Wahrscheinlichkeitsverteilung in der Grundgesamtheit unbekannt ist, einer Verteilung $F_0$ folgen. Dies bezeichnet man auch als Nullhypothese.
 Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer numerischen Bibliothek erklären.
+
+
+\section{Introduction to Statistics}
+\subsection{Fundamentals}
+\begin{description}
+	\item[sample space] collection of all possible outcomes of an experiment
+	\item[P(A)] probability of the event A
+	\item[random variable] function assigning real numbers to points in the sample space
+	\item[probability function of a random variable X] denoted $f(x)$. Gives the probability of X assuming the value x, so $f(x) = P(X = x)$
+	\item[distribution function of a random variable X] denoted $F(x)$. Gives the probability of X being less than or equal to x, so $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$
+	\item[quantile $x_p$] $p$th quantile of the random variable X, if $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$ for $p\in[0,1]$. e.g. $x_{0.5}$ is the median.
+	\item[expected value] of a real valued function $u(X)$ of a random variable X with the probability function $f(x)$, written $E[u(X)] = \sum_{x}u(x)f(x)$
+	\item[mean] of a random variable X: $\mu = E(X)$
+	\item[variance] of a random variable X with mean $\mu$ and the probability function $f(x)$: $\sigma^2 = E[(x-\mu)^2]$. Its positive square root is the \emph{standard deviation}.
+
+\end{description}
+
+\subsection{Probability Distributions}
+\begin{description}
+	\item[binomial distribution] $F(x) = \sum_{i\leq x} {n \choose i} p^{i}q^{n-i}$
+	\item[normal distribution] $F(x) = \int_{-\infty}^{x}\frac{1}{\sqrt{2\pi\sigma}}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y $ (standard normal distribution has $\mu=0,~\sigma=1$)
+	\item[uniform distribution] ...
+	\item[exponential distribution] ...
+	\item[$\chi^2$ distribution] with k degrees of freedom $F(x) = \left\{\begin{tabular}{ll}
+		$\int_{0}^{x} \frac{y^{(k/2)-1}e^{(y/2)}}{2^{k/2}\Gamma(k/2)}$ & if $x>0$ \\
+		0 & if $x\leq 0$
+		\end{tabular}\right.$
+		\\
+		example: Let $X_1, \ldots, X_k$ be $k$ independent and identically distributed standard normal random variables. Let $Y = \sum_{i=1}^{k}X_i^2$. Then $Y$ has the $\chi^2$ distribution with $k$ degrees of freedom.
+	\item[gamma distribution] ...
+\end{description}
+
+\subsection{Statistical Inference}
+	theory -> (via deduction) -> empiricism \\
+	empiricism -> (via induction) -> theory \\
+
+	hypotheses as a mean of induction \\
+
+\subsection{Estimation}
+
+	Schätzer \\
+	Qualität eines Schätzers: Präzision (Genauigkeit), Zuverlässigkeit (Wahrscheinlichkeit, dass Ergebnis korrekt)
+	Punktschätzer:
+	Konfidenzintervalle (benötigt für Signifikanztests): $\alpha$ als Wahrscheinlichkeit, dass man falsch liegt
+
+\subsection{Hypothese}
+	definition \\
+	has to be falsifiable, can not be proven, ...\\
+
+
+
+\subsection{statistical tests}
+	null hypotheses, alternate hypotheses \\
+	type I error $\alpha$, type II error $\beta$
+
+
+...
+
+\section{$\chi^2$ Tests}
+\subsection{Mathematical Background}
+\subsection{$\chi^2$ using the NAG C Library}
+\subsection{$\chi^2$ using R}
+\subsection{conclusion / comparison / ...}
+
+\section{Kolmogorov–Smirnov Test}
+\subsection{Mathematical Background}
+\subsection{Kolmogorov–Smirnov using the NAG C Library}
+\subsection{Kolmogorov–Smirnov using R}
+\subsection{conclusion / comparison / ...}
+
+\section{Conclusion}
 
 %%%---Problembeschreibung---%%%
 \section{Problembeschreibung}

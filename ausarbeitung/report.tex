@@ -15,6 +15,8 @@
 
 \usepackage{epstopdf}
 
+\usepackage{tikz}
+
 \newcommand{\refchapter}[1]{Chapter~\ref{#1}}
 \newcommand{\refsec}[1]{Section~\ref{#1}}
 \newcommand{\refeqn}[1]{Equation~(\ref{#1})}
@@ -85,7 +87,7 @@ Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer nume
 
 \subsection{Probability Distributions}
 \begin{description}
-	\item[binomial distribution] $F(x) = \sum_{i\leq x} {n \choose i} p^{i}q^{n-i}$
+	\item[binomial distribution] $F(x) = \sum_{i\leq x} \genfrac(){0pt}{}{n}{i} p^{i}q^{n-i}$
 	\item[normal distribution] $F(x) = \int_{-\infty}^{x}\frac{1}{\sqrt{2\pi\sigma}}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y $ (standard normal distribution has $\mu=0,~\sigma=1$)
 	\item[uniform distribution] ...
 	\item[exponential distribution] ...
@@ -99,19 +101,43 @@ Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer nume
 \end{description}
 
 \subsection{Statistical Inference}
-	theory -> (via deduction) -> empiricism \\
-	empiricism -> (via induction) -> theory \\
+\begin{tikzpicture}[node distance = 2 cm]
+	\node (t) at (2,3) {\bfseries theory};
+	\node (d) at (4,1.5) {deduction};
+	\node (i) at (0,1.5) {induction};
+	\node (e) at (2,0) {\bfseries empiricism};
+	\path
+		(t) edge[bend left, ->] node[right] {} (d)
+		(d) edge[bend left, ->] node[left] {} (e)
+		(e) edge[bend left, ->] node[right] {} (i)
+		(i) edge[bend left, ->] node[left] {} (t) ;
+\end{tikzpicture}
 
-	hypotheses as a mean of induction \\
+\begin{description}
+	\item[population] all elements under investigation
+	\item[sample] collection of some elements of a population
+	\item[target population] population, one wants information about
+	\item[sampled population] population, one has information about
+	\item[random sample] a sample from a finite population is a random sample if each of the possible samples was equally likely to be obtained
+	\item[random sample of size n] is a sequence of n independent and identically distributed random variables $X_1, \ldots, X_n$
+\end{description}
+
 
 \subsection{Estimation}
+\begin{description}
+	\item[empirical distribution function] Let $X_1, \ldots, X_n$ be a random sample. The empirical distribution function $S(x)$ is a function of $x$, which equals the fraction of $X_i$s that are less than or equal to $x$ for each $x$, $-\infty<x<\infty$.
+	\item[sample mean] Let $X_1, \ldots, X_n$ be a random sample. $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$ is the sample mean.
+	\item[sample variance] Let $X_1, \ldots, X_n$ be a random sample. $S^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})$ is the sample variance. The positive square root of the sample variance is the sample standard deviation $S$.
+	\item[]
+\end{description}
 
-	Schätzer \\
-	Qualität eines Schätzers: Präzision (Genauigkeit), Zuverlässigkeit (Wahrscheinlichkeit, dass Ergebnis korrekt)
-	Punktschätzer:
-	Konfidenzintervalle (benötigt für Signifikanztests): $\alpha$ als Wahrscheinlichkeit, dass man falsch liegt
+	estimates:
+	quality criteria of an estimate: precision (how close to the real value) and reliability (probability for the result to be correct)
+	point estimates: sample mean, sample variance, ...
+	confidence interval: consist of \emph{interval estimate} borders and the \emph{confidence coefficient} (probability, that the interval estimator will contain the unknown population quantity)
 
 \subsection{Hypothesis}
+	hypotheses as a mean of statistical induction \\
 	definition \\
 	has to be falsifiable, can not be proven, ...\\
 

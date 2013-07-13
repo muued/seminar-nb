@@ -139,29 +139,30 @@ Generally, a hypothesis is required to be either falsifiable or verifiable, such
 A statistical test performs a test on a hypothesis against the \emph{evidence} in a sample.
 In the context of statistics, a hypothesis under test is often called the \emph{null hypothesis} ($H_0$) and its logical complement is called the \emph{alternative hypothesis} ($H_1$).
 \\
-When testing whether or not the null hypothesis is true, three different answers are possible:
+When testing the null hypothesis, two answers can be given:
 \begin{enumerate}
-	\item $H_0$ is false
-	\item $H_0$ is true
-	\item $H_0$ is not rejected
+	\item $H_0$ is rejected
+	\item $H_0$ is accepted
 \end{enumerate}
-Here, the third answer is different from the second in making no statement about $H_0$ being true or false.
-It implies that the sample does not allow a statement about the truth value of the hypothesis with a reasonable confidence.
-In some literature answer three is also phrased as $H_0$ is accepted \cite{conover1980practical}.
+The first answer states that $H_0$ is false and therefore $H_1$ is true.
+Yet, the second answer only states that $H_0$ is not rejected, so it may or may not be true.
+Sometimes, the literature gives three answer options \cite{weigand2009statistik}.
+This is useful when looking at tests different than the ones focused on in this paper.
 \\
-The set of points in the sample space leading to answer 1 is also called the critical region.
+With these answers at hand, we have to make a hypothesis the 
+\\
+The set of points in the sample space leading to the rejection of the null hypothesis is also called the critical region.
 \\
 It would be desirable for tests to always find the correct answer, but since we have to rely upon samples, there may be answers incorrect in the sense of the target population.
-We distinguish between two types of errors when choosing the incorrect answer:
+We distinguish between two types of errors when choosing an incorrect answer as in \cite{conover1980practical}:
 \begin{description}
 	\item[type I error] is the error of rejecting a true null hypothesis
 	\item[type II error] is the error of accepting a false null hypothesis
 \end{description}
+The probability to commit a type I error is also called the \emph{significance level}, denoted by $\alpha$.
+When denoting the probability to commit a type II error by $\beta$, the probability of rejecting a false null hypothesis is also called the \emph{power}, denoted by $1-\beta$.
 
-type I error $\alpha$, type II error $\beta$
 
-
-...
 
 \section{$\chi^2$ Tests}
 \subsection{Mathematical Background}

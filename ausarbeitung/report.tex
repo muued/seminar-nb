@@ -135,10 +135,30 @@ Using a hypothesis, one may predict e.\,g. the outcome of experiments.
 Generally, a hypothesis is required to be either falsifiable or verifiable, such that it can be tested.
 
 
+\subsection{Statistical Tests}
+A statistical test performs a test on a hypothesis against the \emph{evidence} in a sample.
+In the context of statistics, a hypothesis under test is often called the \emph{null hypothesis} ($H_0$) and its logical complement is called the \emph{alternative hypothesis} ($H_1$).
+\\
+When testing whether or not the null hypothesis is true, three different answers are possible:
+\begin{enumerate}
+	\item $H_0$ is false
+	\item $H_0$ is true
+	\item $H_0$ is not rejected
+\end{enumerate}
+Here, the third answer is different from the second in making no statement about $H_0$ being true or false.
+It implies that the sample does not allow a statement about the truth value of the hypothesis with a reasonable confidence.
+In some literature answer three is also phrased as $H_0$ is accepted \cite{conover1980practical}.
+\\
+The set of points in the sample space leading to answer 1 is also called the critical region.
+\\
+It would be desirable for tests to always find the correct answer, but since we have to rely upon samples, there may be answers incorrect in the sense of the target population.
+We distinguish between two types of errors when choosing the incorrect answer:
+\begin{description}
+	\item[type I error] is the error of rejecting a true null hypothesis
+	\item[type II error] is the error of accepting a false null hypothesis
+\end{description}
 
-\subsection{statistical tests}
-	null hypotheses, alternate hypotheses \\
-	type I error $\alpha$, type II error $\beta$
+type I error $\alpha$, type II error $\beta$
 
 
 ...

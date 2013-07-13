@@ -22,6 +22,7 @@
 \newcommand{\refsec}[1]{Section~\ref{#1}}
 \newcommand{\refeqn}[1]{Equation~(\ref{#1})}
 \newcommand{\reffig}[1]{Figure~\ref{#1}}
+\newcommand{\reftbl}[1]{Table~\ref{#1}}
 
 \title{
 {\bf \scriptsize RHEINISCH-WESTF\"ALISCHE TECHNISCHE HOCHSCHULE AACHEN \\
@@ -420,6 +421,50 @@ Therefore his test statistic $X^2_{\text{Franz}}$ needs to be smaller than $\chi
 For $2.8 > 2.706$ holds, Fritz's hypothesis is rejected.
 
 \subsection{$\chi^2$ using the NAG C Library}
+As shown above, applying the $\chi^2$ goodness-of-fit test consists of four main steps: determine the interval borders, the corresponding frequencies for the sample, the corresponding frequencies for the distribution function in the hypothesis, and the test statistic.
+The steps themselves are simple to solve, but result in a lot of work for larger samples.
+So it is not surprising that the NAG C Library provides means to support the user with these tasks.
+\\
+To use the c function nag\_chi\_sq\_goodness\_of\_fit\_test (g08cgc), one has to provide the following parameters:
+\begin{description}
+	\item[nclass] the integer number of classes $k\geq 2$, into which the data is divided
+	\item[ifreq] an array of $k$ non-negative integers specifying the frequencies of the corresponding classes $O_{1}, \ldots, O_{k}$
+	\item[cint] an array of $k-1$ doubles specifying the upper boundaries of the corresponding classes.
+		The array has to be sorted monotonically increasing.
+		For tests against the gamma or $\chi^2$ distribution, all elements have to be non-negative.
+	\item[dist] a Nag\_Distribution specifying the distribution to be tested against. This can be one of the distributions listed in \reftbl{tbl:chisq_distributions} or Nag\_UserProb, where the user supplies the probabilities in the parameter prob.
+	\item[par] an array of two doubles specifying the parameters for the distribution to be tested against
+	\item[npest] the integer number of estimated parameters of the distribution $(0\leq\text{npest}<k-1)$
+	\item[prob] an array of k doubles specifying the probabilities of $X$ lying in the corresponding class.
+		This parameter is only referenced, if the user supplies the distribution to be tested against.
+\end{description}
+\begin{table}[htbp]
+\center
+\caption{Possible Distributions for the $\chi^2$ Goodness-of-Fit Test}
+\label{tbl:chisq_distributions}
+\begin{tabular}{lll}
+nag c name & distribution & parameter usage \\
+\hline
+Nag\_Normal & $\mathcal{N}(\mu,\sigma^2)$ & $\mu=\text{par}[0],~\sigma^2=\text{par}[1]$  \\
+Nag\_Uniform & $\mathcal{U}(a,b)$ & $a=\text{par}[0],~b=\text{par}[1]$ \\
+Nag\_Exponential & $\mathcal{E}\operatorname{xp}(\lambda)$ & $\lambda=\text{par}[0]$ \\
+Nag\_ChiSquare & $\chi^2(k)$ & $k=\text{par}[0]$ \\
+Nag\_Gamma & $\Gamma(\alpha,\beta)$ & $\alpha=\text{par}[0],~\beta=\text{par}[1]$
+\end{tabular}
+\end{table}
+With these parameters created and passed to the function, the user obtains the following values:
+\begin{description}
+	\item[chisq] the test statistic $X^2$
+	\item[p] the upper tail probability from the $\chi^2$ distribution associated with the test statistic, $X^2$, and the number of degrees of freedom, also known as p-value
+	\item[ndf] the degrees of freedom associated with the test $(nclass-1-npest)$
+	\item[eval] an array of $k$ doubles containing the expected frequencies for the corresponding classes
+	\item[chisqi] an array of $k$ doubles containing the contributions of the corresponding classes to the test statistic
+	\item[fail] A NagError stating if something went wrong
+\end{description}
+As the function takes the frequency table as an input, the user receives no help in performing step two.
+She can however use the function nag\_frequency\_table (g01aec) to calculate the frequency table.
+For further documentation of that function please refer to the user manual \cite{nagc}.
+
 \subsection{$\chi^2$ using R}
 \subsection{conclusion / comparison / ...}
 

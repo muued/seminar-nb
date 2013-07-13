@@ -15,6 +15,7 @@
 
 \usepackage{epstopdf}
 
+\usepackage[table]{xcolor}
 \usepackage{tikz}
 
 \newcommand{\refchapter}[1]{Chapter~\ref{#1}}
@@ -54,21 +55,6 @@ LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
 \newpage
 
 
-%%%----Einführung----%%%
-\section{Einführung}
-Die Statistik als Teilgebiet der Mathematik beschreibt das Sammeln, Auswerten und Beurteilen von Informationen und Daten.
-Zusätzlich dient sie der Stochastik als Verbindung zwischen empirischen Daten und den dazu erhobenen theoretischen Modellen.\\
-Erhobene Daten helfen zukünftige Ereignisse besser zu prognostizieren, wie zum Beispiel das Wetter oder das Kaufverhalten der Bevölkerung während einer wirtschaftlichen Rezession.\\
-Auch hilft die Statistik dabei, aus diskreten Datensätzen Modelle zu erstellen, welche die Verteilung der Werte als Funktion erklärt und somit Rückschlüsse auf Bereiche zulässt, für die keine Daten existieren. Dies ist hilfreich um beispielsweise die Fernsehquote der Gesamtbevölkerung auf Basis einiger weniger Fernsehzuschauer zu erstellen.\\
-Da sich zu empirischen Datensätzen nicht jedes theoretische Modell eignet, müssen diese auf ihre Korrektheit im Sinne der Genauigkeit geprüft werden. Je besser die Genauigkeit eines statistischen Modells beziehungsweise seine Fähigkeit einen Datensatz zu erklären, desto besser ist seine Anpassungsgüte oder auch Anpassung.\\
-Die Prüfung der Anpassung übernehmen sogenannte Anpassungsgüte-Tests. Diese Tests sind essentiell um die Wahrscheinlichkeit falscher Prognosen zu minimieren und die Qualität statistischer Modelle zu erhöhen.\\
-Da diese Tests in der Regel alle vorhandenen empirischen Daten zur Berechnung der Anpassungsgüte verwenden, sind diese mitunter ziemlich aufwendig und zeitintensiv. Um die Berechnung der Anpassungsgüte-Tests zu beschleunigen und den Prozess zu automatisieren, existieren diverse numerische Bibliotheken für verschiedene Programmiersprachen.\\
-Diese Bibliotheken beinhalten eine Vielzahl von Algorithmen zur Bewältigung mathematischer Probleme. Sie werden genutzt für die Berechnung von Integralen, der Lösung von Differentialgleichungen oder der Berechnung der Anpassungsgüte eines statistischen Modells.\\
-Numerische Bibliotheken ersparen dem Programmierer somit das Schreiben eines eigenen Algorithmus' für mathematische Probleme. Jedoch muss beachtet werden, dass diese Algorithmen -- aufgrund der Fähigkeit von Computern -- Zahlen nur in endlicher Präzision darstellen zu können, bei Eingaben einen Fehler aufweisen können, welcher nicht immer unerheblich ist.\\
-Exemplarisch sollen zwei Anpassungsgüte-Tests, namentlich der $\chi^2$-Test und der Kolmogorow-Smirnow-Test, zur Demonstration genutzt werden.
-Beide Test überprüfen, ob ein statistisches Merkmal $X$, dessen Wahrscheinlichkeitsverteilung in der Grundgesamtheit unbekannt ist, einer Verteilung $F_0$ folgen. Dies bezeichnet man auch als Nullhypothese.
-Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer numerischen Bibliothek erklären.
-
 
 \section{Introduction to Statistics}
 \subsection{Fundamentals}
@@ -77,7 +63,7 @@ Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer nume
 	\item[P(A)] probability of the event A
 	\item[random variable] function assigning real numbers to points in the sample space
 	\item[probability function of a random variable X] denoted $f(x)$. Gives the probability of X assuming the value x, so $f(x) = P(X = x)$
-	\item[distribution function of a random variable X] denoted $F(x)$. Gives the probability of X being less than or equal to x, so $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$
+	\item[cumulative distribution function of a random variable X] denoted $F(x)$. Gives the probability of X being less than or equal to x, so $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$
 	\item[quantile $x_p$] $p$th quantile of the random variable X, if $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$ for $p\in[0,1]$. e.g. $x_{0.5}$ is the median.
 	\item[expected value] of a real valued function $u(X)$ of a random variable X with the probability function $f(x)$, written $E[u(X)] = \sum_{x}u(x)f(x)$
 	\item[mean] of a random variable X: $\mu = E(X)$
@@ -164,63 +150,182 @@ Generally, a hypothesis is required to be either falsifiable or verifiable, such
 \subsection{conclusion / comparison / ...}
 
 \section{Kolmogorov–Smirnov Test}
+In statistics the Kolmogorov-Smirnov-test is a nonparametric test which checks for equality of two probability distributions.
+With this test one can check either if a given set of random samples follows a specified probability distribution or if two sets of random samples have the same probability distribution.\\
+The first alternative is called ``one sample Kolmogorov-Smirnov-test'' and is a goodness of fit test. The ``two sample  Kolmogorov-Smirnov-test'' is the second alternative, but due to the limited space it will be neglected in this written elaboration.
+
 \subsection{Mathematical Background}
+In the following the proceeding of the execution of the goodness of fit test is described and will be later explained by means of an illustrative example. \\
+For a random variable $X$ a set of $n$ observations ordered ascending such that $x_1 \le x_2 \le ... \le x_n$ is given. For those $n$ values the empirical distribution function $S(x)$  is determined.
+The value of $S(x)$ for a given $x$ is just a simple counting of values which are less than or equal $x$ and then dividing this number by $n$. Formally written: 
+$$S(x) = \frac{1}{n} \sum\limits^n_{i=1} I_{x_i\le x}~,$$
+where $I_{x_i\le x}$ is the indicator function, which equals $1$ if $x_i\le x$ and equals $0$ if $x_i>x$.\\
+After $S(x)$  is determined one has to formulate the null hypothesis 
+$$H_0:S (x)=F_0 (x)~,$$ 
+where $F_0 (x)$ is a manually chosen probability distribution.\\
+The alternative hypothesis 
+$$H_1:S (x)\ne F_0 (x)$$ 
+means that the random variable does not follow the probability distribution $S(x)$.\\
+The Kolmogorov-Smirnov test statistic is
+$$D_n = \max (d_0,d_1)~,$$
+where 
+$$d_0=\sup_{X} |S(x)-F(x)|$$ 
+and
+$$d_1 = \sup_{x_i \in X} | S(x_{i-1})-F(x_i)|~,$$
+with $S (x_0)$  defined as $0$. With a significance level $\alpha$, the value $D_n$ is then compared to a value $D_\alpha$.
+The value $D_\alpha$ is the critical value of the Kolmogorov distribution, which will not be discussed here, can be looked up in a table if $n$ is less than or equal $35$. If $n$ is greater than $35$, then the approximate value
+$$D_\alpha = \frac{ \sqrt{\ln(\frac 2 \alpha)} } {\sqrt{2n}}$$ 
+is used. If $D_n>D_\alpha$ the null hypothesis $H_0$  is rejected at a significance level $\alpha$.
+
+%\subsection{Mathematical Background}
+\subsection{Example}
+An illustrative example for the use of the ``one-sample-Kolmogorov-Smirnov-test'' is the following everyday situation.\\
+While drinking a few wheat beer at the local pub, Paul and Franz start discussing about the height of the head of their beer.
+Paul states that the head of his beer has a normal, average height, while Franz claims, the average height is normally higher.\\
+Because they do not come to a conclusion, Franz takes out his measuring tape and measures the height of the heads and writes them down. Due to the obvious fact that two observations are not enough to give a statement about the average height, they order few more wheat beer, measure the height from every beer head and write it down.
+After rearranging the observations into an ascending order, the following table is obtained:
+\begin{table}[h]
+\center
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+$x_1$	&$x_2$	&$x_3$	&$x_4$	&$x_5$	&$x_6$	&$x_7$	&$x_8$	&$x_9$	&$x_{10}$\\
+\hline
+1	&1,1	&1,2	&1,6	&1,7	&2,1	&2,1	&2,4	&2,4	&2,5	\\
+\end{tabular}
+\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+$x_{11}$	&$x_{12}$	&$x_{13}$	&$x_{14}$	&$x_{15}$	&$x_{16}$	&$x_{17}$	&$x_{18}$	&$x_{19}$	&$x_{20}$\\
+\hline
+2,6	&2,6	&2,6	&2,7	&2,8	&3	&3,3	&3,5	&3,8	&4,2\\
+\end{tabular}
+\end{table}
+\\
+With these data available, Paul claims that the heights are normally distributed with a mathematical expectation of 3 cm and a variance of 0.7, while Franz states that it is 3.5 cm and 1, respectively.\\
+The bartender, who noticed their conversation recommends them to check their statements with the ``Kolmogorov-Smirnov goodness of fit test''.
+Following the suggestion they construct their hypotheses:
+$$H_{Franz} : S(x) = \Phi (x|3.5,1)$$
+and
+$$H_{Paul} : S(x) = \Phi (x|3,0.7)~,$$
+where $\Phi(x|\mu,\sigma^2)$ is the cumulative distribution function of the normal distribution and $S(x)$ is the empirical distribution function.\\
+Because Paul and Franz want to proof each other wrong, their hope is, that the hypothesis of the opponent is rejected by the test.
+To obtain the test statistic which is needed to potentially rejected or accept a hypotheses the values for $S(x_i)$, $\Phi (x_i|3;0,7)$ and $\Phi (x_i|3,5;1)$ are computed and written down in a table to get a clear overview.
+\begin{table}[ht]
+\caption{observations and their respective values}
+\center
+\begin{tabular}{c|c|c|c|c}
+\label{tab:1}
+$i$ 	& $x_i$ 	& $S(x_i)$ 	& $\Phi (x_i|3;0,7)$ 	& $\Phi (x_i|3,5;1)$ 	\\
+\hline
+1	&	1	&	0,05	&	0,002137	&	0,006210	\\
+2	&	1,1	&	0,1	&	0,003321	&	0,008198	\\
+3	&	1,2	&	0,15	&	0,005064	&	0,010724	\\
+4	&	1,6	&	0,2	&	0,022750	&	0,028717	\\
+5	&	1,7	&	0,25	&	0,031645	&	0,035930	\\
+%6	&	2,1	&	0,35	&	0,099271	&	0,080757	\\
+7	&	2,1	&	0,35	&	0,099271	&	0,080757	\\
+%8	&	2,4	&	0,45	&	0,195683	&	0,135666	\\
+9	&	2,4	&	0,45	&	0,195683	&	0,135666	\\
+10	&	2,5	&	0,5	&	0,237525	&	0,158655	\\
+11	&	2,6	&	0,65	&	0,283855	&	0,184060	\\
+%12	&	2,6	&	0,65	&	0,283855	&	0,184060	\\
+%13	&	2,6	&	0,65	&	0,283855	&	0,184060	\\
+14	&	2,7	&	0,7	&	0,334118	&	0,211855	\\
+15	&	2,8	&	0,75	&	0,387548	&	0,241964	\\
+16	&	3	&	0,8	&	0,500000	&	0,308538	\\
+17	&	3,3	&	0,85	&	0,665882	&	0,420740	\\
+18	&	3,5	&	0,9	&	0,762475	&	0,500000	\\
+19	&	3,8	&	0,95	&	0,873451	&	0,617911	\\
+20	&	4,2	&	1	&	0,956762	&	0,758036	\\
+\end{tabular}
+\end{table}
+\\
+The entries $d_{\{0,1\},\{Franz,Paul\}}(x_i)$ in table ~\ref{tab:2} are short forms for $S(x_i)-\Phi (x_i|\mu ;\sigma^2)$ and $S(x_{i-1})-\Phi (x_i|\mu;\sigma^2)$ with the respective values for $\mu$ and $\sigma^2$.\\
+Now that all values are wrote down, Franz and Paul only need to calculate $\max(d_0,d_1)$ for their values in order to obtain the ``Kolmogorov-Smirnov test statistic''.\\
+The final values are $D_{n,Franz}=0,508036$ and $D_{n,Paul}=0,366145$, both marked on table~\ref{tab:2}.
+The friends agree on a significance level $\alpha = 5\%$ and compare their values with $D_\alpha=0,294$. Because $D_{n,Franz}>D_\alpha$ and $D_{n,Paul}>D_\alpha$, both hypotheses are rejected which states that Franz and Paul were both wrong.
+\begin{table}[ht]
+\caption{subtracted values}
+\center
+\begin{tabular}{c|c|c|c|c}
+\label{tab:2}
+$i$ 	& $d_{0,Paul}(x_i)$ 	& $d_{1,Paul}(x_i)$ 	& $d_{0,Franz}(x_i)$ 	& $d_{1,Franz}(x_i)$ 	\\
+\hline
+1	&	0,047863	&	0,002137	&	0,043790	&	0,006210	\\
+2	&	0,096679	&	0,046679	&	0,091802	&	0,041802	\\
+..	&	...		&	...		&	...		&	...		\\
+%3	&	0,144936	&	0,094936	&	0,139276	&	0,089276	\\
+%4	&	0,177250	&	0,127250	&	0,171283	&	0,121283	\\
+%5	&	0,218355	&	0,168355	&	0,214070	&	0,164070	\\
+%6	&	0,250729	&	0,150729	&	0,269243	&	0,169243	\\
+%7	&	0,250729	&	0,250729	&	0,269243	&	0,269243	\\
+%8	&	0,254317	&	0,154317	&	0,314334	&	0,214334	\\
+%9	&	0,254317	&	0,254317	&	0,314334	&	0,314334	\\
+10	&	0,262475	&	0,212475	&	0,341345	&	0,291345	\\
+11	&	0,366145	&	0,216145	&	0,465940	&	0,315940	\\
+12	&\cellcolor[gray]{0.9}	0,366145	&	0,366145	&	0,465940	&	0,465940	\\
+..	&	...		&	...		&	...		&	...		\\
+%13	&\cellcolor[gray]{0.9}	0,366145	&	0,366145	&	0,465940	&	0,465940	\\
+%14	&	0,365882	&	0,315882	&	0,488145	&	0,438145	\\
+15	&	0,362452	&	0,312452	&\cellcolor[gray]{0.9}	0,508036	&	0,458036	\\
+%16	&	0,300000	&	0,250000	&	0,491462	&	0,441462	\\
+%17	&	0,184118	&	0,134118	&	0,429260	&	0,379260	\\
+%18	&	0,137525	&	0,087525	&	0,400000	&	0,350000	\\
+..	&	...		&	...		&	...		&	...		\\
+19	&	0,076549	&	0,026549	&	0,332089	&	0,282089	\\
+20	&	0,043238	&	0,006762	&	0,241964	&	0,191964	\\
+\end{tabular}
+\end{table}
+
+This result is not too surprising, if one looks at figure~\ref{fig:1}. The blue curve describes Paul's, the orange curve Franz' cumulative distribution function. The red lines represent the value $D_n$, the maximum distance between the respective assumed function and the gray empirical distribution function.
+As one can see, the empirical distribution function is far from being close to the assumed function and thus the value of $D_n$ is high.
+\begin{figure}[here]
+\caption{the cumulative and empirical distribution function plotted}
+\center
+\includegraphics[width=1.0\textwidth]{figures/diagramKSexample.png}
+\label{fig:1}
+\end{figure}
 \subsection{Kolmogorov–Smirnov using the NAG C Library}
+As seen in the example, the algorithm is quite simple but needs a few computation steps for calculating the empirical and the cumulative distribution function.
+Especially for higher values of $n$ or more complex cumulative distribution functions the computational effort is too high to do it manually.\\
+For this reason, there are numerical libraries that provide implementations for the ``Kolmogorov-Smirnov test''. For example the ``c'' library of the ``Numerical Algorithm Group'' - in short ``nag'' - provides reliable implementation of this goodness of fit test, although it works a little different as the procedure described above.
+To use the nag c function ``nag\_1\_sample\_ks\_test'' one has to specify the following variables:
+\begin{itemize}
+\item $n$ -- an integer storing the number of observations
+\item $x[n]$ -- an double array with observations $x_1 … x_n$
+\item $dist$ -- a Nag\_Distribution specifying the theoretical null distribution
+\item $par[2]$ -- an array consisting of two double entries representing parameters for the specified function e.g. $\mu$ and $\sigma^2$ for a normal cumulative distribution function.
+\item $estima$ -- Nag\_ParaSupplied if $para[2]$ is given or Nag\_ParaEstimated if the parameters are to be estimated
+\item $dtype$ -- specifies a Nag\_TestStatistics which will be explained later
+\end{itemize}
+$dtype$ defines if the calculated test statistic should either be $D_n$, $D^+_n$ or $D^-_n$.
+Those statistics are used to test the null hypothesis against the following alternative hypotheses.
+\begin{itemize}
+\item $D_n=\max\{D^+_n,D^-_n\}$ is calculated for $H_1 $: The data does not come from the specified null distribution.\\
+\item $D^+_n=\max\{S(x)-F(x),0\}$ is calculated for $H_2$: The data comes from a distribution which dominates the null distribution.\\
+\item $D^-_n=\max\{F(x)-S(x),F(x_i)-S(x_{i-1})\}$ is calculated for $H_3$: The data comes from a distribution which is dominated by the null distribution.\\
+\end{itemize}
+A visual representation for values of $D_n^+$ and $D_n^-$ can be seen in figure~\ref{fig:2}, where the orange curve is the dominating $S(x)$ and blue is dominated by $S(x)$.
+
+\begin{figure}[here]
+\caption{Example for $H_2$ and $H_3$}
+\center
+\includegraphics[width=.99\textwidth]{figures/diagramKSd-d+.png}
+\label{fig:2}
+\end{figure}
+\newpage
+
+After specifying those parameters one can run the function and gets the following values in return.
+\begin{itemize}
+\item $d$ -- the calculated test statistic specified by $dtype$
+\item $z$ -- the standardized  statistic $Z=D*\sqrt n$
+\item $p$ -- the probability for $d$
+\item $fail$ -- A NagError stating if something went wrong
+\end{itemize}
+$p$ describes the probability that, if the observations would actually arise from the specified null distribution, meaning that $H_0$ is correct, the value of $d$ would be this extreme. Although this value indicates that the null hypothesis may not be correct, especially for low numbers like $p<0,1$, it does not mean that if $p$ is high the null hypothesis is correct. It merely means that $p$ fails to demonstrate evidence against $H_0$.
+
 \subsection{Kolmogorov–Smirnov using R}
 \subsection{conclusion / comparison / ...}
 
 \section{Conclusion}
 
-%%%---Problembeschreibung---%%%
-\section{Problembeschreibung}
-Diese Seminararbeit soll sich mit der Einarbeitung in die oben genannten Algorithmen befassen.
-Als praxisrelevante, numerische Bibliothek soll dabei jene der Numerical Algorithms Group, im weiteren Verlauf NAG genannt, verwendet werden. Diese Bibliothek lässt sich in der Programmiersprache C einbinden und verwenden.\\
-Es soll eine Programm geschrieben werden, welches die relevanten Funktionen zu den Algorithmen aufruft und auf Beispieldaten anwendet. Die schriftliche Ausarbeitung soll erläutern, wie diese Routinen aufgerufen werden und es soll eine abstrakte Erklärung der Eigenschaften der zugrundeliegenden Algorithmen anhand von Beispielen demonstriert gegeben werden.\\
-Nachfolgend sollen noch alternativen Bibliotheken für die Programmiersprachen R, Matlab und Mathematica analysiert und eventuelle Unterschiede in Präzision und Laufzeit herausgearbeitet werden.
-
-%%%----Arbeitsplan----%%%
-\section{Arbeitsplan}
-Für die Bearbeitung des Seminars müssen die verschiedenen Aufgaben in eine sinnvolle zeitliche Abfolge gebracht und ein Plan über den geschätzten Zeitaufwand erstellt werden.
-Die für die Seminararbeit zur Verfügung stehenden Sechs Wochen sollen dabei sinnvoll eingeteilt werden.
-Zusätzlich soll darauf eingegangen werden, wie auf das Wegfallen eines Gruppenmitglieds reagiert werden kann.
-Das Ergebnis dieser Überlegungen ist ein Arbeitsplan, der nun im Folgenden näher erläutert werden soll.
-
-\subsection{Anfangsphase (Zwei Wochen)}
-Die ersten Schritte der Erstellung der Seminararbeit sind in der Anfangsphase zusammengefasst.
-Das Augenmerk liegt hier hauptsächlich auf Verständnis und Reproduktion von Grundlagen.
-Hierfür sind 2 Wochen veranschlagt.
-\\
-Da für das Verständnis und die Anwendung der vorzustellenden Algorithmen Vorkenntnisse im Bereich Statistik von Nöten sind, müssen sich diese via Literaturrecherche angeeignet werden.
-Dieses Wissen soll dann in die Seminararbeit einfließen.
-Das Verfassen einer Einführung in die notwendigen Grundlagen der Statistik soll in der Anfangsphase abgeschlossen werden.
-\\
-Wie bereits erläutert soll die Implementierung der NAG C Bibliotheken mit Alternativen verglichen werden.
-Die C-Kenntnisse der Gruppenmitglieder sind hinreichend ausgeprägt, um die NAG C Bibliotheken mit Hilfe der Dokumentation verwenden zu können.
-Erfahrungen mit R hat jedoch noch keines der Gruppenmitglieder.
-Hier steht daher eine Einarbeitung an.
-Eines der Gruppenmitglieder hat rudimentäre Kenntnisse in Mathematica und Matlab.
-Diese können bei der Verwendung der Programme für das Seminar einen Großteil der Einarbeitungszeit ersparen.
-\\
-Die Einarbeitung in die verschiedenen Sprachen soll zum Ziel haben, dass jeweils ein Grundgerüst geschaffen werden kann, mit Hilfe dessen die Implementierungen unter Verwendung verschiedener Eingabedaten einfach und schnell miteinander verglichen werden können.
-Die Umsetzung solcher Grundgerüste bildet den letzten Punkt der Anfangsphase.
-\\
-Sollte ein Gruppenmitglied ausfallen, kann die Anzahl der Vergleichssprachen gegebenenfalls reduziert werden.
-Dabei verspricht Mathematica die größten Unterschiede, sowohl in der Handhabung als auch in der Präzision der Ergebnisse.
-R sollte im Vergleich jedoch als quelloffene Statistikprogrammiersprache auf keinen Fall fehlen.
-Somit sollte Matlab aus dem Vergleich gestrichen werden, falls der Zeitplan bei reduzierter Gruppengröße nicht aufgeht.
-
-\subsection{Transfer- und Vergleichsphase (Drei Wochen)}
-Nachdem in der ersten Phase die Grundlage für den Vergleich der verschiedenen Implementierungen geschaffen wurde, soll in der zweiten Phase der eigentliche Vergleich durchgeführt werden.
-Dazu sollen geeignete Beispiele erarbeitet werden, die signifikante Unterschiede zwischen den verschiedenen Bibliotheken herausstellen.
-Da die Beispiele zum Teil mit in die Seminararbeit einfließen sollen, soll auf die Verständlichkeit und Anschaulichkeit der damit verknüpften Szenarien Wert gelegt werden.
-Die während des Vergleichs erkannten Eigenschaften der einzelnen Umsetzungen sind im Zweifel durch eine weitergehende Literaturrecherche zu verifizieren.
-Ziel für die Seminararbeit ist es, aus den so gewonnenen Informationen eine fundierte Gegenüberstellung der betrachteten Implementierungen ausarbeiten zu können.
-Deren Umsetzung bildet den letzten Schritt dieser dreiwöchigen Phase.
-
-\subsection{Finalisierungsphase (Eine Woche)}
-Die letzte Phase widmet sich hauptsächlich dem Verfassen eines Fazits und Ausblicks.
-Zudem sollen hier abschließende Arbeiten am Dokument, etwa sprachliche Verbesserungen oder das Einbinden von Beispiel-Quelltext in das Dokument, durchgeführt werden.
-Hierfür ist ein Zeitrahmen von einer Woche geplant.
 
 \newpage
 \nocite{*}

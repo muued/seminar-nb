@@ -100,7 +100,29 @@ Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer nume
 	\item[gamma distribution] ...
 \end{description}
 
+\subsection{Estimation}
+\begin{description}
+	\item[population] all elements under investigation
+	\item[sample] collection of some elements of a population
+	\item[target population] population, one wants information about
+	\item[sampled population] population, one has information about
+	\item[random sample] a sample from a finite population is a random sample if each of the possible samples was equally likely to be obtained
+	\item[random sample of size n] is a sequence of n independent and identically distributed random variables $X_1, \ldots, X_n$
+\end{description}
+
+estimates:
+quality criteria of an estimate: precision (how close to the real value) and reliability (probability for the result to be correct)
+point estimates: sample mean, sample variance, ...
+confidence interval: consist of \emph{interval estimate} borders and the \emph{confidence coefficient} (probability, that the interval estimator will contain the unknown population quantity)
+
+\begin{description}
+	\item[empirical distribution function] Let $X_1, \ldots, X_n$ be a random sample. The empirical distribution function $S(x)$ is a function of $x$, which equals the fraction of $X_i$s that are less than or equal to $x$ for each $x$, $-\infty<x<\infty$.
+	\item[sample mean] Let $X_1, \ldots, X_n$ be a random sample. $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$ is the sample mean.
+	\item[sample variance] Let $X_1, \ldots, X_n$ be a random sample. $S^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})$ is the sample variance. The positive square root of the sample variance is the sample standard deviation $S$.
+\end{description}
+
 \subsection{Statistical Inference}
+
 \begin{tikzpicture}[node distance = 2 cm]
 	\node (t) at (2,3) {\bfseries theory};
 	\node (d) at (4,1.5) {deduction};
@@ -113,33 +135,18 @@ Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer nume
 		(i) edge[bend left, ->] node[left] {} (t) ;
 \end{tikzpicture}
 
-\begin{description}
-	\item[population] all elements under investigation
-	\item[sample] collection of some elements of a population
-	\item[target population] population, one wants information about
-	\item[sampled population] population, one has information about
-	\item[random sample] a sample from a finite population is a random sample if each of the possible samples was equally likely to be obtained
-	\item[random sample of size n] is a sequence of n independent and identically distributed random variables $X_1, \ldots, X_n$
-\end{description}
 
-
-\subsection{Estimation}
-\begin{description}
-	\item[empirical distribution function] Let $X_1, \ldots, X_n$ be a random sample. The empirical distribution function $S(x)$ is a function of $x$, which equals the fraction of $X_i$s that are less than or equal to $x$ for each $x$, $-\infty<x<\infty$.
-	\item[sample mean] Let $X_1, \ldots, X_n$ be a random sample. $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$ is the sample mean.
-	\item[sample variance] Let $X_1, \ldots, X_n$ be a random sample. $S^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})$ is the sample variance. The positive square root of the sample variance is the sample standard deviation $S$.
-	\item[]
-\end{description}
-
-	estimates:
-	quality criteria of an estimate: precision (how close to the real value) and reliability (probability for the result to be correct)
-	point estimates: sample mean, sample variance, ...
-	confidence interval: consist of \emph{interval estimate} borders and the \emph{confidence coefficient} (probability, that the interval estimator will contain the unknown population quantity)
-
-\subsection{Hypothesis}
-	hypotheses as a mean of statistical induction \\
-	definition \\
-	has to be falsifiable, can not be proven, ...\\
+hypothesis testing as a mean of statistical induction \\
+process of inferring from a sample whether or not to accept a certain statement about the population \\
+the statement itself has to be a hypothesis. \\
+%
+The word hypothesis may in this context be defined as
+\begin{quote}
+	a tentative assumption made in order to draw out and test its logical and empirical consequences \cite{merriamwebster}
+\end{quote}
+It can be seen as a more formal version of an \emph{educated guess}.
+Using a hypothesis, one may predict e.\,g. the outcome of experiments.
+Generally, a hypothesis is required to be either falsifiable or verifiable, such that it can be tested.
 
 
 

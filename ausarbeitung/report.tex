@@ -567,7 +567,17 @@ Then use the attribute `counts' in the returning object from a call to `hist' pa
 This way, the expected frequencies of the hypothetical distribution function are equal in all classes, as this is what quantiles stand for.
 
 \subsection{conclusion / comparison / ...}
-
+With the $\chi^2$ Goodness-of-Fit test a contingency table-based test has been presented.
+Pearson's test is probably the oldest Goodness-of-Fit test and has some limitations, which were discussed above.
+\\
+The implementations in C (in the NAG C Library) and in R have been presented.
+As can be seen in the implementation of the example using the C function involves writing a lot of code to be able to call the function.
+The sheer amount of code and the complexity of the C language presents far more pitfalls than the R language.
+Yet, the c function can be passed the null hypothesis distribution function as an enum instead of a contingency table, which is easier to supply, especially for non-equidistant intervals.
+\\
+This way both implementations have their upsides.
+When runtime speed is critical or non-equidistant intervals shall be used, the NAG C Library lends itself.
+Otherwise it is much simpler to just use the R version, as the code is easier to write and the overhead is much smaller.
 
 \section{Conclusion}
 

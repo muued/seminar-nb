@@ -5,10 +5,8 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
-\usepackage{amsmath}
 \usepackage[english]{babel}
-\usepackage{amssymb}
-\usepackage{amsxtra}
+\usepackage{amsmath, amssymb, amsxtra, amsthm}
 \usepackage{epsfig,psfrag}
 \usepackage{listings}
 \usepackage{url}
@@ -20,6 +18,10 @@
 
 \usepackage{nicefrac}
 \usepackage[toc,page]{appendix}
+
+
+\theoremstyle{definition}
+\newtheorem*{example}{Example}
 
 \newcommand{\refchapter}[1]{Chapter~\ref{#1}}
 \newcommand{\refsec}[1]{Section~\ref{#1}}
@@ -59,14 +61,35 @@ LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
 \newpage
 
 \section{Introduction / Preface / ...}
-
+...
 Between various alternatives to the NAG C Library such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
+...
 
-\section{Introduction to Statistics}
+\section{Basic Statistics}
+This section is intended to provide the basic knowledge about statistics up to statistical hypothesis testing needed to understand the two algorithms this paper focuses on.
+
 \subsection{Fundamentals}
+As the goal is to understand tests on hypothesis, we place an emphasis on experiments.
+When conducting an experiment, different outcomes are possible, otherwise it would make little sense to do so.
+The collection of all possible outcomes of an experiment shall be called \emph{sample space}.
+Analogue a possible outcome is called a \emph{point in the sample space}.
+Now we can define the omnipresent term \emph{event} as any set of points in the sample space.
+One is usually interested in the \emph{probability of an event A}, denoted by P(A).
+To determine those, we need a \emph{probability function}, assigning real numbers to points in the sample space.
+The terms introduced shall now be illustrated using an example.
+\begin{example}[Flipping a coin \cite{conover1980practical}]
+	We conduct the following experiment:
+	A fair coin is flipped twice and the outcome is denoted by T for tails and H for heads.
+	Our sample space is the set \{TT, TH, HT, HH\}.
+	The event `at least one head' includes the following points in the sample space: HT, TH, HH.
+	As every point in the sample space is equally likely, our probability function assigns the same value to each of them (0.25).
+	The probability of the event `at least one head' is 0.75.
+\end{example}
+Furthermore we define the term \emph{random variable}, meaning a function assigning real numbers to points in the sample space.
+In contrast to the probability function the random variable acts as an enumerator.
+The \emph{probability function of a random variable} X (denoted $f(x)$) gives the probability of X assuming a point in the sample space, that X assigns the number x, so $f(x) = P(X = x)$, where $X = x$ is an event the probability function $P$ gives a probability for.
+
 \begin{description}
-	\item[sample space] collection of all possible outcomes of an experiment
-	\item[P(A)] probability of the event A
 	\item[random variable] function assigning real numbers to points in the sample space
 	\item[probability function of a random variable X] denoted $f(x)$. Gives the probability of X assuming the value x, so $f(x) = P(X = x)$
 	\item[cumulative distribution function of a random variable X] denoted $F(x)$. Gives the probability of X being less than or equal to x, so $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$
@@ -74,7 +97,6 @@ Between various alternatives to the NAG C Library such as R \cite{hellbrueck2009
 	\item[expected value] of a real valued function $u(X)$ of a random variable X with the probability function $f(x)$, written $E[u(X)] = \sum_{x}u(x)f(x)$
 	\item[mean] of a random variable X: $\mu = E(X)$
 	\item[variance] of a random variable X with mean $\mu$ and the probability function $f(x)$: $\sigma^2 = E[(x-\mu)^2]$. Its positive square root is the \emph{standard deviation}.
-
 \end{description}
 
 \subsection{Probability Distributions}

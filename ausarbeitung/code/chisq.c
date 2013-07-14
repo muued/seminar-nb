@@ -7,22 +7,20 @@
 
 int main(void)
 {
-	NagError          fail;
+	NagError fail;
 	INIT_FAIL(fail);
 
-	// constant part
 	Integer n = 20, nclass = 4;
 	double x[] = {14.6, 15.4, 15.2, 15.8, 17.3, 18.0, 18.7, 19.5, 19.7, 19.9, 20.1, 21.1, 21.7, 22.6, 23.1, 23.2, 24.4, 24.7, 24.8, 25.3};
 	Integer *ifreq = 0;
 
-	// werte fuer paul
+	// Paul's values
 	double par[] = {20.0, 11.0};
 	double cint[] = {20-sqrt(11)*0.6745, 20, 20+sqrt(11)*0.6745};
 	Integer npest = 0;
 
-	/* Double scalar and array declarations */
-	double            chisq, *chisqi = 0, *eval = 0, p;
-	double            *prob = 0;
+	// parameters
+	double chisq, *chisqi = 0, *eval = 0, p, *prob;
 
 	if (!(ifreq = NAG_ALLOC(nclass, Integer))
 			|| !(chisqi = NAG_ALLOC(nclass, double))
@@ -55,7 +53,7 @@ int main(void)
 		printf("rejected!\n");
 	}
 
-
+	// Fritz's values
 	par[0] = 20.26;
 	par[1] = 11.297;
 	cint[0] = 20.26-sqrt(11.297)*0.6745;

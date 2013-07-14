@@ -169,11 +169,13 @@ means that the random variable does not follow the probability distribution $S(x
 The Kolmogorov-Smirnov test statistic is
 $$D_n = \max (d_0,d_1)~,$$
 where 
-$$d_0=\max_{X} |S(x)-F(x)|$$ 
+$$d_0=\sup_{X} |S(x)-F(x)|$$ 
 and
-$$d_1 = \max_{x_i \in X} | S(x_{i-1})-F(x_i)|~,$$
-with $S (x_0)$  defined as $0$. With a significance level $\alpha$, the value $D_n$ is then compared to a value $D_\alpha$~\cite{nagcKS}.
-The value $D_\alpha$ is the critical value of the Kolmogorov distribution, which will not be discussed here, can be looked up in a table if $n$ is less than or equal $35$~\cite{massey1951}. If $n$ is greater than $35$, then the approximate value can be calculated with formulas found also in a table with respect to the chosen significance level~\cite{massey1951}. If $D_n>D_\alpha$ the null hypothesis $H_0$  is rejected at a significance level $\alpha$.
+$$d_1 = \sup_{x_i \in X} | S(x_{i-1})-F(x_i)|~,$$
+with $S (x_0)$  defined as $0$. With a significance level $\alpha$, the value $D_n$ is then compared to a value $D_\alpha$.
+The value $D_\alpha$ is the critical value of the Kolmogorov distribution, which will not be discussed here, can be looked up in a table if $n$ is less than or equal $35$. If $n$ is greater than $35$, then the approximate value
+$$D_\alpha = \frac{ \sqrt{\ln(\frac 2 \alpha)} } {\sqrt{2n}}$$ 
+is used. If $D_n>D_\alpha$ the null hypothesis $H_0$  is rejected at a significance level $\alpha$.
 
 %\subsection{Mathematical Background}
 \subsection{Example}
@@ -187,21 +189,21 @@ After rearranging the observations into an ascending order, the following table 
 \begin{tabular}{c|c|c|c|c|c|c|c|c|c}
 $x_1$	&$x_2$	&$x_3$	&$x_4$	&$x_5$	&$x_6$	&$x_7$	&$x_8$	&$x_9$	&$x_{10}$\\
 \hline
-1	&1.1	&1.2	&1.6	&1.7	&2.1	&2.1	&2.4	&2.4	&2.5	\\
+1	&1,1	&1,2	&1,6	&1,7	&2,1	&2,1	&2,4	&2,4	&2,5	\\
 \end{tabular}
 \begin{tabular}{c|c|c|c|c|c|c|c|c|c}
 $x_{11}$	&$x_{12}$	&$x_{13}$	&$x_{14}$	&$x_{15}$	&$x_{16}$	&$x_{17}$	&$x_{18}$	&$x_{19}$	&$x_{20}$\\
 \hline
-2.6	&2.6	&2.6	&2.7	&2.8	&3	&3.3	&3.5	&3.8	&4.2\\
+2,6	&2,6	&2,6	&2,7	&2,8	&3	&3,3	&3,5	&3,8	&4,2\\
 \end{tabular}
 \end{table}
 \\
 With these data available, Paul claims that the heights are normally distributed with a mathematical expectation of 3 cm and a variance of 0.7, while Franz states that it is 3.5 cm and 1, respectively.\\
 The bartender, who noticed their conversation recommends them to check their statements with the ``Kolmogorov-Smirnov goodness of fit test''.
 Following the suggestion they construct their hypotheses:
-$$H_{Franz} : S(x) = \Phi (x|3.5;1)$$
+$$H_{Franz} : S(x) = \Phi (x|3.5,1)$$
 and
-$$H_{Paul} : S(x) = \Phi (x|3;0.7)~,$$
+$$H_{Paul} : S(x) = \Phi (x|3,0.7)~,$$
 where $\Phi(x|\mu,\sigma^2)$ is the cumulative distribution function of the normal distribution and $S(x)$ is the empirical distribution function.\\
 Because Paul and Franz want to proof each other wrong, their hope is, that the hypothesis of the opponent is rejected by the test.
 To obtain the test statistic which is needed to potentially rejected or accept a hypotheses the values for $S(x_i)$, $\Phi (x_i|3;0,7)$ and $\Phi (x_i|3,5;1)$ are computed and written down in a table to get a clear overview.
@@ -212,32 +214,32 @@ To obtain the test statistic which is needed to potentially rejected or accept a
 \label{tab:1}
 $i$ 	& $x_i$ 	& $S(x_i)$ 	& $\Phi (x_i|3;0,7)$ 	& $\Phi (x_i|3,5;1)$ 	\\
 \hline
-1	&	1	&	0.05	&	0.002137	&	0.006210	\\
-2	&	1.1	&	0.1	&	0.003321	&	0.008198	\\
-3	&	1.2	&	0.15	&	0.005064	&	0.010724	\\
-4	&	1.6	&	0.2	&	0.022750	&	0.028717	\\
-5	&	1.7	&	0.25	&	0.031645	&	0.035930	\\
-%6	&	2.1	&	0.35	&	0.099271	&	0.080757	\\
-7	&	2.1	&	0.35	&	0.099271	&	0.080757	\\
-%8	&	2.4	&	0.45	&	0.195683	&	0.135666	\\
-9	&	2.4	&	0.45	&	0.195683	&	0.135666	\\
-10	&	2.5	&	0.5	&	0.237525	&	0.158655	\\
-11	&	2.6	&	0.65	&	0.283855	&	0.184060	\\
-%12	&	2.6	&	0.65	&	0.283855	&	0.184060	\\
-%13	&	2.6	&	0.65	&	0.283855	&	0.184060	\\
-14	&	2.7	&	0.7	&	0.334118	&	0.211855	\\
-15	&	2.8	&	0.75	&	0.387548	&	0.241964	\\
-16	&	3	&	0.8	&	0.500000	&	0.308538	\\
-17	&	3.3	&	0.85	&	0.665882	&	0.420740	\\
-18	&	3.5	&	0.9	&	0.762475	&	0.500000	\\
-19	&	3.8	&	0.95	&	0.873451	&	0.617911	\\
-20	&	4.2	&	1	&	0.956762	&	0.758036	\\
+1	&	1	&	0,05	&	0,002137	&	0,006210	\\
+2	&	1,1	&	0,1	&	0,003321	&	0,008198	\\
+3	&	1,2	&	0,15	&	0,005064	&	0,010724	\\
+4	&	1,6	&	0,2	&	0,022750	&	0,028717	\\
+5	&	1,7	&	0,25	&	0,031645	&	0,035930	\\
+%6	&	2,1	&	0,35	&	0,099271	&	0,080757	\\
+7	&	2,1	&	0,35	&	0,099271	&	0,080757	\\
+%8	&	2,4	&	0,45	&	0,195683	&	0,135666	\\
+9	&	2,4	&	0,45	&	0,195683	&	0,135666	\\
+10	&	2,5	&	0,5	&	0,237525	&	0,158655	\\
+11	&	2,6	&	0,65	&	0,283855	&	0,184060	\\
+%12	&	2,6	&	0,65	&	0,283855	&	0,184060	\\
+%13	&	2,6	&	0,65	&	0,283855	&	0,184060	\\
+14	&	2,7	&	0,7	&	0,334118	&	0,211855	\\
+15	&	2,8	&	0,75	&	0,387548	&	0,241964	\\
+16	&	3	&	0,8	&	0,500000	&	0,308538	\\
+17	&	3,3	&	0,85	&	0,665882	&	0,420740	\\
+18	&	3,5	&	0,9	&	0,762475	&	0,500000	\\
+19	&	3,8	&	0,95	&	0,873451	&	0,617911	\\
+20	&	4,2	&	1	&	0,956762	&	0,758036	\\
 \end{tabular}
 \end{table}
 \\
 The entries $d_{\{0,1\},\{Franz,Paul\}}(x_i)$ in table ~\ref{tab:2} are short forms for $S(x_i)-\Phi (x_i|\mu ;\sigma^2)$ and $S(x_{i-1})-\Phi (x_i|\mu;\sigma^2)$ with the respective values for $\mu$ and $\sigma^2$.\\
 Now that all values are wrote down, Franz and Paul only need to calculate $\max(d_0,d_1)$ for their values in order to obtain the ``Kolmogorov-Smirnov test statistic''.\\
-The final values are $D_{n,Franz}=0.508036$ and $D_{n,Paul}=0.366145$, both marked on table~\ref{tab:2}.
+The final values are $D_{n,Franz}=0,508036$ and $D_{n,Paul}=0,366145$, both marked on table~\ref{tab:2}.
 The friends agree on a significance level $\alpha = 5\%$ and compare their values with $D_\alpha=0,294$. Because $D_{n,Franz}>D_\alpha$ and $D_{n,Paul}>D_\alpha$, both hypotheses are rejected which states that Franz and Paul were both wrong.
 \begin{table}[ht]
 \caption{subtracted values}
@@ -246,34 +248,34 @@ The friends agree on a significance level $\alpha = 5\%$ and compare their value
 \label{tab:2}
 $i$ 	& $d_{0,Paul}(x_i)$ 	& $d_{1,Paul}(x_i)$ 	& $d_{0,Franz}(x_i)$ 	& $d_{1,Franz}(x_i)$ 	\\
 \hline
-1	&	0.047863	&	0.002137	&	0.043790	&	0.006210	\\
-2	&	0.096679	&	0.046679	&	0.091802	&	0.041802	\\
+1	&	0,047863	&	0,002137	&	0,043790	&	0,006210	\\
+2	&	0,096679	&	0,046679	&	0,091802	&	0,041802	\\
 ..	&	...		&	...		&	...		&	...		\\
-%3	&	0.144936	&	0.094936	&	0.139276	&	0.089276	\\
-%4	&	0.177250	&	0.127250	&	0.171283	&	0.121283	\\
-%5	&	0.218355	&	0.168355	&	0.214070	&	0.164070	\\
-%6	&	0.250729	&	0.150729	&	0.269243	&	0.169243	\\
-%7	&	0.250729	&	0.250729	&	0.269243	&	0.269243	\\
-%8	&	0.254317	&	0.154317	&	0.314334	&	0.214334	\\
-%9	&	0.254317	&	0.254317	&	0.314334	&	0.314334	\\
-10	&	0.262475	&	0.212475	&	0.341345	&	0.291345	\\
-11	&	0.366145	&	0.216145	&	0.465940	&	0.315940	\\
-12	&\cellcolor[gray]{0.9}	0.366145	&	0.366145	&	0.465940	&	0.465940	\\
+%3	&	0,144936	&	0,094936	&	0,139276	&	0,089276	\\
+%4	&	0,177250	&	0,127250	&	0,171283	&	0,121283	\\
+%5	&	0,218355	&	0,168355	&	0,214070	&	0,164070	\\
+%6	&	0,250729	&	0,150729	&	0,269243	&	0,169243	\\
+%7	&	0,250729	&	0,250729	&	0,269243	&	0,269243	\\
+%8	&	0,254317	&	0,154317	&	0,314334	&	0,214334	\\
+%9	&	0,254317	&	0,254317	&	0,314334	&	0,314334	\\
+10	&	0,262475	&	0,212475	&	0,341345	&	0,291345	\\
+11	&	0,366145	&	0,216145	&	0,465940	&	0,315940	\\
+12	&\cellcolor[gray]{0.9}	0,366145	&	0,366145	&	0,465940	&	0,465940	\\
 ..	&	...		&	...		&	...		&	...		\\
-%13	&\cellcolor[gray]{0.9}	0.366145	&	0.366145	&	0.465940	&	0.465940	\\
-%14	&	0.365882	&	0.315882	&	0.488145	&	0.438145	\\
-15	&	0.362452	&	0.312452	&\cellcolor[gray]{0.9}	0.508036	&	0.458036	\\
-%16	&	0.300000	&	0.250000	&	0.491462	&	0.441462	\\
-%17	&	0.184118	&	0.134118	&	0.429260	&	0.379260	\\
-%18	&	0.137525	&	0.087525	&	0.400000	&	0.350000	\\
+%13	&\cellcolor[gray]{0.9}	0,366145	&	0,366145	&	0,465940	&	0,465940	\\
+%14	&	0,365882	&	0,315882	&	0,488145	&	0,438145	\\
+15	&	0,362452	&	0,312452	&\cellcolor[gray]{0.9}	0,508036	&	0,458036	\\
+%16	&	0,300000	&	0,250000	&	0,491462	&	0,441462	\\
+%17	&	0,184118	&	0,134118	&	0,429260	&	0,379260	\\
+%18	&	0,137525	&	0,087525	&	0,400000	&	0,350000	\\
 ..	&	...		&	...		&	...		&	...		\\
-19	&	0.076549	&	0.026549	&	0.332089	&	0.282089	\\
-20	&	0.043238	&	0.006762	&	0.241964	&	0.191964	\\
+19	&	0,076549	&	0,026549	&	0,332089	&	0,282089	\\
+20	&	0,043238	&	0,006762	&	0,241964	&	0,191964	\\
 \end{tabular}
 \end{table}
 
 This result is not too surprising, if one looks at figure~\ref{fig:1}. The blue curve describes Paul's, the orange curve Franz' cumulative distribution function. The red lines represent the value $D_n$, the maximum distance between the respective assumed function and the gray empirical distribution function.
-As one can see, the empirical distribution function is far from being close to the assumed functions and thus the values of $D_n$ are high.
+As one can see, the empirical distribution function is far from being close to the assumed function and thus the value of $D_n$ is high.
 \begin{figure}[here]
 \caption{the cumulative and empirical distribution function plotted}
 \center
@@ -283,8 +285,8 @@ As one can see, the empirical distribution function is far from being close to t
 \subsection{Kolmogorov–Smirnov using the NAG C Library}
 As seen in the example, the algorithm is quite simple but needs a few computation steps for calculating the empirical and the cumulative distribution function.
 Especially for higher values of $n$ or more complex cumulative distribution functions the computational effort is too high to do it manually.\\
-For this reason, there are numerical libraries that provide implementations for the ``Kolmogorov-Smirnov test''. For example the ``c'' library of the ``Numerical Algorithm Group'' - in short ``Nag c''~\cite{nagc} - provides reliable implementation of this goodness of fit test, although it works a little different as the procedure described above.
-To use the nag c function ``nag\_1\_sample\_ks\_test'' one has to specify the following variables~\cite{nagcKS}:
+For this reason, there are numerical libraries that provide implementations for the ``Kolmogorov-Smirnov test''. For example the ``c'' library of the ``Numerical Algorithm Group'' - in short ``nag'' - provides reliable implementation of this goodness of fit test, although it works a little different as the procedure described above.
+To use the nag c function ``nag\_1\_sample\_ks\_test'' one has to specify the following variables:
 \begin{itemize}
 \item $n$ -- an integer storing the number of observations
 \item $x[n]$ -- an double array with observations $x_1 … x_n$
@@ -314,30 +316,12 @@ After specifying those parameters one can run the function and gets the followin
 \begin{itemize}
 \item $d$ -- the calculated test statistic specified by $dtype$
 \item $z$ -- the standardized  statistic $Z=D*\sqrt n$
-\item $p$ -- the $p$-value
+\item $p$ -- the probability for $d$
 \item $fail$ -- A NagError stating if something went wrong
 \end{itemize}
-$p$ describes the probability that if the null hypothesis is correct, observations following the null distribution would generate a value for $d$, which is this extreme.
-%$p$ describes the probability that, if the observations would actually arise from the specified null distribution, meaning that $H_0$ is correct, the value of $d$ would be this extreme.
-Although this value indicates that the null hypothesis may not be correct, especially for low numbers like $p<0.1$, it does not mean that if $p$ is high the null hypothesis is correct. It merely means that $p$ fails to demonstrate evidence against $H_0$~\cite{conover1980practical}.
+$p$ describes the probability that, if the observations would actually arise from the specified null distribution, meaning that $H_0$ is correct, the value of $d$ would be this extreme. Although this value indicates that the null hypothesis may not be correct, especially for low numbers like $p<0,1$, it does not mean that if $p$ is high the null hypothesis is correct. It merely means that $p$ fails to demonstrate evidence against $H_0$.
 
 \subsection{Kolmogorov–Smirnov using R}
-A handy alternative to the ``nag c'' library is the open source software ``R''.\\
-``R'' provides various functions for statistical computations, also including a function for the ``Kolmogorv-Smirnov test''. To Run this function, one has to specify the following parameters:
-\begin{itemize}
-\item $x$
-\item $y$
-\item $params$
-\item $alternative$
-\end{itemize}
-Once these parameters have been set the function can be run and returns the next described results:
-\begin{itemize}
-\item $statistic$
-\item $p.value$
-\item $alternative$
-\item $method$
-\item $data.name$
-\end{itemize}
 \subsection{conclusion / comparison / ...}
 
 \section{Conclusion}

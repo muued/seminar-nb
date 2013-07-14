@@ -340,25 +340,28 @@ $p$ describes the probability that if the null hypothesis is correct, observatio
 Although this value indicates that the null hypothesis may not be correct, especially for low numbers like $p<0.1$, it does not mean that if $p$ is high the null hypothesis is correct. It merely means that $p$ fails to demonstrate evidence against $H_0$~\cite{conover1980practical}.
 
 \subsection{Kolmogorov–Smirnov using R}
-A handy alternative to the ``nag c'' library is the open source software ``R''.\\
+A handy alternative to the ``nag c'' library is the open source software ``R''~\cite{rproject}.\\
 ``R'' provides various functions for statistical computations, also including a function for the ``Kolmogorv-Smirnov test''. To Run this function, one has to specify the following parameters:
 \begin{itemize}
-\item $x$
-\item $y$
-\item $params$
-\item $alternative$
+\item $x$ -- a numeric vector, containing the values of the observations. Comparable with $x[n]$
+\item $y$ -- a character string specifying the theoretical null distribution. Comparable with $dist$
+\item $params$ -- a character string further specifying $y$. Comparable with $par[2]$
+\item $alternative$ -- defines which alternative hypothesis is to be chosen. Comparable with $dtype$
 \end{itemize}
 Once these parameters have been set the function can be run and returns the next described results:
 \begin{itemize}
-\item $statistic$
-\item $p.value$
-\item $alternative$
-\item $method$
-\item $data.name$
+\item $statistic$ -- the calculated test statistic specified by $dtype$
+\item $p.value$ -- the $p$-value
+\item $alternative$ -- the chosen alternative hypothesis
+\item $method$ -- the test that was performed
+\item $data.name$ -- the name or names of the data
 \end{itemize}
 \subsection{conclusion / comparison / ...}
-
-
+As one can see the ``Kolmogorv-Smirnov'' goodness of fit test is an easy to use tool to check whether a given observation set follows a specified probability distribution or not.
+Due to the circumstances that a not rejected hypothesis should not be considered as correct~\cite{conover1980practical}, the tests application is to show that a given observation does not follow a probability distribution. An example could be to show that the distribution of wealth of the people of Germany does not follow a normal distribution.\\
+Numerical libraries come in handy especially for quick examine of the plausibility of a hypothesis with the help of the ``Kolmogorov-Smirnov'' test. The ``nag c'' library has its advantages 
+in estimating values for the specified null hypothesis, but on the downside one has to handle a lot of variables in comparison to the ``R'' variant. However the ``R project'' solution does not offer the option to estimate the values of the given null hypothesis, but it has the benefit that can calculate the ``two sample Kolmogorov-Smirnov'' test by just changing the value of $y$ to a numerical vector. Although this test is not described in this thesis, the fact that one can switch between those two without having to call a complete new function is valuable attribute.\\
+Neither of these two alternatives dominates, therefor there is no clear choice for one of it. It depends on the situation and the preferences the user has. 
 \section{$\chi^2$ Tests}
 A $\chi^2$ test (also denoted chi-square test) is a statistical hypothesis test in which the sampling distribution of the test statistic is a $\chi^2$ distribution under the null hypothesis.
 The oldest and best-known version is Pearson's $\chi^2$ Goodness-of-Fit test.

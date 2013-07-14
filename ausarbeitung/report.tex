@@ -411,7 +411,7 @@ So they decide to offer them to other people in the pub under the premise that t
 The bartender, happily lending himself to drinking one of the beers, proposes to use the $\chi^2$ goodness-of-fit test this time.
 After rearranging the times measured, they obtained the data presented in \reftbl{tbl:chisqrawdata}.
 %
-\begin{table}[h]
+\begin{table}[htb]
 \caption{$\chi^2$ example: sample data}
 \label{tbl:chisqrawdata}
 \center
@@ -452,9 +452,10 @@ They calculate their interval borders $x_p$ using the standard normal distributi
 	&\approx 22.527 & &\approx 22.237
 \end{align*}
 %
-\begin{table}[h]
+\begin{table}[htb]
 \center
 \caption{Franz's frequency table}
+\label{tbl:chisq:ex:franz}
 \begin{tabular}{l|cccc}
 	& $(-\infty, 17.993]$ & $(17.993, 20.26]$ & $(20.26, 22.527]$ & $(22.527,\infty)$ \\
 	\hline
@@ -462,9 +463,10 @@ They calculate their interval borders $x_p$ using the standard normal distributi
 	Expected & 5 & 5 & 5 & 5 \\
 \end{tabular}
 \end{table}
-\begin{table}[h]
+\begin{table}[htb]
 \center
 \caption{Paul's frequency table}
+\label{tbl:chisq:ex:paul}
 \begin{tabular}{l|cccc}
 	& $(-\infty, 17.763]$ & $(17.763, 20]$ & $(20, 22.237]$ & $(22.393,\infty)$ \\
 	\hline
@@ -472,7 +474,7 @@ They calculate their interval borders $x_p$ using the standard normal distributi
 	Expected & 5 & 5 & 5 & 5 \\
 \end{tabular}
 \end{table}
-Now the test statistic $X^2$ is calculated.
+Now the test statistic $X^2$ is calculated based on the frequency tables shown in Tables \ref{tbl:chisq:ex:paul} and \ref{tbl:chisq:ex:franz}.
 \begin{align*}
 	X^2_{\text{Franz}} &= \frac{(5-5)^2}{5} + \frac{(6-5)^2}{5} + \frac{(2-5)^2}{5} + \frac{(7-5)^2}{5} = 2.8
 	\\[1ex]

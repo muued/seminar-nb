@@ -44,7 +44,7 @@ LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
 \begin{document}
 
 \lstloadlanguages{[ISO]C++, R}
-\lstset{basicstyle=\small, numbers=left, numberstyle=\footnotesize,
+\lstset{basicstyle=\small, numbers=left, numberstyle=\footnotesize, tabsize=2,
   stepnumber=1, numbersep=5pt, breaklines=true, escapeinside={/*@}{@*/}}
 
 \begin{titlepage}
@@ -373,8 +373,9 @@ The test may reject the null hypothesis or accept it, meaning the sample does no
 
 \subsection{Mathematical Background}
 Here, the mathematical background of the $\chi^2$ Goodness-of-Fit test is explained and afterwards elaborated by means of an example.
-The test works on a sample of $n$ independent observations of a random variable $X$, denoted $x_1, \ldots, x_n$, which are grouped into $k$ classes.
-To be able to draw conclusions from the sample to the target population, it has to be a random sample.
+\\
+The test works on a sample of $n$ independent observations of a random variable $X$, denoted by $x_1, \ldots, x_n$, which are grouped into $k$ classes.
+To be able to draw conclusions from the sample back to the target population, it has to be a random sample.
 The observed frequencies for each class $i$ are denoted by $O_i$.
 \\
 Let $F$ be the distribution function given in the null hypothesis.
@@ -388,7 +389,7 @@ Now, the test statistic can be computed as follows:
 \end{equation}
 With the significance level $\alpha$ the null hypothesis is rejected, if the test statistic $X^2$ is greater than $x_{1-\alpha}$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with $(k-1-d)$ degrees of freedom, otherwise it is accepted.
 \\
-While the test statistic seems quite simple, there has been a lot of discussion about when the it computes reliable results.
+While the test statistic seems quite simple, there has been a lot of discussion about when it computes reliable results.
 We can divide the discussion into the following two questions.
 \subparagraph{What constraints are there for the $E_i$s?}
 	Early literature implies, that no $E_i$ should be less than 1 and no more than 20\% should be smaller than 5 \cite{conover1980practical}.
@@ -403,10 +404,17 @@ We can divide the discussion into the following two questions.
 	For the sake of simplicity, the example mentioned below does not take this into account.
 
 \subsection{Example}
-TODO intro
+Following the Kolmogorov-Smirnov test example, we now present another situation illustrating the usage of the $\chi^2$ Goodness-of-Fit test.
+\\
+With about 20 wheat beers standing in front of them, Paul and Franz start discussing about what to do with them.
+It is a lot too much to drink for the two of them.
+So they decide to offer them to other people in the pub under the premise that they measure how long it would take them to drink the beer -- as the duo now had the idea that the resulting times would be normally distributed.
 The bartender, happily lending himself to drinking one of the beers, proposes to use the $\chi^2$ goodness-of-fit test this time.
+After rearranging the times measured, they obtain the data presented in \reftbl{tbl:chisqrawdata}.
 %
-\begin{table}[h]
+\begin{table}[htb]
+\caption{$\chi^2$ example: sample data}
+\label{tbl:chisqrawdata}
 \center
 \begin{tabular}{cccccccccc}
 $x_1$	&$x_2$	&$x_3$	&$x_4$	&$x_5$	&$x_6$	&$x_7$	&$x_8$	&$x_9$	&$x_{10}$\\
@@ -422,14 +430,14 @@ $x_{11}$	&$x_{12}$	&$x_{13}$	&$x_{14}$	&$x_{15}$	&$x_{16}$	&$x_{17}$	&$x_{18}$	&
 \\
 Franz, who wrote down the times, covertly calculated the mean of the times measured ($\mu = 20.26$) and their variance ($\sigma^2 \approx 11.297$).
 He smirks at Paul and claims that the times are normally distributed with mean 20.26 and variance 11.297.
-Paul, a little dazzled about the precision of Franz's claim, guesses a mean of 20 and a variance of 11.
+Paul, a little dazzled about the precision of Franz's claim, guesses a mean of 20 and a variance of 11 without knowing the data.
 Once again, they construct their hypotheses:
 \begin{align*}
 	H_{\text{Franz}} &: S(x) = \Phi(x\mid 20.26, 11.297)
 	\\
 	H_{\text{Paul}} &: S(x) = \Phi(x\mid 20, 11)
 \end{align*}
-where $\Phi(x\mid\mu,\sigma^2)$ still is the cumulative normal distribution function and $S(x)$ is the empirical distribution function.
+$\Phi(x\mid\mu,\sigma^2)$ still is the cumulative normal distribution function and $S(x)$ is the empirical distribution function.
 
 Franz and Paul agree on forming four classes with equal expected cell counts.
 They calculate their interval borders $x_p$ using the standard normal distribution quartiles $w_p$ and the following relationship \cite{conover1980practical}:
@@ -445,9 +453,10 @@ They calculate their interval borders $x_p$ using the standard normal distributi
 	&\approx 22.527 & &\approx 22.237
 \end{align*}
 %
-\begin{table}[h]
+\begin{table}[htb]
 \center
 \caption{Franz's frequency table}
+\label{tbl:chisq:ex:franz}
 \begin{tabular}{l|cccc}
 	& $(-\infty, 17.993]$ & $(17.993, 20.26]$ & $(20.26, 22.527]$ & $(22.527,\infty)$ \\
 	\hline
@@ -455,9 +464,10 @@ They calculate their interval borders $x_p$ using the standard normal distributi
 	Expected & 5 & 5 & 5 & 5 \\
 \end{tabular}
 \end{table}
-\begin{table}[h]
+\begin{table}[htb]
 \center
 \caption{Paul's frequency table}
+\label{tbl:chisq:ex:paul}
 \begin{tabular}{l|cccc}
 	& $(-\infty, 17.763]$ & $(17.763, 20]$ & $(20, 22.237]$ & $(22.393,\infty)$ \\
 	\hline
@@ -465,7 +475,7 @@ They calculate their interval borders $x_p$ using the standard normal distributi
 	Expected & 5 & 5 & 5 & 5 \\
 \end{tabular}
 \end{table}
-Now the test statistic $X^2$ is calculated.
+Now the test statistic $X^2$ is calculated based on the frequency tables shown in Tables \ref{tbl:chisq:ex:paul} and \ref{tbl:chisq:ex:franz}.
 \begin{align*}
 	X^2_{\text{Franz}} &= \frac{(5-5)^2}{5} + \frac{(6-5)^2}{5} + \frac{(2-5)^2}{5} + \frac{(7-5)^2}{5} = 2.8
 	\\[1ex]
@@ -473,10 +483,10 @@ Now the test statistic $X^2$ is calculated.
 \end{align*}
 %
 For no special reason, they agree on a significance level of $\alpha = 0.1$.
-Paul's test has $4-1=3$ degrees of freedom, so his test statistic $X^2_{\text{Paul}}$ needs to be smaller than $\chi^2_{0.9, 3} = 6.261$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with three degrees of freedom.
+Paul's test has $4-1=3$ degrees of freedom, so his test statistic $X^2_{\text{Paul}}$ has to be smaller than $\chi^2_{0.9, 3} = 6.261$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with three degrees of freedom.
 As this is the case ($1.6 \leq 6.261$), his hypothesis is not rejected.
 Fritz's test however has $4-1-2=1$ degree of freedom only, as he deduced the mean and variance from the sample.
-Therefore his test statistic $X^2_{\text{Franz}}$ needs to be smaller than $\chi^2_{0.9, 1} = 2.706$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with one degree of freedom.
+Therefore his test statistic $X^2_{\text{Franz}}$ has to be smaller than $\chi^2_{0.9, 1} = 2.706$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with one degree of freedom.
 For $2.8 > 2.706$ holds, Fritz's hypothesis is rejected.
 
 \subsection{$\chi^2$ using the NAG C Library}
@@ -552,10 +562,23 @@ The output of a call to the function chisq.test is an ``htest'' object with the 
 	\item[residuals] a vector containing the Pearson residuals
 	\item[stdres] a vector containing the standardized Pearson residuals
 \end{description}
-
+As with the c function, the user has to calculate the frequency table outside of the function, here even the distribution has to be specified as a frequency table.
+The easiest way to get these data is to use the \nicefrac{1}{k} quantiles of the hypothetical distribution as interval borders (prefix the distribution name in R with a `q' to get the quantile function).
+Then use the attribute `counts' in the returning object from a call to `hist' passing the observations, the quantiles as `breaks' and `plot' set to `FALSE'.
+This way, the expected frequencies of the hypothetical distribution function are equal in all classes, as this is what quantiles stand for.
 
 \subsection{conclusion / comparison / ...}
-
+With the $\chi^2$ Goodness-of-Fit test a contingency table-based test has been presented.
+Pearson's test is probably the oldest Goodness-of-Fit test and has some limitations, which were discussed above.
+\\
+The implementations in C (in the NAG C Library) and in R have been presented.
+As can be seen in the implementation of the example using the C function involves writing a lot of code to be able to call the function.
+The sheer amount of code and the complexity of the C language presents far more pitfalls than the R language.
+Yet, the c function can be passed the null hypothesis distribution function as an enum instead of a contingency table, which is easier to supply, especially for non-equidistant intervals.
+\\
+This way both implementations have their upsides.
+When runtime speed is critical or non-equidistant intervals shall be used, the NAG C Library lends itself.
+Otherwise it is much simpler to just use the R version, as the code is easier to write and the overhead is much smaller.
 
 \section{Conclusion}
 
@@ -566,10 +589,20 @@ The output of a call to the function chisq.test is an ``htest'' object with the 
 \bibliography{report}
 
 \begin{appendices}
-\lstinputlisting[language=C++, caption={KS example in C}, label={code:chisq:r}]{code/ks.c}
-\lstinputlisting[language=R, caption={KS example in R}, label={code:chisq:r}]{code/ks.r}
-\lstinputlisting[language=C++, caption={$\chi^2$ example in C}, label={code:chisq:r}]{code/chisq.c}
+\lstinputlisting[language=C++, caption={KS example in C}, label={code:ks:c}]{code/ks.c}
+\lstinputlisting[language=R, caption={KS example in R}, label={code:ks:r}]{code/ks.r}
+\paragraph{expected output for the KS examples:}
+\begin{verbatim}
+Paul's hypothesis is rejected!
+Franz's hypothesis is rejected!
+\end{verbatim}
+\lstinputlisting[language=C++, caption={$\chi^2$ example in C}, label={code:chisq:c}]{code/chisq.c}
 \lstinputlisting[language=R, caption={$\chi^2$ example in R}, label={code:chisq:r}]{code/chisq.r}
+\paragraph{expected output for the $\chi^2$ examples:}
+\begin{verbatim}
+Paul's hypothesis is not rejected!
+Franz's hypothesis is rejected!
+\end{verbatim}
 \end{appendices}
 
 \end{document}

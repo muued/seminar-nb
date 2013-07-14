@@ -559,7 +559,10 @@ The output of a call to the function chisq.test is an ``htest'' object with the 
 	\item[residuals] a vector containing the Pearson residuals
 	\item[stdres] a vector containing the standardized Pearson residuals
 \end{description}
-
+As with the c function, the user has to calculate the frequency table outside of the function, here even the distribution has to be specified as a frequency table.
+The easiest way to get these data is to use the \nicefrac{1}{k} quantiles of the hypothetical distribution as interval borders (prefix the distribution name in R with a `q' to get the quantile function).
+Then use the attribute `counts' in the returning object from a call to `hist' passing the observations, the quantiles as `breaks' and `plot' set to `FALSE'.
+This way, the expected frequencies of the hypothetical distribution function are equal in all classes, as this is what quantiles stand for.
 
 \subsection{conclusion / comparison / ...}
 

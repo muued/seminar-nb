@@ -373,8 +373,9 @@ The test may reject the null hypothesis or accept it, meaning the sample does no
 
 \subsection{Mathematical Background}
 Here, the mathematical background of the $\chi^2$ Goodness-of-Fit test is explained and afterwards elaborated by means of an example.
-The test works on a sample of $n$ independent observations of a random variable $X$, denoted $x_1, \ldots, x_n$, which are grouped into $k$ classes.
-To be able to draw conclusions from the sample to the target population, it has to be a random sample.
+\\
+The test works on a sample of $n$ independent observations of a random variable $X$, denoted by $x_1, \ldots, x_n$, which are grouped into $k$ classes.
+To be able to draw conclusions from the sample back to the target population, it has to be a random sample.
 The observed frequencies for each class $i$ are denoted by $O_i$.
 \\
 Let $F$ be the distribution function given in the null hypothesis.
@@ -388,7 +389,7 @@ Now, the test statistic can be computed as follows:
 \end{equation}
 With the significance level $\alpha$ the null hypothesis is rejected, if the test statistic $X^2$ is greater than $x_{1-\alpha}$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with $(k-1-d)$ degrees of freedom, otherwise it is accepted.
 \\
-While the test statistic seems quite simple, there has been a lot of discussion about when the it computes reliable results.
+While the test statistic seems quite simple, there has been a lot of discussion about when it computes reliable results.
 We can divide the discussion into the following two questions.
 \subparagraph{What constraints are there for the $E_i$s?}
 	Early literature implies, that no $E_i$ should be less than 1 and no more than 20\% should be smaller than 5 \cite{conover1980practical}.
@@ -406,10 +407,10 @@ We can divide the discussion into the following two questions.
 Following the Kolmogorov-Smirnov test example, we now present another situation illustrating the usage of the $\chi^2$ Goodness-of-Fit test.
 \\
 With about 20 wheat beers standing in front of them, Paul and Franz start discussing about what to do with them.
-It was a lot too much to drink for the two of them.
+It is a lot too much to drink for the two of them.
 So they decide to offer them to other people in the pub under the premise that they measure how long it would take them to drink the beer -- as the duo now had the idea that the resulting times would be normally distributed.
 The bartender, happily lending himself to drinking one of the beers, proposes to use the $\chi^2$ goodness-of-fit test this time.
-After rearranging the times measured, they obtained the data presented in \reftbl{tbl:chisqrawdata}.
+After rearranging the times measured, they obtain the data presented in \reftbl{tbl:chisqrawdata}.
 %
 \begin{table}[htb]
 \caption{$\chi^2$ example: sample data}
@@ -436,7 +437,7 @@ Once again, they construct their hypotheses:
 	\\
 	H_{\text{Paul}} &: S(x) = \Phi(x\mid 20, 11)
 \end{align*}
-where $\Phi(x\mid\mu,\sigma^2)$ still is the cumulative normal distribution function and $S(x)$ is the empirical distribution function.
+$\Phi(x\mid\mu,\sigma^2)$ still is the cumulative normal distribution function and $S(x)$ is the empirical distribution function.
 
 Franz and Paul agree on forming four classes with equal expected cell counts.
 They calculate their interval borders $x_p$ using the standard normal distribution quartiles $w_p$ and the following relationship \cite{conover1980practical}:

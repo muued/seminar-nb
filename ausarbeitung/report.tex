@@ -104,32 +104,53 @@ The terms introduced shall now be illustrated using an example.
 \end{example}
 Furthermore we define the term \emph{random variable}, meaning a function assigning real numbers to points in the sample space.
 In contrast to the probability function the random variable acts as an enumerator.
-The \emph{probability function of a random variable} X (denoted $f(x)$) gives the probability of X assuming a point in the sample space, that X assigns the number x, so $f(x) = P(X = x)$, where $X = x$ is an event the probability function $P$ gives a probability for.
-
-\begin{description}
-	\item[random variable] function assigning real numbers to points in the sample space
-	\item[probability function of a random variable X] denoted $f(x)$. Gives the probability of X assuming the value x, so $f(x) = P(X = x)$
-	\item[cumulative distribution function of a random variable X] denoted $F(x)$. Gives the probability of X being less than or equal to x, so $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$
-	\item[quantile $x_p$] $p$th quantile of the random variable X, if $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$ for $p\in[0,1]$. e.g. $x_{0.5}$ is the median.
-	\item[expected value] of a real valued function $u(X)$ of a random variable X with the probability function $f(x)$, written $E[u(X)] = \sum_{x}u(x)f(x)$
-	\item[mean] of a random variable X: $\mu = E(X)$
-	\item[variance] of a random variable X with mean $\mu$ and the probability function $f(x)$: $\sigma^2 = E[(x-\mu)^2]$. Its positive square root is the \emph{standard deviation}.
-\end{description}
+The \emph{probability function of a random variable} X (denoted by $f(x)$) gives the probability of X assuming a point in the sample space, that X assigns the number x, so $f(x) = P(X = x)$, where $X = x$ is an event the probability function $P$ gives a probability for.
+A \emph{cumulative distribution function $F(x)$ of a random variable} X gives the probability of X being less than or equal to x, formalized as: $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$.
+Quantiles $x_p$ for probabilities $p$ mark the points in the sample space with $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$.
+E.\,g. the 0.5th quantile $x_{0.5}$ divides the sample space into two halves and is also called median.
+The \emph{expected value of a real valued function} $u(X)$ of a random variable X with the probability function $f(x)$ is denoted by $E[u(X)] = \sum_{x}u(x)f(x)$.
+The well known \emph{mean of a random variable X} can then be written as $\mu = E(X) = \sum_{x}xf(x)$.
+Analogue, we define the \emph{variance of a random variable X} with mean $\mu$ and probability function $f(x)$ as $\sigma^2 = E[(X-\mu)^2]$ and its positive square root as the \emph{standard deviation}, denoted by $\sigma$.
 
 \subsection{Probability Distributions}
-\begin{description}
-	\item[binomial distribution] $F(x) = \sum_{i\leq x} \genfrac(){0pt}{}{n}{i} p^{i}q^{n-i}$
-	\item[normal distribution] $F(x) = \int_{-\infty}^{x}\frac{1}{\sqrt{2\pi\sigma}}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y $ (standard normal distribution has $\mu=0,~\sigma=1$)
-	\item[uniform distribution] ...
-	\item[exponential distribution] ...
-	\item[$\chi^2$ distribution] with k degrees of freedom $F(x) = \left\{\begin{tabular}{ll}
-		$\int_{0}^{x} \frac{y^{(k/2)-1}e^{(y/2)}}{2^{k/2}\Gamma(k/2)}$ & if $x>0$ \\
-		0 & if $x\leq 0$
-		\end{tabular}\right.$
-		\\
-		example: Let $X_1, \ldots, X_k$ be $k$ independent and identically distributed standard normal random variables. Let $Y = \sum_{i=1}^{k}X_i^2$. Then $Y$ has the $\chi^2$ distribution with $k$ degrees of freedom.
-	\item[gamma distribution] ...
-\end{description}
+Later on, we want to test, whether or not a sample may obey a specific distribution function.
+Therefore we now present some of the common distribution functions.
+\\
+The most simple distribution is the \emph{uniform distribution}, usually denoted by $\mathcal{U}(a,b)$ with $a$ and $b$ being the minimum and maximum values, respectively.
+Its cumulative distribution function is given by 
+\begin{equation}
+F(x) = \left\{\begin{tabular}{ll}
+0 & for $x<a$ \\
+$\frac{x-b}{b-a}$ & for $a\leq x<b$ \\
+1 & for $x\geq b$ \\
+\end{tabular}\right.
+\end{equation}
+%
+With the \emph{binomial distribution} $B(n,p)$, the number of successes in $n$ independent experiments with a boolean result and a success probability $p$ for each of the experiments can be described.
+Its cumulative distribution function is given by
+\begin{equation}
+F(x) = \sum_{i\leq x} \genfrac(){0pt}{}{n}{i} p^{i}q^{n-i}
+\end{equation}
+%
+Another well known distribution is the \emph{normal distribution} $\mathcal{N}(\mu,\sigma^2)$, parameterized by its mean $\mu$ and variance $\sigma^2$.
+With $\mu = 0$ and $\sigma = 1$ it is called the \emph{standard normal distribution}.
+Its general cumulative distribution function is given by
+\begin{equation}
+F(x) = \Phi\left(\frac{x - \mu}{\sigma}\right) = \frac{1}{\sqrt{2\pi\sigma}} \int_{-\infty}^{x}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y
+\end{equation}
+%
+A distribution of special interest for the focus of this paper is the \emph{chi squared distribution} $\chi^2(k)$.
+It is parameterized by the \emph{degrees of freedom} $k$.
+Its cumulative distribution function is given by
+\begin{equation}
+F(x) = \left\{\begin{tabular}{ll}
+$\int_{0}^{x} \frac{y^{(k/2)-1}e^{(y/2)}}{2^{k/2}\Gamma(k/2)}\textrm{d}y$ & if $x>0$ \\
+0 & if $x\leq 0$
+\end{tabular}\right.
+\end{equation}
+\begin{example}[\cite{conover1980practical}]
+Let $X_1, \ldots, X_k$ be $k$ independent and identically distributed standard normal random variables. Let $Y = \sum_{i=1}^{k}X_i^2$. Then $Y$ has the $\chi^2$ distribution with $k$ degrees of freedom.
+\end{example}
 
 \subsection{Estimation}
 \begin{description}
@@ -368,7 +389,6 @@ A visual representation for values of $D_n^+$ and $D_n^-$ can be seen in figure~
 \includegraphics[width=.99\textwidth]{figures/diagramKSd-d+.png}
 \label{fig:2}
 \end{figure}
-\newpage
 
 After specifying those parameters one can run the function and gets the following values in return.
 \begin{description}

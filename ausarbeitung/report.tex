@@ -77,11 +77,21 @@ Christian Janßen \hfill Fabian Ohler
 \newpage
 
 \section{Introduction}
-Statistics as a part of mathematics describes collecting, evaluating and judging of information and data. In addition it serves the stochastic as a connection between empirical datasets and their respective hypothesis. Those datasets help prognosticating future events like the daily weather forecast.The Statistics helps to create hypotheses explaining the distribution of values of discrete datasets and this allowing conclusions about areas where no data is provided. This is useful for example while calculating TV ratings on basis of a few observed television viewers.\\
+Statistics as a part of mathematics describes collecting, evaluating and judging of information and data.
+In addition it serves the stochastic as a connection between empirical datasets and their respective hypothesis.
+Those datasets help prognosticating future events like the daily weather forecast. 
+The statistics helps to create hypotheses explaining the distribution of values of discrete datasets and in doing so allows conclusions about areas where no data is provided.
+This is useful for example while calculating TV ratings based on a few observed television viewers.
+\\
 Due to the obvious fact that not all hypotheses are qualified for a specific dataset, these hypotheses must be checked in terms of correctness and precision.
 The better the precision of a hypothesis or its ability to explain a dataset the better its Goodness-of-Fit is.
-The checks to measure the quality of hypotheses is done by Goodness-of-Fit tests. Since such tests need all empirical data gathered and the calculation of distribution functions to evaluate a hypothesis, they are normally to time consuming to do it manually. To speed up and automate the procedure of execution of Goodness-of-Fit tests there exists various numerical libraries.\\ 
-In this written elaboration the $\chi^2$ and the Kolmogorov-Smirnov tests is presented with their implementation in the numerical library NAG C together with another alternative library. Between various alternatives such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
+The checks to measure the quality of hypotheses are done by Goodness-of-Fit tests.
+Since such tests need all empirical data gathered and require the calculation of distribution functions to evaluate a hypothesis, they are normally too time consuming to do it manually.
+To speed up and automate the procedure of execution of Goodness-of-Fit tests there are various numerical libraries.
+\\
+In this written elaboration the $\chi^2$ and the Kolmogorov-Smirnov tests are presented with their implementation in the numerical library NAG C together with another alternative library.
+Between various alternatives such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it is on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
+
 \section{Basic Statistics}
 This section is intended to provide the basic knowledge about statistics up to statistical hypothesis testing needed to understand the two algorithms this paper focuses on.
 

@@ -76,11 +76,12 @@ Christian Janßen \hfill Fabian Ohler
 \pagestyle{headings}
 \newpage
 
-\section{Introduction / Preface / ...}
-...
-Between various alternatives to the NAG C Library such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
-...
-
+\section{Introduction}
+Statistics as a part of mathematics describes collecting, evaluating and judging of informations and data. In addition it serves the stochastic as a connection between empirical datasets and their respective hypothesis. Those datasets help prognosticating future events like the daily weather forecast.The Statistics helps to create hypotheses explaining the distribution of values of discrete datasets and this allowing conclusions about areas where no data is provided. This is useful for example while calculating TV ratings on basis of a few observed television viewers.\\
+Due to the obvious fact that not all hypotheses are qualified for a specific dataset, these hypotheses must be checked in terms of correctness and precision.
+The better the precision of a hypothesis or its ability to explain a dataset the better is its goodness of fit.
+The checks to measure the quality of hypotheses is done by ``goodness of fit'' tests. Since such tests need all empirical data gathered and the calculation of distribution functions to evaluate a hypothesis, they are normally to time consuming to do it manually. To speed up and automate the procedure of execution of ``goodness of fit'' tests there exists various numerical libraries.\\ 
+In this written elaboration the $\chi^2$ and the ``Kolmogorv-Smirnov'' tests is presented with their implementation in the numerical library ``NAG C'' together with another alternative library. Between various alternatives such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
 \section{Basic Statistics}
 This section is intended to provide the basic knowledge about statistics up to statistical hypothesis testing needed to understand the two algorithms this paper focuses on.
 
@@ -344,21 +345,21 @@ As seen in the example, the algorithm is quite simple but needs a few computatio
 Especially for higher values of $n$ or more complex cumulative distribution functions the computational effort is too high to do it manually.\\
 For this reason, there are numerical libraries that provide implementations for the ``Kolmogorov-Smirnov test''. For example the ``c'' library of the ``Numerical Algorithm Group'' - in short ``Nag c''~\cite{nagc} - provides reliable implementation of this goodness of fit test, although it works a little different as the procedure described above.
 To use the nag c function ``nag\_1\_sample\_ks\_test'' one has to specify the following variables~\cite{nagcKS}:
-\begin{itemize}
-\item $n$ -- an integer storing the number of observations
-\item $x[n]$ -- an double array with observations $x_1 … x_n$
-\item $dist$ -- a Nag\_Distribution specifying the theoretical null distribution
-\item $par[2]$ -- an array consisting of two double entries representing parameters for the specified function e.g. $\mu$ and $\sigma^2$ for a normal cumulative distribution function.
-\item $estima$ -- Nag\_ParaSupplied if $para[2]$ is given or Nag\_ParaEstimated if the parameters are to be estimated
-\item $dtype$ -- specifies a Nag\_TestStatistics which will be explained later
-\end{itemize}
+\begin{description}
+\item[n] -- an integer storing the number of observations
+\item[x{[n]}] -- an double array with observations $x_1 … x_n$
+\item[dist] -- a Nag\_Distribution specifying the theoretical null distribution
+\item[par{[2]}] -- an array consisting of two double entries representing parameters for the specified function e.g. $\mu$ and $\sigma^2$ for a normal cumulative distribution function.
+\item[estima] -- Nag\_ParaSupplied if $para[2]$ is given or Nag\_ParaEstimated if the parameters are to be estimated
+\item[dtype] -- specifies a Nag\_TestStatistics which will be explained later
+\end{description}
 $dtype$ defines if the calculated test statistic should either be $D_n$, $D^+_n$ or $D^-_n$.
 Those statistics are used to test the null hypothesis against the following alternative hypotheses.
-\begin{itemize}
+\begin{description}
 \item $D_n=\max\{D^+_n,D^-_n\}$ is calculated for $H_1 $: The data does not come from the specified null distribution.\\
 \item $D^+_n=\max\{S(x)-F(x),0\}$ is calculated for $H_2$: The data comes from a distribution which dominates the null distribution.\\
 \item $D^-_n=\max\{F(x)-S(x),F(x_i)-S(x_{i-1})\}$ is calculated for $H_3$: The data comes from a distribution which is dominated by the null distribution.\\
-\end{itemize}
+\end{description}
 A visual representation for values of $D_n^+$ and $D_n^-$ can be seen in figure~\ref{fig:2}, where the orange curve is the dominating $S(x)$ and blue is dominated by $S(x)$.
 
 \begin{figure}[here]
@@ -370,12 +371,12 @@ A visual representation for values of $D_n^+$ and $D_n^-$ can be seen in figure~
 \newpage
 
 After specifying those parameters one can run the function and gets the following values in return.
-\begin{itemize}
-\item $d$ -- the calculated test statistic specified by $dtype$
-\item $z$ -- the standardized  statistic $Z=D*\sqrt n$
-\item $p$ -- the $p$-value
-\item $fail$ -- A NagError stating if something went wrong
-\end{itemize}
+\begin{description}
+\item[d] -- the calculated test statistic specified by $dtype$
+\item[z] -- the standardized  statistic $Z=D*\sqrt n$
+\item[p] -- the $p$-value
+\item[fail] -- A NagError stating if something went wrong
+\end{description}
 $p$ describes the probability that if the null hypothesis is correct, observations following the null distribution would generate a value for $d$, which is this extreme.
 %$p$ describes the probability that, if the observations would actually arise from the specified null distribution, meaning that $H_0$ is correct, the value of $d$ would be this extreme.
 Although this value indicates that the null hypothesis may not be correct, especially for low numbers like $p<0.1$, it does not mean that if $p$ is high the null hypothesis is correct. It merely means that $p$ fails to demonstrate evidence against $H_0$~\cite{conover1980practical}.
@@ -383,21 +384,21 @@ Although this value indicates that the null hypothesis may not be correct, espec
 \subsection{Kolmogorov–Smirnov using R}
 A handy alternative to the ``nag c'' library is the open source software ``R''~\cite{rproject}.\\
 ``R'' provides various functions for statistical computations, also including a function for the ``Kolmogorv-Smirnov test''. To Run this function, one has to specify the following parameters:
-\begin{itemize}
-\item $x$ -- a numeric vector, containing the values of the observations. Comparable with $x[n]$
-\item $y$ -- a character string specifying the theoretical null distribution. Comparable with $dist$
-\item $params$ -- a character string further specifying $y$. Comparable with $par[2]$
-\item $alternative$ -- defines which alternative hypothesis is to be chosen. Comparable with $dtype$
-\end{itemize}
+\begin{description}
+\item[x] -- a numeric vector, containing the values of the observations. Comparable with $x[n]$
+\item[y] -- a character string specifying the theoretical null distribution. Comparable with $dist$
+\item[params]-- a character string further specifying $y$. Comparable with $par[2]$
+\item[alternative]-- defines which alternative hypothesis is to be chosen. Comparable with $dtype$
+\end{description}
 Once these parameters have been set the function can be run and returns the next described results:
-\begin{itemize}
-\item $statistic$ -- the calculated test statistic specified by $dtype$
-\item $p.value$ -- the $p$-value
-\item $alternative$ -- the chosen alternative hypothesis
-\item $method$ -- the test that was performed
-\item $data.name$ -- the name or names of the data
-\end{itemize}
-\subsection{conclusion / comparison / ...}
+\begin{description}
+\item[statistic] -- the calculated test statistic specified by $dtype$
+\item[p.value] -- the $p$-value
+\item[alternative] -- the chosen alternative hypothesis
+\item[method] -- the test that was performed
+\item[data.name] -- the name or names of the data
+\end{description}
+\subsection{Comparison}
 As one can see the ``Kolmogorv-Smirnov'' goodness of fit test is an easy to use tool to check whether a given observation set follows a specified probability distribution or not.
 Due to the circumstances that a not rejected hypothesis should not be considered as correct~\cite{conover1980practical}, the tests application is to show that a given observation does not follow a probability distribution. An example could be to show that the distribution of wealth of the people of Germany does not follow a normal distribution.\\
 Numerical libraries come in handy especially for quick examine of the plausibility of a hypothesis with the help of the ``Kolmogorov-Smirnov'' test. The ``nag c'' library has its advantages 
@@ -631,8 +632,13 @@ Otherwise it is much simpler to just use the R version, as the code is easier to
 \lstinputlisting[language=R, caption={KS example in R}, label={code:ks:r}]{code/ks.r}
 \paragraph{expected output for the KS examples:}
 \begin{verbatim}
-Paul's hypothesis is rejected!
-Franz's hypothesis is rejected!
+Franz' values:
+Statistic :  0.5080
+p-value :  0.0000
+
+Paul's values:
+Statistic :  0.3661
+p-value :  0.0127
 \end{verbatim}
 \lstinputlisting[language=C++, caption={$\chi^2$ example in C}, label={code:chisq:c}]{code/chisq.c}
 \lstinputlisting[language=R, caption={$\chi^2$ example in R}, label={code:chisq:r}]{code/chisq.r}

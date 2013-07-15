@@ -1,0 +1,122 @@
+\documentclass{article}
+
+\usepackage{ucs} % Unicode - dependency of utf8x inputenc
+\usepackage[utf8x]{inputenc} % "utf8x" uses "ucs"-package, better than "UTF8"
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath}
+\usepackage[german]{babel}
+\usepackage{amssymb}
+\usepackage{amsxtra}
+\usepackage{epsfig,psfrag}
+\usepackage{listings}
+\usepackage{url}
+
+\usepackage{epstopdf}
+\newcommand{\refchapter}[1]{Kapitel~\ref{#1}}
+\newcommand{\refsec}[1]{Sektion~\ref{#1}}
+\newcommand{\refeqn}[1]{Gleichung~(\ref{#1})}
+\newcommand{\reffig}[1]{Abbildung~\ref{#1}}
+
+\title{
+{\bf \scriptsize RHEINISCH-WESTF\"ALISCHE TECHNISCHE HOCHSCHULE AACHEN \\
+LuFG Informatik 12 (Prof. Dr. rer. nat. Uwe Naumann)}
+\vspace{.5cm} \\
+\epsfig{file=figures/STCE_Logo_WWW.eps,width=.7\textwidth}
+\vspace{1cm} \\
+{\bf \Large Numerische Bibliotheken} \\
+{\bf \large Statistik} \\
+{\large Arbeitsplan zur Seminararbeit} 
+}
+
+\author{Christian Janßen (302530) \\ Fabian Ohler (280424) }
+
+\begin{document}
+
+\lstloadlanguages{[ISO]C++}
+\lstset{basicstyle=\small, numbers=left, numberstyle=\footnotesize,
+  stepnumber=1, numbersep=5pt, breaklines=true, escapeinside={/*@}{@*/}}
+
+\begin{titlepage}
+\clearpage
+\maketitle
+
+\thispagestyle{empty}
+
+\end{titlepage}
+
+\pagestyle{headings}
+\newpage
+%%%----Einführung----%%%
+\section{Einführung}
+Die Statistik als Teilgebiet der Mathematik beschreibt das Sammeln, Auswerten und Beurteilen von Informationen und Daten.
+Zusätzlich dient sie der Stochastik als Verbindung zwischen empirischen Daten und den dazu erhobenen theoretischen Modellen.\\
+Erhobene Daten helfen zukünftige Ereignisse besser zu prognostizieren, wie zum Beispiel das Wetter oder das Kaufverhalten der Bevölkerung während einer wirtschaftlichen Rezession.\\
+Auch hilft die Statistik dabei, aus diskreten Datensätzen Modelle zu erstellen, welche die Verteilung der Werte als Funktion erklärt und somit Rückschlüsse auf Bereiche zulässt, für die keine Daten existieren. Dies ist hilfreich um beispielsweise die Fernsehquote der Gesamtbevölkerung auf Basis einiger weniger Fernsehzuschauer zu erstellen.\\
+Da sich zu empirischen Datensätzen nicht jedes theoretische Modell eignet, müssen diese auf ihre Korrektheit im Sinne der Genauigkeit geprüft werden. Je besser die Genauigkeit eines statistischen Modells beziehungsweise seine Fähigkeit einen Datensatz zu erklären, desto besser ist seine Anpassungsgüte oder auch Anpassung.\\
+Die Prüfung der Anpassung übernehmen sogenannte Anpassungsgüte-Tests. Diese Tests sind essentiell um die Wahrscheinlichkeit falscher Prognosen zu minimieren und die Qualität statistischer Modelle zu erhöhen.\\
+Da diese Tests in der Regel alle vorhandenen empirischen Daten zur Berechnung der Anpassungsgüte verwenden, sind diese mitunter ziemlich aufwendig und zeitintensiv. Um die Berechnung der Anpassungsgüte-Tests zu beschleunigen und den Prozess zu automatisieren, existieren diverse numerische Bibliotheken für verschiedene Programmiersprachen.\\
+Diese Bibliotheken beinhalten eine Vielzahl von Algorithmen zur Bewältigung mathematischer Probleme. Sie werden genutzt für die Berechnung von Integralen, der Lösung von Differentialgleichungen oder der Berechnung der Anpassungsgüte eines statistischen Modells.\\
+Numerische Bibliotheken ersparen dem Programmierer somit das Schreiben eines eigenen Algorithmus' für mathematische Probleme. Jedoch muss beachtet werden, dass diese Algorithmen -- aufgrund der Fähigkeit von Computern -- Zahlen nur in endlicher Präzision darstellen zu können, bei Eingaben einen Fehler aufweisen können, welcher nicht immer unerheblich ist.\\
+Exemplarisch sollen zwei Anpassungsgüte-Tests, namentlich der $\chi^2$-Test und der Kolmogorow-Smirnow-Test, zur Demonstration genutzt werden.
+Beide Test überprüfen, ob ein statistisches Merkmal $X$, dessen Wahrscheinlichkeitsverteilung in der Grundgesamtheit unbekannt ist, einer Verteilung $F_0$ folgen. Dies bezeichnet man auch als Nullhypothese.
+Diese Seminararbeit soll beide Tests mitsamt ihrer Implementierung in einer numerischen Bibliothek erklären.
+
+%%%---Problembeschreibung---%%%
+\section{Problembeschreibung}
+Diese Seminararbeit soll sich mit der Einarbeitung in die oben genannten Algorithmen befassen.
+Als praxisrelevante, numerische Bibliothek soll dabei jene der Numerical Algorithms Group, im weiteren Verlauf NAG genannt, verwendet werden. Diese Bibliothek lässt sich in der Programmiersprache C einbinden und verwenden.\\
+Es soll eine Programm geschrieben werden, welches die relevanten Funktionen zu den Algorithmen aufruft und auf Beispieldaten anwendet. Die schriftliche Ausarbeitung soll erläutern, wie diese Routinen aufgerufen werden und es soll eine abstrakte Erklärung der Eigenschaften der zugrundeliegenden Algorithmen anhand von Beispielen demonstriert gegeben werden.\\
+Nachfolgend sollen noch alternativen Bibliotheken für die Programmiersprachen R, Matlab und Mathematica analysiert und eventuelle Unterschiede in Präzision und Laufzeit herausgearbeitet werden.
+
+%%%----Arbeitsplan----%%%
+\section{Arbeitsplan}
+Für die Bearbeitung des Seminars müssen die verschiedenen Aufgaben in eine sinnvolle zeitliche Abfolge gebracht und ein Plan über den geschätzten Zeitaufwand erstellt werden.
+Die für die Seminararbeit zur Verfügung stehenden Sechs Wochen sollen dabei sinnvoll eingeteilt werden.
+Zusätzlich soll darauf eingegangen werden, wie auf das Wegfallen eines Gruppenmitglieds reagiert werden kann.
+Das Ergebnis dieser Überlegungen ist ein Arbeitsplan, der nun im Folgenden näher erläutert werden soll.
+
+\subsection{Anfangsphase (Zwei Wochen)}
+Die ersten Schritte der Erstellung der Seminararbeit sind in der Anfangsphase zusammengefasst.
+Das Augenmerk liegt hier hauptsächlich auf Verständnis und Reproduktion von Grundlagen.
+Hierfür sind 2 Wochen veranschlagt.
+\\
+Da für das Verständnis und die Anwendung der vorzustellenden Algorithmen Vorkenntnisse im Bereich Statistik von Nöten sind, müssen sich diese via Literaturrecherche angeeignet werden.
+Dieses Wissen soll dann in die Seminararbeit einfließen.
+Das Verfassen einer Einführung in die notwendigen Grundlagen der Statistik soll in der Anfangsphase abgeschlossen werden.
+\\
+Wie bereits erläutert soll die Implementierung der NAG C Bibliotheken mit Alternativen verglichen werden.
+Die C-Kenntnisse der Gruppenmitglieder sind hinreichend ausgeprägt, um die NAG C Bibliotheken mit Hilfe der Dokumentation verwenden zu können.
+Erfahrungen mit R hat jedoch noch keines der Gruppenmitglieder.
+Hier steht daher eine Einarbeitung an.
+Eines der Gruppenmitglieder hat rudimentäre Kenntnisse in Mathematica und Matlab.
+Diese können bei der Verwendung der Programme für das Seminar einen Großteil der Einarbeitungszeit ersparen.
+\\
+Die Einarbeitung in die verschiedenen Sprachen soll zum Ziel haben, dass jeweils ein Grundgerüst geschaffen werden kann, mit Hilfe dessen die Implementierungen unter Verwendung verschiedener Eingabedaten einfach und schnell miteinander verglichen werden können.
+Die Umsetzung solcher Grundgerüste bildet den letzten Punkt der Anfangsphase.
+\\
+Sollte ein Gruppenmitglied ausfallen, kann die Anzahl der Vergleichssprachen gegebenenfalls reduziert werden.
+Dabei verspricht Mathematica die größten Unterschiede, sowohl in der Handhabung als auch in der Präzision der Ergebnisse.
+R sollte im Vergleich jedoch als quelloffene Statistikprogrammiersprache auf keinen Fall fehlen.
+Somit sollte Matlab aus dem Vergleich gestrichen werden, falls der Zeitplan bei reduzierter Gruppengröße nicht aufgeht.
+
+\subsection{Transfer- und Vergleichsphase (Drei Wochen)}
+Nachdem in der ersten Phase die Grundlage für den Vergleich der verschiedenen Implementierungen geschaffen wurde, soll in der zweiten Phase der eigentliche Vergleich durchgeführt werden.
+Dazu sollen geeignete Beispiele erarbeitet werden, die signifikante Unterschiede zwischen den verschiedenen Bibliotheken herausstellen.
+Da die Beispiele zum Teil mit in die Seminararbeit einfließen sollen, soll auf die Verständlichkeit und Anschaulichkeit der damit verknüpften Szenarien Wert gelegt werden.
+Die während des Vergleichs erkannten Eigenschaften der einzelnen Umsetzungen sind im Zweifel durch eine weitergehende Literaturrecherche zu verifizieren.
+Ziel für die Seminararbeit ist es, aus den so gewonnenen Informationen eine fundierte Gegenüberstellung der betrachteten Implementierungen ausarbeiten zu können.
+Deren Umsetzung bildet den letzten Schritt dieser dreiwöchigen Phase.
+
+\subsection{Finalisierungsphase (Eine Woche)}
+Die letzte Phase widmet sich hauptsächlich dem Verfassen eines Fazits und Ausblicks.
+Zudem sollen hier abschließende Arbeiten am Dokument, etwa sprachliche Verbesserungen oder das Einbinden von Beispiel-Quelltext in das Dokument, durchgeführt werden.
+Hierfür ist ein Zeitrahmen von einer Woche geplant.
+
+\newpage
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{report}
+
+\end{document}

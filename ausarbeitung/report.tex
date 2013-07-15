@@ -112,19 +112,44 @@ The well known \emph{mean of a random variable X} can then be written as $\mu = 
 Analogue, we define the \emph{variance of a random variable X} with mean $\mu$ and probability function $f(x)$ as $\sigma^2 = E[(X-\mu)^2]$ and its positive square root as the \emph{standard deviation}, denoted by $\sigma$.
 
 \subsection{Probability Distributions}
-\begin{description}
-	\item[binomial distribution] $F(x) = \sum_{i\leq x} \genfrac(){0pt}{}{n}{i} p^{i}q^{n-i}$
-	\item[normal distribution] $F(x) = \int_{-\infty}^{x}\frac{1}{\sqrt{2\pi\sigma}}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y $ (standard normal distribution has $\mu=0,~\sigma=1$)
-	\item[uniform distribution] ...
-	\item[exponential distribution] ...
-	\item[$\chi^2$ distribution] with k degrees of freedom $F(x) = \left\{\begin{tabular}{ll}
-		$\int_{0}^{x} \frac{y^{(k/2)-1}e^{(y/2)}}{2^{k/2}\Gamma(k/2)}$ & if $x>0$ \\
-		0 & if $x\leq 0$
-		\end{tabular}\right.$
-		\\
-		example: Let $X_1, \ldots, X_k$ be $k$ independent and identically distributed standard normal random variables. Let $Y = \sum_{i=1}^{k}X_i^2$. Then $Y$ has the $\chi^2$ distribution with $k$ degrees of freedom.
-	\item[gamma distribution] ...
-\end{description}
+Later on, we want to test, whether or not a sample may obey a specific distribution function.
+Therefore we now present some of the common distribution functions.
+\\
+The most simple distribution is the \emph{uniform distribution}, usually denoted by $\mathcal{U}(a,b)$ with $a$ and $b$ being the minimum and maximum values, respectively.
+Its cumulative distribution function is given by 
+\begin{equation}
+F(x) = \left\{\begin{tabular}{ll}
+0 & for $x<a$ \\
+$\frac{x-b}{b-a}$ & for $a\leq x<b$ \\
+1 & for $x\geq b$ \\
+\end{tabular}\right.
+\end{equation}
+%
+With the \emph{binomial distribution} $B(n,p)$, the number of successes in $n$ independent experiments with a boolean result and a success probability $p$ for each of the experiments can be described.
+Its cumulative distribution function is given by
+\begin{equation}
+F(x) = \sum_{i\leq x} \genfrac(){0pt}{}{n}{i} p^{i}q^{n-i}
+\end{equation}
+%
+Another well known distribution is the \emph{normal distribution} $\mathcal{N}(\mu,\sigma^2)$, parameterized by its mean $\mu$ and variance $\sigma^2$.
+With $\mu = 0$ and $\sigma = 1$ it is called the \emph{standard normal distribution}.
+Its general cumulative distribution function is given by
+\begin{equation}
+F(x) = \Phi\left(\frac{x - \mu}{\sigma}\right) = \frac{1}{\sqrt{2\pi\sigma}} \int_{-\infty}^{x}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y
+\end{equation}
+%
+A distribution of special interest for the focus of this paper is the \emph{chi squared distribution} $\chi^2(k)$.
+It is parameterized by the \emph{degrees of freedom} $k$.
+Its cumulative distribution function is given by
+\begin{equation}
+F(x) = \left\{\begin{tabular}{ll}
+$\int_{0}^{x} \frac{y^{(k/2)-1}e^{(y/2)}}{2^{k/2}\Gamma(k/2)}\textrm{d}y$ & if $x>0$ \\
+0 & if $x\leq 0$
+\end{tabular}\right.
+\end{equation}
+\begin{example}[\cite{conover1980practical}]
+Let $X_1, \ldots, X_k$ be $k$ independent and identically distributed standard normal random variables. Let $Y = \sum_{i=1}^{k}X_i^2$. Then $Y$ has the $\chi^2$ distribution with $k$ degrees of freedom.
+\end{example}
 
 \subsection{Estimation}
 \begin{description}

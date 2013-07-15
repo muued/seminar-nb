@@ -79,8 +79,8 @@ Christian Janßen \hfill Fabian Ohler
 \section{Introduction}
 Statistics as a part of mathematics describes collecting, evaluating and judging of information and data. In addition it serves the stochastic as a connection between empirical datasets and their respective hypothesis. Those datasets help prognosticating future events like the daily weather forecast.The Statistics helps to create hypotheses explaining the distribution of values of discrete datasets and this allowing conclusions about areas where no data is provided. This is useful for example while calculating TV ratings on basis of a few observed television viewers.\\
 Due to the obvious fact that not all hypotheses are qualified for a specific dataset, these hypotheses must be checked in terms of correctness and precision.
-The better the precision of a hypothesis or its ability to explain a dataset the better is its goodness of fit.
-The checks to measure the quality of hypotheses is done by goodness of fit tests. Since such tests need all empirical data gathered and the calculation of distribution functions to evaluate a hypothesis, they are normally to time consuming to do it manually. To speed up and automate the procedure of execution of goodness of fit tests there exists various numerical libraries.\\ 
+The better the precision of a hypothesis or its ability to explain a dataset the better its Goodness-of-Fit is.
+The checks to measure the quality of hypotheses is done by Goodness-of-Fit tests. Since such tests need all empirical data gathered and the calculation of distribution functions to evaluate a hypothesis, they are normally to time consuming to do it manually. To speed up and automate the procedure of execution of Goodness-of-Fit tests there exists various numerical libraries.\\ 
 In this written elaboration the $\chi^2$ and the Kolmogorov-Smirnov tests is presented with their implementation in the numerical library NAG C together with another alternative library. Between various alternatives such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
 \section{Basic Statistics}
 This section is intended to provide the basic knowledge about statistics up to statistical hypothesis testing needed to understand the two algorithms this paper focuses on.
@@ -252,10 +252,10 @@ For further reading, we recommend established literature \cite{conover1980practi
 \section{Kolmogorov–Smirnov Test}
 In statistics the Kolmogorov-Smirnov-test is a nonparametric test which checks for equality of two probability distributions.
 With this test one can check either if a given set of random samples follows a specified probability distribution or if two sets of random samples have the same probability distribution.\\
-The first alternative is called ``one sample Kolmogorov-Smirnov test'' and is a goodness of fit test. The ``two sample  Kolmogorov-Smirnov test'' is the second alternative, but due to the limited space it will be neglected in this written elaboration.
+The first alternative is called ``one sample Kolmogorov-Smirnov test'' and is a Goodness-of-Fit test. The ``two sample  Kolmogorov-Smirnov test'' is the second alternative, but due to the limited space it will be neglected in this written elaboration.
 
 \subsection{Mathematical Background}
-In the following the proceeding of the execution of the goodness of fit test is described and will be later explained by means of an illustrative example. \\
+In the following the proceeding of the execution of the Goodness-of-Fit test is described and will be later explained by means of an illustrative example. \\
 For a random variable $X$ a set of $n$ observations ordered ascending such that $x_1 \le x_2 \le ... \le x_n$ is given. For those $n$ values the empirical distribution function $S(x)$  is determined.
 The value of $S(x)$ for a given $x$ is just a simple counting of values which are less than or equal $x$ and then dividing this number by $n$. Formally written: 
 $$S(x) = \frac{1}{n} \sum\limits^n_{i=1} I_{x_i\le x}~,$$
@@ -297,7 +297,7 @@ $x_{11}$	&$x_{12}$	&$x_{13}$	&$x_{14}$	&$x_{15}$	&$x_{16}$	&$x_{17}$	&$x_{18}$	&
 \end{table}
 \\
 With these data available, Paul claims that the heights are normally distributed with a mathematical expectation of 3 cm and a variance of 0.7, while Franz states that it is 3.5 cm and 1, respectively.\\
-The bartender, who noticed their conversation recommends them to check their statements with the Kolmogorov-Smirnov goodness of fit test.
+The bartender, who noticed their conversation recommends them to check their statements with the Kolmogorov-Smirnov Goodness-of-Fit test.
 Following the suggestion they construct their hypotheses:
 $$H_{Franz} : S(x) = \Phi (x|3.5;1)$$
 and
@@ -383,7 +383,7 @@ As one can see, the empirical distribution function is far from being close to t
 \subsection{Kolmogorov–Smirnov using the NAG C Library}
 As seen in the example, the algorithm is quite simple but needs a few computation steps for calculating the empirical and the cumulative distribution function.
 Especially for higher values of $n$ or more complex cumulative distribution functions the computational effort is too high to do it manually.\\
-For this reason, there are numerical libraries that provide implementations for the Kolmogorov-Smirnov test. For example the C library of the Numerical Algorithm Group - in short ``Nag c''~\cite{nagc} - provides reliable implementation of this goodness of fit test, although it works a little different as the procedure described above.
+For this reason, there are numerical libraries that provide implementations for the Kolmogorov-Smirnov test. For example the C library of the Numerical Algorithm Group - in short ``Nag c''~\cite{nagc} - provides reliable implementation of this Goodness-of-Fit test, although it works a little different as the procedure described above.
 To use the nag c function nag\_1\_sample\_ks\_test one has to specify the following variables~\cite{nagcKS}:
 \begin{description}
 \item[n] -- an integer storing the number of observations
@@ -438,7 +438,7 @@ Once these parameters have been set the function can be run and returns the next
 \item[data.name] -- the name or names of the data
 \end{description}
 \subsection{Comparison}
-As one can see the Kolmogorov-Smirnov goodness of fit test is an easy to use tool to check whether a given observation set follows a specified probability distribution or not.
+As one can see the Kolmogorov-Smirnov Goodness-of-Fit test is an easy to use tool to check whether a given observation set follows a specified probability distribution or not.
 Due to the circumstances that a not rejected hypothesis should not be considered as correct~\cite{conover1980practical}, the tests application is to show that a given observation does not follow a probability distribution. An example could be to show that the distribution of wealth of the people of Germany does not follow a normal distribution.\\
 Numerical libraries come in handy especially for quick examine of the plausibility of a hypothesis with the help of the Kolmogorov-Smirnov test. The nag c library has its advantages 
 in estimating values for the specified null hypothesis, but on the downside one has to handle a lot of variables in comparison to the R variant. However the R project solution does not offer the option to estimate the values of the given null hypothesis, but it has the benefit that can calculate the two sample Kolmogorov-Smirnov test by just changing the value of $y$ to a numerical vector. Although this test is not described in this thesis, the fact that one can switch between those two without having to call a complete new function is valuable attribute.\\
@@ -487,7 +487,7 @@ Following the Kolmogorov-Smirnov test example, we now present another situation 
 With about 20 wheat beers standing in front of them, Paul and Franz start discussing about what to do with them.
 It is a lot too much to drink for the two of them.
 So they decide to offer them to other people in the pub under the premise that they measure how long it would take them to drink the beer -- as the duo now had the idea that the resulting times would be normally distributed.
-The bartender, happily lending himself to drinking one of the beers, proposes to use the $\chi^2$ goodness-of-fit test this time.
+The bartender, happily lending himself to drinking one of the beers, proposes to use the $\chi^2$ Goodness-of-Fit test this time.
 After rearranging the times measured, they obtain the data presented in \reftbl{tbl:chisqrawdata}.
 %
 \begin{table}[htb]
@@ -568,7 +568,7 @@ Therefore his test statistic $X^2_{\text{Franz}}$ has to be smaller than $\chi^2
 For $2.8 > 2.706$ holds, Fritz's hypothesis is rejected.
 
 \subsection{$\chi^2$ using the NAG C Library}
-As shown above, applying the $\chi^2$ goodness-of-fit test consists of four main steps: determine the interval borders, the corresponding frequencies for the sample, the corresponding expected frequencies for the distribution function in the hypothesis, and the test statistic.
+As shown above, applying the $\chi^2$ Goodness-of-Fit test consists of four main steps: determine the interval borders, the corresponding frequencies for the sample, the corresponding expected frequencies for the distribution function in the hypothesis, and the test statistic.
 The steps themselves are simple to solve, but result in a lot of work for larger samples.
 So it is not surprising that the NAG C Library provides means to support the user with these tasks.
 \\
@@ -659,7 +659,7 @@ When runtime speed is critical or non-equidistant intervals shall be used, the N
 Otherwise it is much simpler to just use the R version, as the code is easier to write and the overhead is much smaller.
 
 \section{Conclusion}
-This thesis has shown a basic introduction into numerical libraries and their usages in statistics. A short introduction into the basics of statistics was also needed to get the required background to understand the usage and importance of goodness of fit tests. As presented in the Kolmogorov-Smirnov section, one has seen a description of the procedure and an example of how to use and when to apply this test. In the $\chi^2$ section information about execution have been provided. Also an illustrative example demonstrated the application and benefits of this test.
+This thesis has shown a basic introduction into numerical libraries and their usages in statistics. A short introduction into the basics of statistics was also needed to get the required background to understand the usage and importance of Goodness-of-Fit tests. As presented in the Kolmogorov-Smirnov section, one has seen a description of the procedure and an example of how to use and when to apply this test. In the $\chi^2$ section information about execution have been provided. Also an illustrative example demonstrated the application and benefits of this test.
 For both tests different implementations have been pointed out and their example implementations are presented in the appendices.
 But as shown in the conclusion section of the respective tests neither the C nor the R implementation can be recommended over the other.\\
 What has not been discussed yet is if one test can be preferred over the other.\\

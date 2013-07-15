@@ -669,11 +669,19 @@ When runtime speed is critical or non-equidistant intervals shall be used, the N
 Otherwise it is much simpler to just use the R version, as the code is easier to write and the overhead is much smaller.
 
 \section{Conclusion}
-This thesis has shown a basic introduction into numerical libraries and their usages in statistics. A short introduction into the basics of statistics was also needed to get the required background to understand the usage and importance of Goodness-of-Fit tests. As presented in the Kolmogorov-Smirnov section, one has seen a description of the procedure and an example of how to use and when to apply this test. In the $\chi^2$ section information about execution have been provided. Also an illustrative example demonstrated the application and benefits of this test.
+This thesis has shown a basic introduction into numerical libraries and their usages in statistics.
+A short introduction into the basics of statistics was also needed to get the required background to understand the usage and importance of Goodness-of-Fit tests.
+As presented in the Kolmogorov-Smirnov section, one has seen a description of the procedure and an example of how to use and when to apply this test.
+In the $\chi^2$ section information about execution have been provided.
+Also an illustrative example demonstrated the application and benefits of this test.
+\\
 For both tests different implementations have been pointed out and their example implementations are presented in the appendices.
-But as shown in the conclusion section of the respective tests neither the C nor the R implementation can be recommended over the other.\\
-What has not been discussed yet is if one test can be preferred over the other.\\
-While both test have in common that one has to specify the null distribution, the $\chi^2$ test requires to specify classes for the observations and the Kolmogorov-Smirnov test requires that the observations are ordered ascending and additionally the empirical null distribution has to be calculated.\\
+But as shown in the conclusion section of the respective tests neither the C nor the R implementation can be recommended over the other.
+\\
+What has not been discussed yet is if one test can be preferred over the other.
+\\
+While both test have in common that one has to specify the null distribution, the $\chi^2$ test requires to specify classes for the observations and the Kolmogorov-Smirnov test requires that the observations are ordered ascending and additionally the empirical null distribution has to be calculated.
+\\
 But since the $\chi^2$ test needs more observations than the Kolmogorov-Smirnov test to be accurate~\cite{knuth2001art}, the second test may be considered as the better choice in a situation with relatively few observations.
 In a situation with large sample size the choice is not clear and the it may varies from case to case.
 \newpage

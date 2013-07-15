@@ -93,7 +93,7 @@ In this written elaboration the $\chi^2$ and the Kolmogorov-Smirnov tests are pr
 Between various alternatives such as R \cite{hellbrueck2009angewandte}, Matlab \cite{benker2001statistik}, and Mathematica \cite{jaeger1997statistik}, we decided to present the test equivalents in R, as it is on its way to being the most commonly used language for statistical applications and all comparable major applications provide interfaces to it.
 
 \section{Basic Statistics}
-This section is intended to provide the basic knowledge about statistics up to statistical hypothesis testing needed to understand the two algorithms this paper focuses on.
+This section is intended to provide the basic knowledge about statistics up to \emph{statistical hypothesis testing} needed to understand the two algorithms this paper focuses on.
 
 \subsection{Fundamentals}
 As the goal is to understand tests on hypotheses, we place an emphasis on experiments.
@@ -115,10 +115,13 @@ The terms introduced shall now be illustrated using an example.
 Furthermore we define the term \emph{random variable}, meaning a function assigning real numbers to points in the sample space.
 In contrast to the probability function the random variable acts as an enumerator.
 The \emph{probability function of a random variable} X (denoted by $f(x)$) gives the probability of X assuming a point in the sample space, that X assigns the number x, so $f(x) = P(X = x)$, where $X = x$ is an event the probability function $P$ gives a probability for.
+\\
 A \emph{cumulative distribution function $F(x)$ of a random variable} X gives the probability of X being less than or equal to x, formalized as: $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$.
 Quantiles $x_p$ for probabilities $p$ mark the points in the sample space with $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$.
 E.\,g. the 0.5th quantile $x_{0.5}$ divides the sample space into two halves and is also called median.
+\\
 The \emph{expected value of a real valued function} $u(X)$ of a random variable X with the probability function $f(x)$ is denoted by $E[u(X)] = \sum_{x}u(x)f(x)$.
+\\
 The well known \emph{mean of a random variable X} can then be written as $\mu = E(X) = \sum_{x}xf(x)$.
 Analogue, we define the \emph{variance of a random variable X} with mean $\mu$ and probability function $f(x)$ as $\sigma^2 = E[(X-\mu)^2]$ and its positive square root as the \emph{standard deviation}, denoted by $\sigma$.
 

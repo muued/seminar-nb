@@ -409,9 +409,9 @@ To use the nag c function nag\_1\_sample\_ks\_test one has to specify the follow
 $dtype$ defines if the calculated test statistic should either be $D_n$, $D^+_n$ or $D^-_n$.
 Those statistics are used to test the null hypothesis against the following alternative hypotheses.
 \begin{description}
-\item $D_n=\max\{D^+_n,D^-_n\}$ is calculated for $H_1 $: The data does not come from the specified null distribution.\\
-\item $D^+_n=\max\{S(x)-F(x),0\}$ is calculated for $H_2$: The data comes from a distribution which dominates the null distribution.\\
-\item $D^-_n=\max\{F(x)-S(x),F(x_i)-S(x_{i-1})\}$ is calculated for $H_3$: The data comes from a distribution which is dominated by the null distribution.\\
+\item $D_n=\max\{D^+_n,D^-_n\}$ is calculated for $H_1 $: The data does not come from the specified null distribution.
+\item $D^+_n=\max\{S(x)-F(x),0\}$ is calculated for $H_2$: The data comes from a distribution which dominates the null distribution.
+\item $D^-_n=\max\{F(x)-S(x),F(x_i)-S(x_{i-1})\}$ is calculated for $H_3$: The data comes from a distribution which is dominated by the null distribution.
 \end{description}
 A visual representation for values of $D_n^+$ and $D_n^-$ can be seen in figure~\ref{fig:2}, where the orange curve is the dominating $S(x)$ and blue is dominated by $S(x)$.
 

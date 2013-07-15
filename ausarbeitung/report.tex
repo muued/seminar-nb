@@ -454,7 +454,7 @@ Once these parameters have been set the function can be run and returns the next
 As one can see the Kolmogorov-Smirnov Goodness-of-Fit test is an easy to use tool to check whether a given observation set follows a specified probability distribution or not.
 Due to the circumstances that a not rejected hypothesis should not be considered as correct~\cite{conover1980practical}, the tests application is to show that a given observation does not follow a probability distribution. An example could be to show that the distribution of wealth of the people of Germany does not follow a normal distribution.\\
 Numerical libraries come in handy especially for quick examine of the plausibility of a hypothesis with the help of the Kolmogorov-Smirnov test. The nag c library has its advantages 
-in estimating values for the specified null hypothesis, but on the downside one has to handle a lot of variables in comparison to the R variant. However the R project solution does not offer the option to estimate the values of the given null hypothesis, but it has the benefit that can calculate the two sample Kolmogorov-Smirnov test by just changing the value of $y$ to a numerical vector. Although this test is not described in this thesis, the fact that one can switch between those two without having to call a complete new function is valuable attribute.\\
+in estimating values for the specified null hypothesis, but on the downside one has to handle a lot of variables in comparison to the R variant. However the R project solution does not offer the option to estimate the values of the given null hypothesis, but it has the benefit that one can calculate the two sample Kolmogorov-Smirnov test by just changing the value of $y$ to a numerical vector. Although this test is not described in this thesis, the fact that one can switch between those two without having to call a complete new function is valuable attribute.\\
 Neither of these two alternatives dominates, therefor there is no clear choice for one of it. It depends on the situation and the preferences the user has. 
 \section{$\chi^2$ Tests}
 A $\chi^2$ test (also denoted chi-square test) is a statistical hypothesis test in which the sampling distribution of the test statistic is a $\chi^2$ distribution under the null hypothesis.
@@ -576,9 +576,9 @@ Now the test statistic $X^2$ is calculated based on the frequency tables shown i
 For no special reason, they agree on a significance level of $\alpha = 0.1$.
 Paul's test has $4-1=3$ degrees of freedom, so his test statistic $X^2_{\text{Paul}}$ has to be smaller than $\chi^2_{0.9, 3} = 6.261$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with three degrees of freedom.
 As this is the case ($1.6 \leq 6.261$), his hypothesis is not rejected.
-Fritz's test however has $4-1-2=1$ degree of freedom only, as he deduced the mean and variance from the sample.
+Franz' test however has $4-1-2=1$ degree of freedom only, as he deduced the mean and variance from the sample.
 Therefore his test statistic $X^2_{\text{Franz}}$ has to be smaller than $\chi^2_{0.9, 1} = 2.706$, the $(1-\alpha)$ quantile of a $\chi^2$ random variable with one degree of freedom.
-For $2.8 > 2.706$ holds, Fritz's hypothesis is rejected.
+For $2.8 > 2.706$ holds, Franz' hypothesis is rejected.
 
 \subsection{$\chi^2$ using the NAG C Library}
 As shown above, applying the $\chi^2$ Goodness-of-Fit test consists of four main steps: determine the interval borders, the corresponding frequencies for the sample, the corresponding expected frequencies for the distribution function in the hypothesis, and the test statistic.
@@ -622,7 +622,7 @@ With these parameters created and passed to the function, the user obtains the f
 	\item[fail] A NagError stating if something went wrong
 \end{description}
 As the function takes the frequency table as an input, the user receives no help in performing step two.
-She can however use the function nag\_frequency\_table (g01aec) to calculate the frequency table.
+One can however use the function nag\_frequency\_table (g01aec) to calculate the frequency table.
 For further documentation of that function please refer to the user manual \cite{nagc}.
 
 \subsection{$\chi^2$ using R}
@@ -686,7 +686,7 @@ What has not been discussed yet is if one test can be preferred over the other.
 While both test have in common that one has to specify the null distribution, the $\chi^2$ test requires to specify classes for the observations and the Kolmogorov-Smirnov test requires that the observations are ordered ascending and additionally the empirical null distribution has to be calculated.
 \\
 But since the $\chi^2$ test needs more observations than the Kolmogorov-Smirnov test to be accurate~\cite{knuth2001art}, the second test may be considered as the better choice in a situation with relatively few observations.
-In a situation with large sample size the choice is not clear and the it may varies from case to case.
+In a situation with large sample size the choice is not clear and it may varies from case to case.
 \newpage
 \nocite{*}
 \bibliographystyle{plain}

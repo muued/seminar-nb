@@ -103,17 +103,13 @@ The terms introduced shall now be illustrated using an example.
 \end{example}
 Furthermore we define the term \emph{random variable}, meaning a function assigning real numbers to points in the sample space.
 In contrast to the probability function the random variable acts as an enumerator.
-The \emph{probability function of a random variable} X (denoted $f(x)$) gives the probability of X assuming a point in the sample space, that X assigns the number x, so $f(x) = P(X = x)$, where $X = x$ is an event the probability function $P$ gives a probability for.
-
-\begin{description}
-	\item[random variable] function assigning real numbers to points in the sample space
-	\item[probability function of a random variable X] denoted $f(x)$. Gives the probability of X assuming the value x, so $f(x) = P(X = x)$
-	\item[cumulative distribution function of a random variable X] denoted $F(x)$. Gives the probability of X being less than or equal to x, so $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$
-	\item[quantile $x_p$] $p$th quantile of the random variable X, if $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$ for $p\in[0,1]$. e.g. $x_{0.5}$ is the median.
-	\item[expected value] of a real valued function $u(X)$ of a random variable X with the probability function $f(x)$, written $E[u(X)] = \sum_{x}u(x)f(x)$
-	\item[mean] of a random variable X: $\mu = E(X)$
-	\item[variance] of a random variable X with mean $\mu$ and the probability function $f(x)$: $\sigma^2 = E[(x-\mu)^2]$. Its positive square root is the \emph{standard deviation}.
-\end{description}
+The \emph{probability function of a random variable} X (denoted by $f(x)$) gives the probability of X assuming a point in the sample space, that X assigns the number x, so $f(x) = P(X = x)$, where $X = x$ is an event the probability function $P$ gives a probability for.
+A \emph{cumulative distribution function $F(x)$ of a random variable} X gives the probability of X being less than or equal to x, formalized as: $F(x) = P(X \leq x) = \sum_{t\leq x}f(t)$.
+Quantiles $x_p$ for probabilities $p$ mark the points in the sample space with $P(X<x_p)\leq p$ and $P(X>x_p)\leq 1-p$.
+E.\,g. the 0.5th quantile $x_{0.5}$ divides the sample space into two halves and is also called median.
+The \emph{expected value of a real valued function} $u(X)$ of a random variable X with the probability function $f(x)$ is denoted by $E[u(X)] = \sum_{x}u(x)f(x)$.
+The well known \emph{mean of a random variable X} can then be written as $\mu = E(X) = \sum_{x}xf(x)$.
+Analogue, we define the \emph{variance of a random variable X} with mean $\mu$ and probability function $f(x)$ as $\sigma^2 = E[(X-\mu)^2]$ and its positive square root as the \emph{standard deviation}, denoted by $\sigma$.
 
 \subsection{Probability Distributions}
 \begin{description}

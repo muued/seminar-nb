@@ -183,25 +183,26 @@ An interval estimator represents an interval overlapping the real value with som
 The interval borders together with a \emph{confidence coefficient}, the probability, that the interval will overlap the real value, we call a \emph{confidence interval}.
 An example for an interval estimator is the postulation ``We are 90\% confident, that less than 1\% of our products are defective''.
 
-
 \subsection{Statistical Inference}
-
-\begin{tikzpicture}[node distance = 2 cm]
-	\node (t) at (2,3) {\bfseries theory};
-	\node (d) at (4,1.5) {deduction};
-	\node (i) at (0,1.5) {induction};
-	\node (e) at (2,0) {\bfseries empiricism};
-	\path
-		(t) edge[bend left, ->] node[right] {} (d)
-		(d) edge[bend left, ->] node[left] {} (e)
-		(e) edge[bend left, ->] node[right] {} (i)
-		(i) edge[bend left, ->] node[left] {} (t) ;
-\end{tikzpicture}
-
-
-hypothesis testing as a mean of statistical induction \\
-process of inferring from a sample whether or not to accept a certain statement about the population \\
-the statement itself has to be a hypothesis. \\
+From a philosophical perspective, statistical induction, also called statistical inference, is the method of drawing conclusions from empiricism to theory.
+Its counterpart is the deduction, applying general rules to empirical instances.
+\begin{figure}[h]
+	\center
+	\begin{tikzpicture}[node distance = 2 cm]
+		\node (t) at (2,3) {\bfseries theory};
+		\node (d) at (4,1.5) {deduction};
+		\node (i) at (0,1.5) {induction};
+		\node (e) at (2,0) {\bfseries empiricism};
+		\path
+			(t) edge[bend left, ->] node[right] {} (d)
+			(d) edge[bend left, ->] node[left] {} (e)
+			(e) edge[bend left, ->] node[right] {} (i)
+			(i) edge[bend left, ->] node[left] {} (t) ;
+	\end{tikzpicture}
+\end{figure}
+We therefore see hypothesis testing as a mean of statistical induction.
+Hypothesis testing describes the process of inferring from a sample whether or not to accept a certain statement about a population.
+In doing so, that statement has to be a \emph{hypothesis}.
 %
 The word hypothesis may in this context be defined as
 \begin{quote}
@@ -210,7 +211,6 @@ The word hypothesis may in this context be defined as
 It can be seen as a more formal version of an \emph{educated guess}.
 Using a hypothesis, one may predict e.\,g. the outcome of experiments.
 Generally, a hypothesis is required to be either falsifiable or verifiable, such that it can be tested.
-
 
 \subsection{Statistical Tests}
 A statistical test performs a test on a hypothesis against the \emph{evidence} in a sample.

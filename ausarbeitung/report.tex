@@ -153,25 +153,36 @@ Let $X_1, \ldots, X_k$ be $k$ independent and identically distributed standard n
 \end{example}
 
 \subsection{Estimation}
-\begin{description}
-	\item[population] all elements under investigation
-	\item[sample] collection of some elements of a population
-	\item[target population] population, one wants information about
-	\item[sampled population] population, one has information about
-	\item[random sample] a sample from a finite population is a random sample if each of the possible samples was equally likely to be obtained
-	\item[random sample of size n] is a sequence of n independent and identically distributed random variables $X_1, \ldots, X_n$
-\end{description}
+With the probability theory basics presented above, we still lack the ability to draw conclusions from finite experiments to the ``real world''.
+We will now try to close this gap by laying the foundations for statistical inference.
+\\
+The ``real world'' one wants know something about when performing an experiment shall from now on be named \emph{population} describing all elements under investigation.
+A collection of some of these elements is named \emph{sample}.
+As one can never be sure that a \emph{sample} is representative for the population of concern, we distinguish between the \emph{target population} -- the population, one wants information about -- and the \emph{sampled population} -- the population, one has information about.
+\\
+We call a sample from a finite population a \emph{random sample} if each of the possible samples would have been equally likely to be obtained.
+E.\,g. a sequence of $n$ independent, identically distributed random variables $X_1, \ldots, X_n$ is a \emph{random sample of size $n$}.
+\\
+For a random sample $X_1, \ldots, X_n$ of size $n$ we call
+\begin{equation}
+S(x) = \frac{1}{n}(\text{\#elements in sample}\leq x)
+\end{equation}
+the empirical distribution function.
+\\
+Due to the difference between the sampled and the target population, we can only derive estimates about the target population from a sample.
+A function used to estimate is called an \emph{estimator}.
+The quality of an estimate is determined by its precision, a measure for how close the estimate is to the real value, and its reliability, the probability for the result to be correct.
+In this context we will present two types of estimators:
+\paragraph{Point Estimates}
+Point estimates have a high precision, but a low reliability, as they mark one point in the sample space.
+The probability, that this point exactly matches the real value is rather low.
+An example for a point estimate is the \emph{sample mean} $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$ for a random sample $X_1,\ldots,X_n$ of size $n$.
+Similarly, the \emph{sample variance} $S^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})$ is a point estimate for a random sample $X_1,\ldots,X_n$ of size $n$.
+\paragraph{Interval Estimates}
+An interval estimator represents an interval overlapping the real value with some probability.
+The interval borders together with a \emph{confidence coefficient}, the probability, that the interval will overlap the real value, we call a \emph{confidence interval}.
+An example for an interval estimator is the postulation ``We are 90\% confident, that less than 1\% of our products are defective''.
 
-estimates:
-quality criteria of an estimate: precision (how close to the real value) and reliability (probability for the result to be correct)
-point estimates: sample mean, sample variance, ...
-confidence interval: consist of \emph{interval estimate} borders and the \emph{confidence coefficient} (probability, that the interval estimator will contain the unknown population quantity)
-
-\begin{description}
-	\item[empirical distribution function] Let $X_1, \ldots, X_n$ be a random sample. The empirical distribution function $S(x)$ is a function of $x$, which equals the fraction of $X_i$s that are less than or equal to $x$ for each $x$, $-\infty<x<\infty$.
-	\item[sample mean] Let $X_1, \ldots, X_n$ be a random sample. $\overline{X} = \frac{1}{n}\sum_{i=1}^{n}X_i$ is the sample mean.
-	\item[sample variance] Let $X_1, \ldots, X_n$ be a random sample. $S^2 = \frac{1}{n}\sum_{i=1}^{n}(X_i-\overline{X})$ is the sample variance. The positive square root of the sample variance is the sample standard deviation $S$.
-\end{description}
 
 \subsection{Statistical Inference}
 

@@ -477,16 +477,44 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 
 \begin{frame}{\insertsubsection}
 \begin{block}{Eingabe}
-	\begin{description}[]
+	\begin{description}[Signifikanzniveau]
 	\item[Zufallsstichprobe] von $n$ unabhängigen Ereignissen $x_1, \ldots, x_n$
 	\item[Klassenanzahl] Ereignisse sollen gruppiert werden in $k$ Klassen
 	\item[Klassengrenzen] $k-1$ Werte ($c_i$), die die Stichprobe partitionieren
+	\item[Signifikanzniveau] $\alpha$
 	\end{description}
 \end{block}
-\begin{block}{Vorbereitung: Berechnung der Klassen-Häufigkeiten}
+\begin{block}{Vorbereitung: Berechnung der beobachteten Klassen-Häufigkeiten}
 	$O_i = \left|\{ x_a ; c_{i-1} < x_a \leq c_i \}\right| ~ \forall 1 \leq i \leq k$
 	\\
 	$c_0 = -\infty, ~ c_k = \infty$
+\end{block}
+\end{frame}
+
+\begin{frame}{\insertsubsection}
+\begin{definition}
+	\begin{description}[$E_i$]
+	\item[$F$] Verteilungsfunktion der Nullhypothese
+	\item[$d$] Anzahl Parameter der Verteilungsfunktion, die aus Stichprobe abgelesen wurden
+	\item[$E_i$] erwartete Anzahl an Werten in Klasse $i$ unter falls $H_0$
+	\end{description}
+\end{definition}
+\begin{block}{Vorbereitung: Berechnung der erwarteten Klassen-Häufigkeiten}
+	$E_i = n \cdot P(c_{i-1} < X \leq c_i) ~ \forall 1 \leq i \leq k$
+	\\
+	$c_0 = -\infty, ~ c_k = \infty$
+\end{block}
+\end{frame}
+
+\begin{frame}{\insertsubsection}
+\begin{definition}[Teststatistik]
+	\begin{equation*}
+		X^2 = \sum_{i=1}^{k}\frac{(O_i - E_i)^2}{E_i}
+	\end{equation*}
+\end{definition}
+\begin{block}{Entscheidung}
+	Verwirf $H_0$, falls $X^2 > x_{1-\alpha}$ \\[1ex]
+	$x_{1-\alpha}$ ist $(1-\alpha)$-Quantil der $\chi^2$-Verteilung mit $k-1-d$ Freiheitsgraden
 \end{block}
 \end{frame}
 \subsection{Implementierung in NAG C}

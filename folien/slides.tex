@@ -5,7 +5,7 @@
 \usepackage{epstopdf}
 
 \usepackage{ucs} % Unicode - dependency of utf8x inputenc
-\usepackage{inputenc} % "utf8x" uses "ucs"-package, better than "UTF8"
+\usepackage[utf8x]{inputenc} % "utf8x" uses "ucs"-package, better than "UTF8"
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
@@ -147,9 +147,8 @@ Somit sind beide Hypothesen verworfen.
 
 	%%%NAG C
 \subsection{Implementierung in NAG C}
-\begin{frame}{\insertsubsection}
-
-	\lstinline[language=C++]$fuck(this shit)$
+\begin{frame}[fragile]{\insertsubsection}
+	\lstinline[language=C++]$struct a{ operator()(a const& b);};$
 \end{frame}
 	%%%R
 \subsection{Alternative Bibliotheken}

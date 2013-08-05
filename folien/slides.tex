@@ -458,7 +458,37 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 
 %%%$\chi^2$ Test
 \section{$\chi^2$ Test}
+\begin{frame}{\insertsection}
+\begin{block}{$\chi^2$ Tests}
+	Familie von Tests mit $\chi^2$-verteilter Teststatistik.
+	\\
+	Hier betrachtet: Pearson's $\chi^2$ Test (Anpassungsgütetest)
+\end{block}
+\begin{block}{Anwendungsfälle}
+	\begin{description}[Alternativhypothese]
+	\item[Nullhypothese] Die Stichprobe genügt spezifizierter Verteilung
+	\item[Alternativhypothese] Die Stichprobe genügt irgend einer anderen als der spezifizierten Verteilung
+	\item[Verwerfen von $H_0$] falls Stichprobe \emph{dagegen spricht}
+	\end{description}
+\end{block}
+\end{frame}
+
 \subsection{Mathematischer Hintergrund}
+
+\begin{frame}{\insertsubsection}
+\begin{block}{Eingabe}
+	\begin{description}[]
+	\item[Zufallsstichprobe] von $n$ unabhängigen Ereignissen $x_1, \ldots, x_n$
+	\item[Klassenanzahl] Ereignisse sollen gruppiert werden in $k$ Klassen
+	\item[Klassengrenzen] $k-1$ Werte ($c_i$), die die Stichprobe partitionieren
+	\end{description}
+\end{block}
+\begin{block}{Vorbereitung: Berechnung der Klassen-Häufigkeiten}
+	$O_i = \left|\{ x_a ; c_{i-1} < x_a \leq c_i \}\right| ~ \forall 0 < i < k$
+	\\
+	$c_0 = -\infty, ~ c_k = \infty$
+\end{block}
+\end{frame}
 \subsection{Implementierung in NAG C}
 \subsection{Alternative Bibliotheken}
 \begin{frame}

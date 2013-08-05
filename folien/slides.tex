@@ -52,19 +52,18 @@ LuFG Informatik 12: Software and Tools for Computational Engineering}
 %%%Einführung
 \section{Einführung}
 \begin{frame}{\insertsection}
-Themen dieses Vortrags:
-	\begin{itemize}
-		\item Statistik
+		\begin{block}{Statistik}
 			\begin{itemize}
 			\item ist das Sammeln, Auswerten und Beurteilen von Daten
 			\item dient als Bindeglied zwischen Daten und Hypothesen
-			\end{itemize}		
-		\item Numerische Bibliotheken
+			\end{itemize}
+ 		\end{block}
+		\begin{block}{Numerische Bibliotheken}
 			\begin{itemize}
 			\item stellen mathematische Algorithmen zur Verfügung wodurch eine eigene Implementation entfällt
 			\item sind in diesem Vortrag NAG C und die Sprache R
 			\end{itemize}
-	\end{itemize}
+ 		\end{block}
 \end{frame}
 
 %%%Statistische Grundlagen
@@ -272,37 +271,39 @@ Themen dieses Vortrags:
 %%%Kolmogorow-Smirnow Test
 \section{Kolmogorow-Smirnow Test}
 \begin{frame}{\insertsection}
-Kolmogorow-Smirnow Test hat zwei Anwendungen:\\
+\begin{block}{Kolmogorow-Smirnow Test hat zwei Anwendungen}
 	\begin{itemize}
 		\item[1.] Pr\"uft Mengen $X$ und $ Y$ auf gleiche Wahrscheinlichkeitsverteilung \\
-		\item[2.] Pr\"uft Menge $X$ auf spezifizierte Wahrscheinlichkeitsverteilung $F(x)$ \\
+		\item[2.] Pr\"uft Menge $X$ auf spezifizierte Wahrscheinlichkeitsverteilung
 			\[S(x)=F(x)\]
-			\begin{center}$\rightarrow$ Anpassungsg\"utetest\end{center}
+	%		\begin{center}$\rightarrow$ Anpassungsg\"utetest\end{center}
 	\end{itemize}
+\end{block}
 \end{frame}
 
 	%%%Mathematischer Hintergrund
 \subsection{Mathematischer Hintergrund}
 
 \begin{frame}{\insertsubsection}
-Anwendung des Anpassungsg\"utetests:
+\begin{block}{Anwendung des Anpassungsgütetests}
 	\begin{itemize}
-		\item Menge $X$ aufsteigend sortieren, $x_1\le ...\le x_n$
-		\item<2-> Bilden der empirischen Verteilungsfunktion $S(x)$	
+		\item[1.] Menge $X$ aufsteigend sortieren, $x_1\le ...\le x_n$
+		\item[2.]<2-> Bilden der empirischen Verteilungsfunktion $S(x)$	
 		\only<2>{ $$S(x)=\frac{1}{n}\sum^{n}_{i=1}I_{x_i\le x}$$}
-		\item<3-> Spezifizieren der angenommenen Verteilungsfunktion $F(x)$
-		\item<3-> Aufstellen der Nullhypothese $H_0$ und der Alternativhypothese $H_1$
+		\item[3.]<3-> Spezifizieren der angenommenen Verteilungsfunktion $F(x)$
+		\item[4.]<3-> Aufstellen der Nullhypothese $H_0$ und der Alternativhypothese $H_1$
 		\only<3>{$$H_0:S(x)=F(x)$$ $$H_1:S(x)\neq F(x)$$}
-		\item<4-> Ermitteln der Teststatistik $D_n$
+		\item[5.]<4-> Ermitteln der Teststatistik $D_n$
 		\only<4>{ $$D_n=\max(d_0,d_1)$$ $$ d_0=\max_x|S(x)-F(x)|,$$ $$d_1=\max_x|S(x_{i-1})-F(x_i)|$$ }
-		\item<5->Wenn $D_n>D_\alpha$ wird die Nullhypothese verworfen
+		\item[6.]<5->Wenn $D_n>D_\alpha$ wird die Nullhypothese verworfen
 	\end{itemize}
+\end{block}
 \end{frame}
 
 	%%%Beispiel
 
 \begin{frame}{\insertsubsection}
-Ein Beispiel:\\
+\begin{example}[KS-Test Anwendung]
 	\begin{itemize}
 		\item Beobachtungen:
 			\begin{table}[h]
@@ -320,10 +321,11 @@ Ein Beispiel:\\
 			\end{table}
 		\item Hypothesen: $$H_{Franz}:S(x)=\Phi(x|3.5;1)$$ $$H_{Paul}:S(x)=\Phi(x|3;0.7)$$
 	\end{itemize}
+\end{example}
 \end{frame}
 
 \begin{frame}{\insertsubsection}
-Berechnung der Werte:\\
+\begin{example}[KS-Test Anwendung]
 	\begin{itemize}
 		\item Werte der Verteilungsfunktionen
 			\begin{table}[ht]
@@ -350,23 +352,29 @@ Berechnung der Werte:\\
 			\end{tabular}
 			\end{table}
 	\end{itemize}
+\end{example}
 \end{frame}
 
 \begin{frame}{\insertsubsection}
-Auswertung der Teststatistiken:\\
+\begin{example}[KS-Test Anwendung]
+Auswertung der Teststatistiken:
 	\begin{itemize}
 		\item $D_{n,Franz}=0.508036$ und $D_{n,Paul}=0.366145$
 		\item $D_\alpha=0.294$
 	\end{itemize}
 Somit sind beide Hypothesen verworfen.
+\end{example}
 \end{frame}
 
 	%%%NAG C
 \subsection{Implementierung in NAG C}
 \begin{frame}[fragile]{\insertsubsection}
-In NAG C: \lstinline[language=C++]$g08cbc$ oder \lstinline[language=C++]$nag_1_sample_ks_test$ mit folgenden Parametern:\\
-\begin{center}\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$\end{center}
-Die Eingabeparameter sind die Folgenden:
+\begin{block}{\lstinline[language=C++]$nag_1_sample_ks_test$ oder \lstinline[language=C++]$g08cbc$}
+	\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$
+\end{block}
+%In NAG C: \lstinline[language=C++]$g08cbc$ oder \lstinline[language=C++]$nag_1_sample_ks_test$ mit folgenden Parametern:\\
+%\begin{center}\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$\end{center}
+\begin{block}{Die Eingabeparameter}
 	\begin{description}
 		\item[n] -- Integer der die Anzahl der Beobachtungen speichert
 		\item[x{[n]}] -- Double Array mit den Beobachtungen $x_1...x_n$
@@ -375,52 +383,71 @@ Die Eingabeparameter sind die Folgenden:
 		\item[estima] -- Nag\_ParaSupplied falls $par$ gegeben ist oder Nag\_ParaEstimated wenn die Parameter von NAG bestimmt werden sollen
 		\item[dtype] -- definiert Nag\_TestStatistics
 	\end{description}
+\end{block}
 \end{frame}
 
 \begin{frame}[fragile]{\insertsubsection}
+\begin{example}[dtype]
 $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 	\begin{itemize}
 		\item Nag\_TestStatisticsDAbs
 		\item Nag\_TestStatisticsDPos
 		\item Nag\_TestStatisticsDNeg
 	\end{itemize}
-	\includegraphics[width=1.0\textwidth]{figures/diagramKSd-d+.png}
+	\center \includegraphics[width=.8\textwidth]{figures/diagramKSd-d+.png}
+\end{example}
 \end{frame}
 
 \begin{frame}[fragile]{\insertsubsection}
-\begin{center}\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$\end{center}
-Folgende Werte werden von der Funktion beschrieben:
+\begin{block}{\lstinline[language=C++]$nag_1_sample_ks_test$ oder \lstinline[language=C++]$g08cbc$}
+	\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$
+\end{block}
+\begin{block}{Die Ausgabeparameter}
 	\begin{description}
 		\item[*d] -- Double mit dem Wert der Teststatistik
 		\item[*z] -- Double mit dem $z$ Wert
 		\item[*p] -- Double mit $p$ Wert
 		\item[*fail] -- NagError mit etwaigen Fehlerbeschreibungen
 	\end{description}
+\end{block}
 \end{frame}
 
 	%%%R
 \subsection{Alternative Bibliotheken}
 \begin{frame}{\insertsubsection}
-R als alternative Bibliothek mit der folgenden Methode: 
-\begin{center}\lstinline[language=R] $ks.test(x, y, ..., alternative)$\end{center}
+
+\begin{block}{R als alternative Bibliothek}
+	\lstinline[language=R] $ks.test(x, y, ..., alternative)$
+\end{block}
+
+\begin{block}{Die Eingabeparameter}
 \begin{description}
-\item[x] -- Numerischer Vektor mit  allen Beobachtungen
-\item[y] -- String welche die Nullverteilung beschreibt
-\item[...]-- Strings mit Parametern für $y$
-\item[alternative]-- definiert welche Teststatistik berechnet wird
+	\item[x] -- Numerischer Vektor mit  allen Beobachtungen
+	\item[y] -- String welche die Nullverteilung beschreibt
+	\item[...]-- Strings mit Parametern für $y$
+	\item[alternative]-- definiert welche Teststatistik berechnet wird
 \end{description}
-R generiert folgende Rückgabe:
-\begin{description}
-\item[statistic] -- Teststatistik welche in $alternative$ festgelegt wurde
-\item[p.value] -- p Wert
-\item[alternative] -- gewählter Wert für $alternative$
-\item[method] -- genutzter Test
-\item[data.name] -- Namen der Daten
-\end{description}
+\end{block}
 
 \end{frame}
 
+\begin{frame}{\insertsubsection}
 
+\begin{block}{R als alternative Bibliothek}
+	\lstinline[language=R] $ks.test(x, y, ..., alternative)$
+\end{block}
+
+\begin{block}{Die Rückgabeparameter}
+\begin{description}
+	\item[statistic] -- Teststatistik welche in $alternative$ festgelegt wurde
+	\item[p.value] -- p Wert
+	\item[alternative] -- gewählter Wert für $alternative$
+	\item[method] -- genutzter Test
+	\item[data.name] -- Namen der Daten
+\end{description}
+\end{block}
+
+\end{frame}
 
 %%%$\chi^2$ Test
 \section{$\chi^2$ Test}
@@ -446,32 +473,37 @@ R generiert folgende Rückgabe:
 
 \begin{columns}
 \begin{column}{.48\textwidth}
-R:
+\begin{block}{R}
 	\begin{itemize}
 		\item freie Verfügbar
 		\item leicht handhabbar
 	\end{itemize}
+\end{block}
 \vspace{1cm}
-NAG C:
+
+\begin{block}{NAG C}
 	\begin{itemize}
 		\item kostenpflichtig
 		\item komplex
 		\item Support
 	\end{itemize}
+\end{block}
 \end{column}
 
 \hfill
 \begin{column}{.48\textwidth}
-KS-Test:
+\begin{block}{KS-Test}
 	\begin{itemize}
 		\item erstellen der empirischen Verteilungsfunktion
 		\item benötigt weniger Beobachtungen als $\chi^2$
 	\end{itemize}
+\end{block}
 \vspace{1cm}
-$\chi^2$-Test:
+\begin{block}{$\chi^2$-Test}
 	\begin{itemize}
 		\item erstellen von Klassen
 	\end{itemize}
+\end{block}
 \end{column}
 \end{columns}
 

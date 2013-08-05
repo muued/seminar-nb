@@ -71,13 +71,16 @@ Themen dieses Vortrags:
 \section{Statistische Grundlagen}
 
 \begin{frame}{\insertsection}
+\begin{definition}
 	\begin{description}[Punkt im Ergebnisraum]
 	\item[Experiment] verschiedene mögliche Ausgänge
 	\item[Ergebnisraum] Menge aller möglichen Ausgänge
 	\item[Punkt im Ergebnisraum] ein konkreter Ausgang
 	\item[Ereignis] Menge von Punkten im Ergebnisraum
+	\item[P: Ergebnisraum $\rightarrow\mathbb{R}$] Wahrscheinlichkeitsfunktion
 	\item[P(A)] Wahrscheinlichkeit für Ereignis A
 	\end{description}
+\end{definition}
 \end{frame}
 
 \begin{frame}{\insertsection}
@@ -91,6 +94,20 @@ Themen dieses Vortrags:
 	\item[P(mind.~1x Kopf)] = 0.75
 	\end{description}
 \end{example}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{definition}
+	\begin{description}[kumulierte Verteilungsfunktion]
+	\item[Zufallsvariable X] \emph{sortiert} Punkte im Ergebnisraum
+	\item[Dichtefunktion] $f(x) = P(X=x)$
+	\item[kumulierte Verteilungsfunktion] $F(x) = P(X \leq x)$
+	\item[Quantil] $x_p: ~ P(X\leq x_p)\geq p$ und $P(X\geq x_p)\geq 1-p$
+	\item[Median] $x_{0.5}$
+	\item[Erwartungswert] von X: ~ $\mu = E(X) = \int x\cdot f(x) \text{d}x$
+	\item[Varianz] von X: ~ $\sigma^2 = E[(X-\mu)^2]$
+	\end{description}
+\end{definition}
 \end{frame}
 
 %%%Kolmogorow-Smirnow Test

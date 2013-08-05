@@ -5,7 +5,7 @@
 \usepackage{epstopdf}
 
 \usepackage{ucs} % Unicode - dependency of utf8x inputenc
-\usepackage[utf8x]{inputenc} % "utf8x" uses "ucs"-package, better than "UTF8"
+\usepackage{inputenc} % "utf8x" uses "ucs"-package, better than "UTF8"
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
@@ -21,6 +21,8 @@
 
 \beamertemplatenavigationsymbolsempty % turn off navigation bar
 
+\lstloadlanguages{[ISO]C++, R}
+\lstset{basicstyle=\small, numbers=left, numberstyle=\footnotesize, tabsize=2,  stepnumber=1, numbersep=5pt, breaklines=true, escapeinside={/*@}{@*/}}
 
 \setbeamertemplate{footline}[frame number]
 
@@ -63,10 +65,10 @@ Kolmogorow-Smirnow Test hat zwei Anwendungen:\\
 	\end{itemize}
 \end{frame}
 
-%%%Mathematischer Hintergrund
+	%%%Mathematischer Hintergrund
 \subsection{Mathematischer Hintergrund}
 
-\begin{frame}{\insertsection}
+\begin{frame}{\insertsubsection}
 Anwendung des Anpassungsg\"utetests:
 	\begin{itemize}
 		\item Menge $X$ aufsteigend sortieren, $x_1\le ...\le x_n$
@@ -81,10 +83,9 @@ Anwendung des Anpassungsg\"utetests:
 	\end{itemize}
 \end{frame}
 
-%%%Beispie
+	%%%Beispiel
 
-\begin{frame}{\insertsection}
-\frametitle{Kolmogorow-Smirnow Test}
+\begin{frame}{\insertsubsection}
 Ein Beispiel:\\
 	\begin{itemize}
 		\item Beobachtungen:
@@ -105,8 +106,7 @@ Ein Beispiel:\\
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
+\begin{frame}{\insertsubsection}
 Berechnung der Werte:\\
 	\begin{itemize}
 		\item Werte der Verteilungsfunktionen
@@ -136,8 +136,7 @@ Berechnung der Werte:\\
 	\end{itemize}
 \end{frame}
 
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
+\begin{frame}{\insertsubsection}
 Auswertung der Teststatistiken:\\
 	\begin{itemize}
 		\item $D_{n,Franz}=0.508036$ und $D_{n,Paul}=0.366145$
@@ -146,15 +145,15 @@ Auswertung der Teststatistiken:\\
 Somit sind beide Hypothesen verworfen.
 \end{frame}
 
-\subsection{Implementierung in NAG C}
 	%%%NAG C
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
+\subsection{Implementierung in NAG C}
+\begin{frame}{\insertsubsection}
+
+	\lstinline[language=C++]$fuck(this shit)$
 \end{frame}
 	%%%R
 \subsection{Alternative Bibliotheken}
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
+\begin{frame}{\insertsubsection}
 \end{frame}
 
 

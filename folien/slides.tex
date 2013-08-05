@@ -2,8 +2,6 @@
 \usetheme{STCE}
 \usepackage{beamerfoils}
 
-\usepackage{epstopdf}
-
 \setbeamertemplate{footline}[frame number]
 
 \MyLogo{
@@ -13,103 +11,17 @@
 
 \begin{document}
 \title{\centering
-\includegraphics[width=0.25\textwidth]{./figures/logo.eps} \\ Numerische Bibliotheken}
+\includegraphics[width=0.25\textwidth]{./figures/logo.eps} \\ Computational Differentiation}
 
-\subtitle{Der $\chi^2$ und Kolmogorow-Smirnow Test}
-\author{Christian Jan\ss en, Fabian Ohler}
+\subtitle{Tutorial}
+\author{}
 \institute{
 LuFG Informatik 12: Software and Tools for Computational Engineering}
-\date{06.08.2013}
+\date{}
 \frame[plain]{\titlepage}
 
-%%% Inhalt
 \begin{frame}
-\frametitle{Inhalt}
-	\begin{itemize}
-		\item Statistische Grundlagen
-%		\begin{itemize}
-%			\item test 1.2
-%			\item test 1.1
-%		\end{itemize}
-		\item Kolmogorow-Smirnow Test
-		\begin{itemize}
-			\item Mathematische Hintergrund
-			\item Implementierung in NAG C
-			\item Alternative Bibliotheken
-		\end{itemize}
-		\item $\chi^2$ Test
-		\begin{itemize}
-			\item Mathematische Hintergrund
-			\item Implementierung in NAG C
-			\item Alternative Bibliotheken
-		\end{itemize}
-		\item Live Demo
-		\item Zusammenfassung
-	\end{itemize}
+\frametitle{Contents}
 \end{frame}
-
-%%%Statistische Grundlagen
-\begin{frame}
-\frametitle{Statistische Grundlagen}
-\end{frame}
-
-%%%Kolmogorow-Smirnow Test
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
-Kolmogorow-Smirnow Test hat zwei Anwendungen:\\
-	\begin{itemize}
-		\item[1.] Pr\"uft Mengen $X$ und $ Y$ auf gleiche Wahrscheinlichkeitsverteilung \\
-		\item[2.] Pr\"uft Menge $X$ auf spezifizierte Wahrscheinlichkeitsverteilung $F(x)$ \\
-			\[S(x)=F(x)\]
-			\begin{center}$\rightarrow$ Anpassungsg\"utetest\end{center}
-	\end{itemize}
-\end{frame}
-	%%%Mathematischer Hintergrund
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
-Anwendung des Anpassungsg\"utetests:
-	\begin{itemize}
-		\item Menge $X$ aufsteigend sortieren, $x_1\le ...\le x_n$
-		\item<2-> Bilden der empirischen Verteilungsfunktion $S(x)$	
-		\only<2>{ $$S(x)=\frac{1}{n}\sum^{n}_{i=1}I_{x_i\le x}$$}
-		\item<3-> Spezifizieren der angenommenen Verteilungsfunktion $F(x)$
-		\item<3-> Aufstellen der Nullhypothese $H_0$ und der Alternativhypothese $H_1$
-		\only<3>{$$H_0:S(x)=F(x)$$ $$H_1:S(x)\neq F(x)$$}
-		\item<4-> Ermitteln der Teststatistik $D_n$
-		\only<4>{ $$D_n=\max(d_0,d_1)$$ $$ d_0=\max_x|S(x)-F(x)|,$$ $$d_1=\max_x|S(x_{i-1})-F(x_i)|$$ }
-		\item<5->Wenn $D_n>D_\alpha$ wird die Nullhypothese verworfen
-	\end{itemize}
-\end{frame}
-	%%%Beispie
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
-Ein Beispiel:
-\end{frame}l
-	%%%NAG C
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
-\end{frame}
-	%%%R
-\begin{frame}
-\frametitle{Kolmogorow-Smirnow Test}
-\end{frame}
-
-%%%$\chi^2$ Test
-\begin{frame}
-\frametitle{$\chi^2$ Test}
-\end{frame}
-
-%%%Live Demo
-\begin{frame}
-\frametitle{Live Demo}
-\center
-\Huge Live Demo
-\end{frame}
-
-%%%Zusammenfassung
-\begin{frame}
-\frametitle{Zusammenfassung}
-\end{frame}
-
 
 \end{document}

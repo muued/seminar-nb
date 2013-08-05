@@ -602,6 +602,57 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 \end{frame}
 
 \subsection{Implementierung in NAG C}
+
+\begin{frame}{\insertsubsection}
+\begin{block}{nag\_chi\_sq\_goodness\_of\_fit\_test oder g08cgc}
+	\lstinline[language=C++]!g08cgc(nclass, ifreq[], cint[], dist, par[], npest, prob[], *chisq, *p, *ndf, eval[], chisqi[], *fail)!
+\end{block}
+\begin{definition}[Eingabeparameter]
+	\begin{description}[cint{[k-1]}]
+	\item[nclass] Anzahl der Klassen
+	\item[ifreq{[k]}] beobachtete Häufigkeiten
+	\item[cint{[k-1]}] Grenzwerte der Klassen
+	\item[dist] Verteilung (enum)
+	\item[par{[2]}] Parameter von \emph{dist}
+	\item[npest] Anzahl der aus der Stichprobe abgeleiteten Parameter d
+	\item[prob{[k]}] Wahrscheinlichkeit, dass $X$ in der Klasse liegt (zum Definieren einer Verteilungsfunktion)
+	\end{description}
+\end{definition}
+\end{frame}
+
+\begin{frame}{\insertsubsection}
+\begin{block}{Verteilungs-Enum}
+	\begin{table}[htbp]
+	\center
+	\begin{tabular}{lll}
+	NAG C Name & Verteilung & Parameter-Verwendung \\
+	\hline
+	Nag\_Normal & $\mathcal{N}(\mu,\sigma^2)$ & $\mu=\text{par}[0],~\sigma^2=\text{par}[1]$  \\
+	Nag\_Uniform & $\mathcal{U}(a,b)$ & $a=\text{par}[0],~b=\text{par}[1]$ \\
+	Nag\_Exponential & $\mathcal{E}\operatorname{xp}(\lambda)$ & $\lambda=\text{par}[0]$ \\
+	Nag\_ChiSquare & $\chi^2(k)$ & $k=\text{par}[0]$ \\
+	Nag\_Gamma & $\Gamma(\alpha,\beta)$ & $\alpha=\text{par}[0],~\beta=\text{par}[1]$
+	\end{tabular}
+	\end{table}
+\end{block}
+\end{frame}
+
+\begin{frame}{\insertsubsection}
+\begin{definition}[Ausgabeparameter]
+	\begin{description}
+	\item[*chisq] Teststatistik $X^2$
+	\item[*p] p-Wert
+	\item[*ndf] Anzahl der Freiheitsgrade für die Quantil-Bestimmung
+	\item[eval{[k]}] erwartete Häufigkeiten der Klassen
+	\item[chisqi{[k]}] Summanden der Teststatistik
+	\item[*fail] NagError mit etwaiger Fehlerbeschreibung
+	\end{description}
+\end{definition}
+\begin{block}{nag\_frequency\_table oder g01aec}
+	nützlich zur Bestimmung der Häufigkeitstabellen
+\end{block}
+\end{frame}
+
 \subsection{Alternative Bibliotheken}
 \begin{frame}
 \frametitle{$\chi^2$ Test}

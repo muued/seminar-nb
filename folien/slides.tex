@@ -101,14 +101,89 @@ Themen dieses Vortrags:
 	\begin{description}[kumulierte Verteilungsfunktion]
 	\item[Zufallsvariable X] \emph{sortiert} Punkte im Ergebnisraum
 	\item[Dichtefunktion] $f(x) = P(X=x)$
-	\item[kumulierte Verteilungsfunktion] $F(x) = P(X \leq x)$
+	\item[kumulative Verteilungsfunktion] $F(x) = P(X \leq x)$
 	\item[Quantil] $x_p: ~ P(X\leq x_p)\geq p$ und $P(X\geq x_p)\geq 1-p$
 	\item[Median] $x_{0.5}$
-	\item[Erwartungswert] von X: ~ $\mu = E(X) = \int x\cdot f(x) \text{d}x$
-	\item[Varianz] von X: ~ $\sigma^2 = E[(X-\mu)^2]$
+	\item[Erwartungswert] $\mu = E(X) = \int x\cdot f(x) \text{d}x$
+	\item[Varianz] $\sigma^2 = E[(X-\mu)^2]$
+	\item[Standardabweichung] $\sigma = \sqrt{\sigma^2}$
 	\end{description}
 \end{definition}
 \end{frame}
+
+\begin{frame}{\insertsection}
+\begin{block}{Normalverteilung $\mathcal{N}(\mu,\sigma^2)$}
+	$\mu$ Erwartungswert, $\sigma^2$ Varianz \\
+	kumulative Verteilungsfunktion:
+	\begin{equation*}
+	F(x) = \Phi\left(\frac{x - \mu}{\sigma}\right) = \frac{1}{\sqrt{2\pi\sigma}} \int_{-\infty}^{x}e^{-\frac{1}{2}[(y-\mu)/\sigma]^2}\textrm{d}y
+	\end{equation*}
+\end{block}
+\end{frame}
+
+\begin{frame}{\insertsection}
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[height=0.99\textheight]{figures/standardnorm_empty}
+	\end{figure}
+\end{frame}
+%quantil
+\begin{frame}{\insertsection}
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[height=0.99\textheight]{figures/standardnorm_quantil}
+	\end{figure}
+\end{frame}
+%F
+\begin{frame}{\insertsection}
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[height=0.99\textheight]{figures/standardnorm}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{block}{Gleichverteilung $\mathcal{U}(a,b)$}
+	$a$ Minimum, $b$ Maximum \\
+	kumulative Verteilungsfunktion:
+	\begin{equation*}
+	F(x) = \left\{\begin{tabular}{ll}
+	0 & for $x<a$ \\
+	$\frac{x-b}{b-a}$ & for $a\leq x<b$ \\
+	1 & for $x\geq b$ \\
+	\end{tabular}\right.
+	\end{equation*}
+\end{block}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{block}{Binomialverteilung $B(n,p)$}
+	$n$ Anzahl der Erfolge, $p$ Wahrscheinlichkeit des Erfolgs bei booleschem Ergebnis \\
+	kumulative Verteilungsfunktion:
+	\begin{equation*}
+	F(x) = \sum_{i\leq x} \genfrac(){0pt}{}{n}{i} p^{i}q^{n-i}
+	\end{equation*}
+\end{block}
+\end{frame}
+
+
+\begin{frame}{\insertsection}
+\begin{block}{Chi-Quadrat-Verteilung $\chi^2(k)$}
+	$k$ Anzahl der Freiheitsgrade \\
+	kumulative Verteilungsfunktion:
+	\begin{equation*}
+	F(x) = \left\{\begin{tabular}{ll}
+	$\int_{0}^{x} \frac{y^{(k/2)-1}e^{(y/2)}}{2^{k/2}\Gamma(k/2)}\textrm{d}y$ & if $x>0$ \\
+	0 & if $x\leq 0$
+	\end{tabular}\right.
+	\end{equation*}
+\end{block}
+\begin{example}
+	$X_1, \ldots X_k$ unabhängig \& gleich normalverteilt \\
+	$Y = \sum_{i=1}^{k}X_i^2$ ist $\chi^2$-verteilt mit $k$ Freiheitsgraden
+\end{example}
+\end{frame}
+
 
 %%%Kolmogorow-Smirnow Test
 \section{Kolmogorow-Smirnow Test}

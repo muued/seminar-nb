@@ -1,6 +1,8 @@
 \documentclass{beamer}
 \usetheme{STCE}
 \usepackage{beamerfoils}
+\uselanguage{German}
+\languagepath{German}
 
 \usepackage{epstopdf}
 
@@ -10,7 +12,7 @@
 \usepackage{lmodern}
 
 \usepackage[german]{babel}
-\usepackage{amsmath, amssymb, amsxtra, amsthm}
+\usepackage{amsmath, amssymb, amsxtra, amsthm, pxfonts}
 \usepackage{epsfig,psfrag, epstopdf}
 \usepackage{listings}
 
@@ -51,6 +53,26 @@ LuFG Informatik 12: Software and Tools for Computational Engineering}
 \section{Statistische Grundlagen}
 
 \begin{frame}{\insertsection}
+	\begin{description}[Punkt im Ergebnisraum]
+	\item[Experiment] verschiedene mögliche Ausgänge
+	\item[Ergebnisraum] Menge aller möglichen Ausgänge
+	\item[Punkt im Ergebnisraum] ein konkreter Ausgang
+	\item[Ereignis] Menge von Punkten im Ergebnisraum
+	\item[P(A)] Wahrscheinlichkeit für Ereignis A
+	\end{description}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{example}[Münzwurf]
+	\begin{description}[Punkt im Ergebnisraum]
+	\item[Experiment] wirf eine (faire) Münze zwei Mal
+	\item[Ergebnisraum] $E \coloneqq \{ZZ,ZK,KZ,KK\}$
+	\item[Punkt im Ergebnisraum] z.\,B.~$KK$
+	\item[Ereignis] z.\,B.~mind.~1x Kopf: $\{ZK, KZ, KK\}$
+	\item[P(A)] = $0.25 ~\forall A\in E$
+	\item[P(mind.~1x Kopf)] = 0.75
+	\end{description}
+\end{example}
 \end{frame}
 
 %%%Kolmogorow-Smirnow Test

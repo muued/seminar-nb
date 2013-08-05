@@ -4,6 +4,24 @@
 
 \usepackage{epstopdf}
 
+\usepackage{ucs} % Unicode - dependency of utf8x inputenc
+\usepackage[utf8x]{inputenc} % "utf8x" uses "ucs"-package, better than "UTF8"
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage[german]{babel}
+\usepackage{amsmath, amssymb, amsxtra, amsthm}
+\usepackage{epsfig,psfrag, epstopdf}
+\usepackage{listings}
+
+\usepackage{tikz}
+
+\usepackage{nicefrac}
+
+
+
+
+
 \setbeamertemplate{footline}[frame number]
 
 \MyLogo{
@@ -83,7 +101,60 @@ Anwendung des Anpassungsg\"utetests:
 	%%%Beispie
 \begin{frame}
 \frametitle{Kolmogorow-Smirnow Test}
-Ein Beispiel:
+Ein Beispiel:\\
+	\begin{itemize}
+		\item Beobachtungen:
+			\begin{table}[h]
+			\center
+			\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+			$x_1$	&$x_2$	&$x_3$	&$x_4$	&$x_5$	&$x_6$	&$x_7$	&$x_8$	&$x_9$	&$x_{10}$\\
+			\hline
+			1	&1.1	&1.2	&1.6	&1.7	&2.1	&2.1	&2.4	&2.4	&2.5	\\
+			\end{tabular}
+			\begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+			$x_{11}$	&$x_{12}$	&$x_{13}$	&$x_{14}$	&$x_{15}$	&$x_{16}$	&$x_{17}$	&$x_{18}$	&$x_{19}$	&$x_{20}$\\
+			\hline
+			2.6	&2.6	&2.6	&2.7	&2.8	&3	&3.3	&3.5	&3.8	&4.2\\
+			\end{tabular}
+			\end{table}
+		\item Hypothesen: $$H_{Franz}:S(x)=\Phi(x|3.5;1)$$ $$H_{Paul}:S(x)=\Phi(x|3;0.7)$$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Kolmogorow-Smirnow Test}
+Berechnung der Werte:\\
+	\begin{itemize}
+		\item Test
+			\begin{table}[ht]
+			\center
+			\begin{tabular}{c|c|c|c|c}
+			\label{tab:1}
+			$i$ 	& $x_i$ 	& $S(x_i)$ 	& $\Phi (x_i|3;0,7)$ 	& $\Phi (x_i|3,5;1)$ 	\\
+			\hline
+			1	&	1	&	0.05	&	0.002137	&	0.006210	\\
+			2	&	1.1	&	0.1	&	0.003321	&	0.008198	\\
+			%3	&	1.2	&	0.15	&	0.005064	&	0.010724	\\
+			%4	&	1.6	&	0.2	&	0.022750	&	0.028717	\\
+			%5	&	1.7	&	0.25	&	0.031645	&	0.035930	\\
+			%6	&	2.1	&	0.35	&	0.099271	&	0.080757	\\
+			%7	&	2.1	&	0.35	&	0.099271	&	0.080757	\\
+			%8	&	2.4	&	0.45	&	0.195683	&	0.135666	\\
+			%9	&	2.4	&	0.45	&	0.195683	&	0.135666	\\
+			%10	&	2.5	&	0.5	&	0.237525	&	0.158655	\\
+			%11	&	2.6	&	0.65	&	0.283855	&	0.184060	\\
+			12	&	2.6	&	0.65	&	0.283855	&	0.184060	\\
+			%13	&	2.6	&	0.65	&	0.283855	&	0.184060	\\
+			%14	&	2.7	&	0.7	&	0.334118	&	0.211855	\\
+			15	&	2.8	&	0.75	&	0.387548	&	0.241964	\\
+			%16	&	3	&	0.8	&	0.500000	&	0.308538	\\
+			%17	&	3.3	&	0.85	&	0.665882	&	0.420740	\\
+			%18	&	3.5	&	0.9	&	0.762475	&	0.500000	\\
+			%19	&	3.8	&	0.95	&	0.873451	&	0.617911	\\
+			20	&	4.2	&	1	&	0.956762	&	0.758036	\\
+			\end{tabular}
+			\end{table}
+	\end{itemize}
 \end{frame}
 	%%%NAG C
 \begin{frame}

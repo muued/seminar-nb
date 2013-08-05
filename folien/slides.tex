@@ -12,7 +12,7 @@
 \usepackage{lmodern}
 
 \usepackage[german]{babel}
-\usepackage{amsmath, amssymb, amsxtra, amsthm, pxfonts}
+\usepackage{amsmath, amssymb, amsxtra, amsthm, pxfonts, stmaryrd}
 \usepackage{epsfig,psfrag, epstopdf}
 \usepackage{listings}
 
@@ -517,6 +517,90 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 	$x_{1-\alpha}$ ist $(1-\alpha)$-Quantil der $\chi^2$-Verteilung mit $k-1-d$ Freiheitsgraden
 \end{block}
 \end{frame}
+
+\begin{frame}{\insertsection}
+\begin{example}[Beobachtungen]
+	\begin{table}[htb]
+	\center
+	\begin{tabular}{cccccccccc}
+	$x_1$	&$x_2$	&$x_3$	&$x_4$	&$x_5$	&$x_6$	&$x_7$	&$x_8$	&$x_9$	&$x_{10}$\\
+	\hline
+	14.6	&15.4	&15.5	&16.2	&17.3	&18.0	&18.7	&19.5	&19.7	&19.9	\\
+	\end{tabular}
+	\begin{tabular}{cccccccccc}
+	$x_{11}$	&$x_{12}$	&$x_{13}$	&$x_{14}$	&$x_{15}$	&$x_{16}$	&$x_{17}$	&$x_{18}$	&$x_{19}$	&$x_{20}$\\
+	\hline
+	20.1	&21.1	&21.7	&22.6	&23.1	&23.2	&24.1	&24.7	&24.8	&25.0	\\
+	\end{tabular}
+	\end{table}
+\end{example}
+\begin{example}[Hypothesen]
+	\begin{align*}
+		H_{\text{Franz}} &: S(x) = \Phi(x\mid 20.26, 11.297)
+		\\
+		H_{\text{Paul}} &: S(x) = \Phi(x\mid 20, 11)
+	\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{example}[Bilden der Klassen]
+	Setze $k=4$, nutze $ x_p = \mu + \sigma w_p $
+	\begin{align*}
+		x_{0.25, \text{Franz}} &= 20.26 + \sqrt{11.297}(-0.6745) \approx 17.993 \\
+		x_{0.5, \text{Franz}} &= 20.26 \\
+		x_{0.75, \text{Franz}} &= 20.26 + \sqrt{11.297}(+0.6745) \approx 22.527
+		\\[1ex]
+		x_{0.25, \text{Paul}} &= 20 + \sqrt{11}(-0.6745) \approx 17.763\\
+		x_{0.5, \text{Paul}} &= 20 \\
+		x_{0.75, \text{Paul}} &= 20 + \sqrt{11}(+0.6745) \approx 22.237
+	\end{align*}
+\end{example}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{example}[Häufigkeitstabelle von Franz]
+	\begin{table}[htb]
+	\center
+	\begin{tabular}{l|cccc}
+		& $(-\infty, 17.993]$ & $(17.993, 20.26]$ & $(20.26, 22.527]$ & $(22.527,\infty)$ \\
+		\hline
+		E & 5 & 5 & 5 & 5 \\
+		O & 5 & 6 & 2 & 7 \\
+	\end{tabular}
+	\end{table}
+\end{example}
+\begin{example}[Häufigkeitstabelle von Paul]
+	\begin{table}[htb]
+	\center
+	\begin{tabular}{l|cccc}
+	& $(-\infty, 17.763]$ & $(17.763, 20]$ & $(20, 22.237]$ & $(22.393,\infty)$ \\
+	\hline
+	E & 5 & 5 & 5 & 5 \\
+	O & 5 & 5 & 3 & 7 \\
+	\end{tabular}
+	\end{table}
+\end{example}
+\end{frame}
+
+\begin{frame}{\insertsection}
+\begin{example}[Berechnung der Teststatistik]
+	\begin{align*}
+		X^2_{\text{Franz}} &= \frac{(5-5)^2}{5} + \frac{(6-5)^2}{5} + \frac{(2-5)^2}{5} + \frac{(7-5)^2}{5} = 2.8
+		\\[1ex]
+		X^2_{\text{Paul}} &= \frac{(5-5)^2}{5} + \frac{(5-5)^2}{5} + \frac{(3-5)^2}{5} + \frac{(7-5)^2}{5} = 1.6
+	\end{align*}
+\end{example}
+\begin{example}[Entscheidung]
+	$\alpha = 0.1$
+	\begin{align*}
+	d_\text{Paul} = 4-1-0 = 3 &\Rightarrow X^2_{\text{Paul}} = 1.6 \overset{!}{\leq} 6.261 = \chi^2_{0.9, 3} ~\checkmark
+	\\
+	d_\text{Franz} = 4-1-2 = 1 &\Rightarrow X^2_{\text{Franz}} = 2.8 \overset{!}{\leq} 2.706 = \chi^2_{0.9, 1} ~\lightning
+	\end{align*}
+\end{example}
+\end{frame}
+
 \subsection{Implementierung in NAG C}
 \subsection{Alternative Bibliotheken}
 \begin{frame}

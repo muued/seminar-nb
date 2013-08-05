@@ -47,6 +47,24 @@ LuFG Informatik 12: Software and Tools for Computational Engineering}
 	\tableofcontents
 \end{frame}
 
+%%%Einführung
+\section{Einführung}
+\begin{frame}{\insertsection}
+Themen dieses Vortrags:
+	\begin{itemize}
+		\item Statistik
+			\begin{itemize}
+			\item ist das Sammeln, Auswerten und Beurteilen von Daten
+			\item dient als Bindeglied zwischen Daten und Hypothesen
+			\end{itemize}		
+		\item Numerische Bibliotheken
+			\begin{itemize}
+			\item stellen mathematische Algorithmen zur Verfügung wodurch eine eigene Implementation entfällt
+			\item sind in diesem Vortrag NAG C und die Sprache R
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
 %%%Statistische Grundlagen
 \section{Statistische Grundlagen}
 
@@ -148,11 +166,60 @@ Somit sind beide Hypothesen verworfen.
 	%%%NAG C
 \subsection{Implementierung in NAG C}
 \begin{frame}[fragile]{\insertsubsection}
-	\lstinline[language=C++]$struct a{ operator()(a const& b);};$
+In NAG C: \lstinline[language=C++]$g08cbc$ oder \lstinline[language=C++]$nag_1_sample_ks_test$ mit folgenden Parametern:\\
+\begin{center}\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$\end{center}
+Die Eingabeparameter sind die Folgenden:
+	\begin{description}
+		\item[n] -- Integer der die Anzahl der Beobachtungen speichert
+		\item[x{[n]}] -- Double Array mit den Beobachtungen $x_1...x_n$
+		\item[dist] -- Nag\_Distribution spezifiziert $F(x)$
+		\item[par{[2]}] -- Enthält optional weitere Parameter für $dist$
+		\item[estima] -- Nag\_ParaSupplied falls $par$ gegeben ist oder Nag\_ParaEstimated wenn die Parameter von NAG bestimmt werden sollen
+		\item[dtype] -- definiert Nag\_TestStatistics
+	\end{description}
 \end{frame}
+
+\begin{frame}[fragile]{\insertsubsection}
+$dtype$ muss einer der drei folgenden Werte zugewiesen werden:
+	\begin{itemize}
+		\item Nag\_TestStatisticsDAbs
+		\item Nag\_TestStatisticsDPos
+		\item Nag\_TestStatisticsDNeg
+	\end{itemize}
+	\includegraphics[width=1.0\textwidth]{figures/diagramKSd-d+.png}
+\end{frame}
+
+\begin{frame}[fragile]{\insertsubsection}
+\begin{center}\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$\end{center}
+Folgende Werte werden von der Funktion beschrieben:
+	\begin{description}
+		\item[*d] -- Double mit dem Wert der Teststatistik
+		\item[*z] -- Double mit dem $z$ Wert
+		\item[*p] -- Double mit $p$ Wert
+		\item[*fail] -- NagError mit etwaigen Fehlerbeschreibungen
+	\end{description}
+\end{frame}
+
 	%%%R
 \subsection{Alternative Bibliotheken}
 \begin{frame}{\insertsubsection}
+R als alternative Bibliothek mit der folgenden Methode: 
+\begin{center}\lstinline[language=R] $ks.test(x, y, ..., alternative)$\end{center}
+\begin{description}
+\item[x] -- Numerischer Vektor mit  allen Beobachtungen
+\item[y] -- String welche die Nullverteilung beschreibt
+\item[...]-- Strings mit Parametern für $y$
+\item[alternative]-- definiert welche Teststatistik berechnet wird
+\end{description}
+R generiert folgende Rückgabe:
+\begin{description}
+\item[statistic] -- Teststatistik welche in $alternative$ festgelegt wurde
+\item[p.value] -- p Wert
+\item[alternative] -- gewählter Wert für $alternative$
+\item[method] -- genutzter Test
+\item[data.name] -- Namen der Daten
+\end{description}
+
 \end{frame}
 
 
@@ -175,9 +242,44 @@ Somit sind beide Hypothesen verworfen.
 \end{frame}
 
 %%%Zusammenfassung
-\section{Zusammenfassung}
+\section{Vergleich}
 
 \begin{frame}{\insertsection}
+
+\begin{columns}
+\begin{column}{.48\textwidth}
+R:
+	\begin{itemize}
+		\item freie Verfügbar
+		\item leicht handhabbar
+	\end{itemize}
+\vspace{1cm}
+NAG C:
+	\begin{itemize}
+		\item kostenpflichtig
+		\item komplex
+		\item Support
+	\end{itemize}
+\end{column}
+
+\hfill
+\begin{column}{.48\textwidth}
+KS-Test:
+	\begin{itemize}
+		\item erstellen der empirischen Verteilungsfunktion
+		\item benötigt weniger Beobachtungen als $\chi^2$
+	\end{itemize}
+\vspace{1cm}
+$\chi^2$-Test:
+	\begin{itemize}
+		\item erstellen von Klassen
+	\end{itemize}
+\end{column}
+\end{columns}
+
+
+
+
 \end{frame}
 
 

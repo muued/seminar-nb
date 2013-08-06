@@ -409,7 +409,7 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 \begin{block}{\lstinline[language=C++]$nag_1_sample_ks_test$ oder \lstinline[language=C++]$g08cbc$}
 	\lstinline[language=C++]$g08cbc(n, x[], dist, par[], estima, dtype, *d, *z, *p, *fail)$
 \end{block}
-\begin{block}{Die Ausgabeparameter}
+\begin{block}{Die Rückgabeparameter}
 	\begin{description}
 		\item[*d] -- Double mit dem Wert der Teststatistik
 		\item[*z] -- Double mit dem $z$ Wert
@@ -444,7 +444,7 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 	\lstinline[language=R] $ks.test(x, y, ..., alternative)$
 \end{block}
 
-\begin{block}{Die Rückgabeparameter}
+\begin{block}{Die Rückgabewerte}
 \begin{description}
 	\item[statistic] -- Teststatistik welche in $alternative$ festgelegt wurde
 	\item[p.value] -- p Wert
@@ -615,7 +615,7 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 	\item[dist] Verteilung (enum)
 	\item[par{[2]}] Parameter von \emph{dist}
 	\item[npest] Anzahl der aus der Stichprobe abgeleiteten Parameter d
-	\item[prob{[k]}] Wahrscheinlichkeit, dass $X$ in der Klasse liegt (zum Definieren einer Verteilungsfunktion)
+	\item[prob{[k]}] Wahrscheinlichkeit, dass $X$ in der Klasse liegt (zum Definieren einer eigenen Verteilungsfunktion)
 	\end{description}
 \end{definition}
 \end{frame}
@@ -638,7 +638,7 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 \end{frame}
 
 \begin{frame}{\insertsubsection}
-\begin{definition}[Ausgabeparameter]
+\begin{definition}[Rückgabeparameter]
 	\begin{description}
 	\item[*chisq] Teststatistik $X^2$
 	\item[*p] p-Wert
@@ -654,8 +654,49 @@ $dtype$ muss einer der drei folgenden Werte zugewiesen werden:
 \end{frame}
 
 \subsection{Alternative Bibliotheken}
-\begin{frame}
-\frametitle{$\chi^2$ Test}
+\begin{frame}{\insertsubsection}
+\begin{block}{R als alternative Bibliothek}
+\lstinline[language=R]!chisq.test(x, y = NULL, correct = TRUE, p = rep(1/length(x), length(x)), rescale.p = FALSE, simulate.p.value = FALSE, B = 2000)!
+\\[1.5ex]
+für NAG C Funktionalität:
+\\
+\lstinline[language=R]!chisq.test(x, p = rep(1/length(x), length(x)), rescale.p = FALSE)!
+\end{block}
+\begin{block}{Die (relevanten) Eingabeparameter}
+\begin{description}
+	\item[x{[k]}] Vektor: beobachtete Häufigkeit $O_i$
+	\item[p{[k]}] Vektor: Wahrscheinlichkeit, dass $X$ in der Klasse liegt\\ Standard: Gleichverteilung
+	\item[rescale.p] gibt an, ob $p$ normalisiert werden soll, s.\,d.~\lstinline[language=R]!sum(p)=1!
+\end{description}
+\end{block}
+\end{frame}
+
+\begin{frame}{\insertsubsection}
+\begin{block}{R als alternative Bibliothek}
+\lstinline[language=R]!chisq.test(x, p = rep(1/length(x), length(x)), rescale.p = FALSE)!
+\end{block}
+\begin{block}{Die (relevanten) Rückgabewerte}
+\begin{description}[residuals{[k]}]
+	\item[statistic] Teststatistik $X^2$
+	\item[parameter] Anzahl der Freiheitsgrade für die Quantil-Bestimmung
+	\item[p.value] p-Wert
+	\item[data.name] Name des Objektes, das als $x$ genutzt wurde
+	\item[observed{[k]}] beobachtete Häufigkeiten der Klassen
+	\item[expected{[k]}] erwartete Häufigkeiten der Klassen
+	\item[residuals{[k]}] Wurzeln der Summanden der Teststatistik \\ (Pearson residuals)
+\end{description}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{\insertsubsection}
+\begin{block}{R als alternative Bibliothek}
+\lstinline[language=R]!chisq.test(x, p = rep(1/length(x), length(x)), rescale.p = FALSE)!
+\end{block}
+\begin{block}{Häufigkeitstabellen}
+	Wähle \nicefrac{1}{k} Quantile als Klassen-Grenzen (\lstinline[language=R]!breaks!).
+	\\
+	\lstinline[language=R]!ht <- hist(samples, breaks=..., plot=FALSE)$counts!
+\end{block}
 \end{frame}
 
 %%%Live Demo
